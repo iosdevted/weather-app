@@ -5,6 +5,7 @@
 //  Created by Ted on 2021/08/11.
 //
 
+import Then
 import UIKit
 
 class HeaderView: UIView {
@@ -26,8 +27,6 @@ class HeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
 //MARK: - Setup Views
@@ -44,18 +43,25 @@ extension HeaderView {
     private func configureSubViews() {
         
         //FIXME: change font and color
-        weatherImageView.image = UIImage(named: "shade")
         
-        temperatureLabel.text = "10 °C"
-        temperatureLabel.font = .mainFont(size: 35)
-        temperatureLabel.textColor = .warmBlack
-        temperatureLabel.textAlignment = .center
+        weatherImageView.do {
+            $0.image = UIImage(named: "shade")
+        }
         
-        weatherDescriptionLabel.text = "Sunny"
-        weatherDescriptionLabel.font = .mainFont(size: 20)
-        weatherDescriptionLabel.textColor = .warmBlack
-        weatherDescriptionLabel.textAlignment = .center
+        temperatureLabel.do {
+            $0.text = "10 °C"
+            $0.font = .mainFont(size: 35)
+            $0.textColor = .warmBlack
+            $0.textAlignment = .center
+        }
         
+        weatherDescriptionLabel.do {
+            $0.text = "Sunny"
+            $0.font = .mainFont(size: 20)
+            $0.textColor = .warmBlack
+            $0.textAlignment = .center
+        }
+
         addSubviews([weatherImageView, weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
     }
 }

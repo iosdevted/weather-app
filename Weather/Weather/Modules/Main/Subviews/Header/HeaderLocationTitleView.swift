@@ -5,6 +5,7 @@
 //  Created by Ted on 2021/08/11.
 //
 
+import Then
 import UIKit
 
 class HeaderLocationTitleView: UIView {
@@ -44,11 +45,16 @@ extension HeaderLocationTitleView {
     }
     
     private func configureSubViews() {
-        arrowImageView.image = UIImage(systemName: "location.fill")
         
-        cityNameLabel.text = "Seoul"
-        cityNameLabel.font = .mainFont(size: 20)
-        cityNameLabel.textColor = .warmBlack
+        arrowImageView.do {
+            $0.image = UIImage(systemName: "location.fill")
+        }
+        
+        cityNameLabel.do {
+            $0.text = "Seoul"
+            $0.font = .mainFont(size: 20)
+            $0.textColor = .warmBlack
+        }
         
         addSubviews([arrowImageView, cityNameLabel])
     }
@@ -60,7 +66,6 @@ extension HeaderLocationTitleView {
     
     //UI Metrics
     
-    //TODO: why struct?
     private struct UI {
         
         struct ArrowImageView {

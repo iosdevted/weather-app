@@ -21,6 +21,9 @@ protocol ViewToPresenterMainProtocol {
     var view: PresenterToViewMainProtocol? { get set }
     var interactor: PresenterToInteractorMainProtocol? { get set }
     var router: PresenterToRouterMainProtocol? { get set }
+    
+    func viewDidLoad()
+    func viewDidAppear()
 }
 
 

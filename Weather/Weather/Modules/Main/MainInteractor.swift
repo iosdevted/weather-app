@@ -8,8 +8,12 @@
 
 import Foundation
 
-class MainInteractor: PresenterToInteractorMainProtocol {
+class MainInteractor {
 
     // MARK: Properties
     var presenter: InteractorToPresenterMainProtocol?
+}
+
+extension MainInteractor: PresenterToInteractorMainProtocol {
+    
 }

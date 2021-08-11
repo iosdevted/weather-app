@@ -8,14 +8,27 @@
 
 import Foundation
 
-class MainPresenter: ViewToPresenterMainProtocol {
+class MainPresenter {
 
     // MARK: Properties
     var view: PresenterToViewMainProtocol?
     var interactor: PresenterToInteractorMainProtocol?
     var router: PresenterToRouterMainProtocol?
+
+}
+
+extension MainPresenter: ViewToPresenterMainProtocol {
+    
+    func viewDidLoad() {
+        //fetch the data If needed
+    }
+    
+    func viewDidAppear() {
+        //request Location Authorization If needed
+    }
 }
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
+
 }

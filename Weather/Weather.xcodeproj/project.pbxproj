@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		9FB7313D26C3C30E00A719F5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7313C26C3C30E00A719F5 /* HeaderView.swift */; };
 		9FB7314026C3CBDD00A719F5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7313F26C3CBDD00A719F5 /* MainViewModel.swift */; };
 		9FB7314426C3D39E00A719F5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7314326C3D39E00A719F5 /* BaseViewController.swift */; };
+		9FB7314726C3EB2500A719F5 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9FB7314626C3EB2500A719F5 /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB7314726C3EB2500A719F5 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +294,9 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				9FB7314626C3EB2500A719F5 /* Then */,
+			);
 			productName = Weather;
 			productReference = 9FB730E726C3A6EC00A719F5 /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -363,6 +368,9 @@
 				Base,
 			);
 			mainGroup = 9FB730DE26C3A6EC00A719F5;
+			packageReferences = (
+				9FB7314526C3EB2500A719F5 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 9FB730E826C3A6EC00A719F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -745,6 +753,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9FB7314526C3EB2500A719F5 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9FB7314626C3EB2500A719F5 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FB7314526C3EB2500A719F5 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9FB730F326C3A6EC00A719F5 /* Weather.xcdatamodeld */ = {
