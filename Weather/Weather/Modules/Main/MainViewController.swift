@@ -24,6 +24,7 @@ class MainViewController: BaseViewController {
     var presenter: ViewToPresenterMainProtocol?
     
     private let headerView = HeaderView()
+    private var alertView: UIAlertController?
     
     //MARK: - Life Cycle
     
@@ -64,5 +65,21 @@ class MainViewController: BaseViewController {
 }
 
 extension MainViewController: PresenterToViewMainProtocol{
-    // TODO: Implement View Output Methods
+
+    func bindToViews(with data: MainWeatherModel) {
+        DispatchQueue.main.async {
+            self.headerView.configureView(image: data.conditionImage,
+                                          cityName: data.cityName,
+                                          currentTemperature: data.currentTemperature,
+                                          description: data.weatherDescription)
+        }
+    }
+    
+    func showAlert(withMessage message: String, animated: Bool) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        alertView = alert
+
+        present(alert, animated: animated, completion: nil)
+    }
 }

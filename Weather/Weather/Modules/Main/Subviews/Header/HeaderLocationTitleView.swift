@@ -51,7 +51,6 @@ extension HeaderLocationTitleView {
         }
         
         cityNameLabel.do {
-            $0.text = "Seoul"
             $0.font = .mainFont(size: 20)
             $0.textColor = .warmBlack
         }

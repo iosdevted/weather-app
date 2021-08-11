@@ -14,7 +14,6 @@ class MainPresenter {
     var view: PresenterToViewMainProtocol?
     var interactor: PresenterToInteractorMainProtocol?
     var router: PresenterToRouterMainProtocol?
-    
 }
 
 extension MainPresenter: ViewToPresenterMainProtocol {
@@ -30,13 +29,13 @@ extension MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: Result<WeatherModel, WeatherServiceError>) {
+    func handleResult(_ result: Result<MainWeatherModel, WeatherServiceError>) {
         switch result {
         case .success(let model):
+            view?.bindToViews(with: model)
             print(model)
         case .failure(let error):
-            print(error)
+            view?.showAlert(withMessage: error.localizedDescription, animated: true)
         }
     }
-    
 }

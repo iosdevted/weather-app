@@ -44,24 +44,18 @@ extension HeaderView {
         
         //FIXME: change font and color
         
-        weatherImageView.do {
-            $0.image = UIImage(named: "shade")
-        }
-        
         temperatureLabel.do {
-            $0.text = "10 °C"
             $0.font = .mainFont(size: 35)
             $0.textColor = .warmBlack
             $0.textAlignment = .center
         }
         
         weatherDescriptionLabel.do {
-            $0.text = "Sunny"
             $0.font = .mainFont(size: 20)
             $0.textColor = .warmBlack
             $0.textAlignment = .center
         }
-
+        
         addSubviews([weatherImageView, weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
     }
 }
@@ -125,5 +119,17 @@ extension HeaderView {
             .heightAnchor(constant: UI.DescriptionLabel.height)
             .centerXAnchor(to: centerXAnchor)
             .activateAnchors()
+    }
+}
+
+//MARK: - Configure View
+
+extension HeaderView {
+    func configureView(image: String, cityName: String, currentTemperature: String, description: String) {
+        weatherImageView.image = UIImage(named: image)
+        weatherLocationTitleView.title = cityName
+        temperatureLabel.text = currentTemperature
+        weatherDescriptionLabel.text = description
+        
     }
 }
