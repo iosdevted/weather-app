@@ -10,6 +10,15 @@ import UIKit
 
 class MainViewController: BaseViewController {
     
+    //MARK: - UI Metrics
+    
+    private struct UI {
+        
+        struct HeaderView {
+            static let height = CGFloat(300)
+        }
+    }
+    
     //MARK: - Properties
     
     var presenter: ViewToPresenterMainProtocol?
@@ -28,40 +37,23 @@ class MainViewController: BaseViewController {
         super.viewDidAppear(animated)
         presenter?.viewDidAppear()
     }
-}
-
-//MARK: - Setup Views
-
-extension MainViewController {
     
-    private func setupViews() {
+    //MARK: - Setup Views
+    
+    override func setupViews() {
         view.backgroundColor = .white
         
         configureSubViews()
         setupConstraints()
     }
     
-    private func configureSubViews() {
+    override func configureSubViews() {
         view.addSubviews([headerView])
     }
-}
-
-//MARK: - Layout & Constraints
-
-extension MainViewController {
     
-    //UI Metrics
+    //MARK: - Layout & Constraints
     
-    private struct UI {
-        
-        struct HeaderView {
-            static let height = CGFloat(300)
-        }
-    }
-    
-    //Setup Constraints
-    
-    private func setupConstraints() {
+    override func setupConstraints() {
         headerView
             .leadingAnchor(to: view.leadingAnchor)
             .trailingAnchor(to: view.trailingAnchor)
@@ -70,7 +62,6 @@ extension MainViewController {
             .activateAnchors()
     }
 }
-
 
 extension MainViewController: PresenterToViewMainProtocol{
     // TODO: Implement View Output Methods

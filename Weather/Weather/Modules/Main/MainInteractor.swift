@@ -12,8 +12,15 @@ class MainInteractor {
 
     // MARK: Properties
     var presenter: InteractorToPresenterMainProtocol?
+    
+    private let weatherService = WeatherService()
 }
 
 extension MainInteractor: PresenterToInteractorMainProtocol {
     
+    func fetchWeatherData() {
+        weatherService.fetchWeather(byCity: "Paris") { [weak self] result in
+            self?.presenter?.handleResult(result)
+        }
+    }
 }

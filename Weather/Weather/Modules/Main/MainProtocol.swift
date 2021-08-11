@@ -31,12 +31,15 @@ protocol ViewToPresenterMainProtocol {
 protocol PresenterToInteractorMainProtocol {
     
     var presenter: InteractorToPresenterMainProtocol? { get set }
+    
+    func fetchWeatherData()
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterMainProtocol {
     
+    func handleResult(_ result: Result<WeatherModel, WeatherServiceError>)
 }
 
 

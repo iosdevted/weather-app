@@ -17,38 +17,21 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
-}
-
-//MARK: - Setup Views
-
-extension BaseViewController {
     
-    private func setupViews() {
-        view.backgroundColor = .white
-        
+    //MARK: - Setup Views
+    
+    func setupViews() {
         configureSubViews()
         setupConstraints()
     }
     
-    private func configureSubViews() {
-        
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension BaseViewController {
-    
-    //UI Metrics
-    
-    private struct UI {
+    func configureSubViews() {
         
     }
     
-    //Setup Constraints
+    //MARK: - Layout & Constraints
     
-    private func setupConstraints() {
+    func setupConstraints() {
+        
     }
-    
 }
-

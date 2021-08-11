@@ -9,18 +9,18 @@
 import Foundation
 
 class MainPresenter {
-
+    
     // MARK: Properties
     var view: PresenterToViewMainProtocol?
     var interactor: PresenterToInteractorMainProtocol?
     var router: PresenterToRouterMainProtocol?
-
+    
 }
 
 extension MainPresenter: ViewToPresenterMainProtocol {
     
     func viewDidLoad() {
-        //fetch the data If needed
+        interactor?.fetchWeatherData()
     }
     
     func viewDidAppear() {
@@ -30,5 +30,13 @@ extension MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
-
+    func handleResult(_ result: Result<WeatherModel, WeatherServiceError>) {
+        switch result {
+        case .success(let model):
+            print(model)
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
 }
