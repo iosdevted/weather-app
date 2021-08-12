@@ -6,6 +6,7 @@
 //  
 //
 
+import Then
 import UIKit
 
 class MainViewController: BaseViewController {
@@ -13,10 +14,8 @@ class MainViewController: BaseViewController {
     //MARK: - UI Metrics
     
     private struct UI {
-        
-        struct HeaderView {
-            static let height = CGFloat(300)
-        }
+        static let headerViewHeightRatio = CGFloat(0.4)
+        static let hourlyCellHeightRatio = CGFloat(0.1)
     }
     
     //MARK: - Properties
@@ -24,6 +23,16 @@ class MainViewController: BaseViewController {
     var presenter: ViewToPresenterMainProtocol?
     
     private let headerView = HeaderView()
+    private lazy var collectionView: CollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width,
+                                            height: UIScreen.main.bounds.height * UI.hourlyCellHeightRatio)
+        let view = CollectionView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
+    
     private var alertView: UIAlertController?
     
     //MARK: - Life Cycle
@@ -49,7 +58,7 @@ class MainViewController: BaseViewController {
     }
     
     override func configureSubViews() {
-        view.addSubviews([headerView])
+        view.addSubviews([headerView, collectionView])
     }
     
     //MARK: - Layout & Constraints
@@ -59,7 +68,14 @@ class MainViewController: BaseViewController {
             .leadingAnchor(to: view.leadingAnchor)
             .trailingAnchor(to: view.trailingAnchor)
             .topAnchor(to: view.topAnchor)
-            .heightAnchor(constant: UI.HeaderView.height)
+            .heightAnchor(constant: UIScreen.main.bounds.height * UI.headerViewHeightRatio)
+            .activateAnchors()
+        
+        collectionView
+            .leadingAnchor(to: view.leadingAnchor)
+            .trailingAnchor(to: view.trailingAnchor)
+            .topAnchor(to: headerView.bottomAnchor)
+            .bottomAnchor(to: view.bottomAnchor)
             .activateAnchors()
     }
 }
@@ -67,21 +83,29 @@ class MainViewController: BaseViewController {
 extension MainViewController: PresenterToViewMainProtocol{
     
     //MARK: Binding
-
+    
     func bindToViews(with data: MainWeatherModel) {
         DispatchQueue.main.async {
             self.headerView.configureView(image: data.conditionImage,
                                           cityName: data.cityName,
                                           currentTemperature: data.currentTemperature,
                                           description: data.weatherDescription)
+            
+            self.collectionView.headerDidLoad = { header in
+                header.hourlyCollectionView.hourlyCellDidLoad = { hourlyCell, hourlyIndexPath in
+                    //                    hourlyCell.configureCell(hour: , icon: , temp: /)
+                }
+            }
         }
     }
+    
+    //MARK: Show Alert
     
     func showAlert(withMessage message: String, animated: Bool) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         alertView = alert
-
+        
         present(alert, animated: animated, completion: nil)
     }
 }

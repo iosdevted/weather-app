@@ -12,5 +12,9 @@ extension UIFont {
     static func mainFont(size: CGFloat) -> UIFont? {
         return UIFont.systemFont(ofSize: size)
     }
+    
+    static func hourlyFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 13)
+    }
 }
 

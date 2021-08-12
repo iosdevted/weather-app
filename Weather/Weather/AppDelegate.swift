@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        let realm = try! Realm()
+        let _ = try! Realm()
         
         return true
     }
