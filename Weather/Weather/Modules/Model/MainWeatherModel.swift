@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MainWeatherModel {
+struct MainWeatherModel: Codable {
     
     var cityName: String
     var currentTemperature: String

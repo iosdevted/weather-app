@@ -39,6 +39,11 @@
 		9FB7316B26C464EA00A719F5 /* testWeatherData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9FB7316A26C464EA00A719F5 /* testWeatherData.json */; };
 		9FB7316D26C465FF00A719F5 /* MockWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7316C26C465FF00A719F5 /* MockWeatherService.swift */; };
 		9FB7316F26C4693100A719F5 /* StubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7316E26C4693100A719F5 /* StubData.swift */; };
+		9FB7317226C46FF800A719F5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 9FB7317126C46FF800A719F5 /* Realm */; };
+		9FB7317426C46FF800A719F5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FB7317326C46FF800A719F5 /* RealmSwift */; };
+		9FB7317626C4703800A719F5 /* LocalWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7317526C4703800A719F5 /* LocalWeather.swift */; };
+		9FB7317826C4709900A719F5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7317726C4709900A719F5 /* User.swift */; };
+		9FB7317A26C4719600A719F5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB7317926C4719600A719F5 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +92,9 @@
 		9FB7316A26C464EA00A719F5 /* testWeatherData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testWeatherData.json; sourceTree = "<group>"; };
 		9FB7316C26C465FF00A719F5 /* MockWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWeatherService.swift; sourceTree = "<group>"; };
 		9FB7316E26C4693100A719F5 /* StubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubData.swift; sourceTree = "<group>"; };
+		9FB7317526C4703800A719F5 /* LocalWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeather.swift; sourceTree = "<group>"; };
+		9FB7317726C4709900A719F5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9FB7317926C4719600A719F5 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB7317426C46FF800A719F5 /* RealmSwift in Frameworks */,
+				9FB7317226C46FF800A719F5 /* Realm in Frameworks */,
 				9FB7314726C3EB2500A719F5 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +222,7 @@
 		9FB7312226C3A97E00A719F5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9FB7317926C4719600A719F5 /* RealmManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -284,6 +295,8 @@
 			children = (
 				9FB7315526C40E5B00A719F5 /* WeatherResponse.swift */,
 				9FB7315A26C41C7300A719F5 /* MainWeatherModel.swift */,
+				9FB7317526C4703800A719F5 /* LocalWeather.swift */,
+				9FB7317726C4709900A719F5 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,6 +388,8 @@
 			name = Weather;
 			packageProductDependencies = (
 				9FB7314626C3EB2500A719F5 /* Then */,
+				9FB7317126C46FF800A719F5 /* Realm */,
+				9FB7317326C46FF800A719F5 /* RealmSwift */,
 			);
 			productName = Weather;
 			productReference = 9FB730E726C3A6EC00A719F5 /* Weather.app */;
@@ -427,6 +442,7 @@
 			mainGroup = 9FB730DE26C3A6EC00A719F5;
 			packageReferences = (
 				9FB7314526C3EB2500A719F5 /* XCRemoteSwiftPackageReference "Then" */,
+				9FB7317026C46FF800A719F5 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 9FB730E826C3A6EC00A719F5 /* Products */;
 			projectDirPath = "";
@@ -463,10 +479,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB7317626C4703800A719F5 /* LocalWeather.swift in Sources */,
 				9FB7315926C4130400A719F5 /* Date.swift in Sources */,
 				9FB7315D26C4396900A719F5 /* WeatherConverter.swift in Sources */,
 				9FB7313D26C3C30E00A719F5 /* HeaderView.swift in Sources */,
 				9FB7314C26C3F5DB00A719F5 /* WeatherServiceType.swift in Sources */,
+				9FB7317A26C4719600A719F5 /* RealmManager.swift in Sources */,
+				9FB7317826C4709900A719F5 /* User.swift in Sources */,
 				9FB7315626C40E5C00A719F5 /* WeatherResponse.swift in Sources */,
 				9FB7315426C3FBF900A719F5 /* Int.swift in Sources */,
 				9FB7312C26C3AD3100A719F5 /* MainViewController.swift in Sources */,
@@ -762,6 +781,14 @@
 				minimumVersion = 2.7.0;
 			};
 		};
+		9FB7317026C46FF800A719F5 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -769,6 +796,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9FB7314526C3EB2500A719F5 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		9FB7317126C46FF800A719F5 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FB7317026C46FF800A719F5 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		9FB7317326C46FF800A719F5 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FB7317026C46FF800A719F5 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

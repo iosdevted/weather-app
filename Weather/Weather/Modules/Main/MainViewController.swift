@@ -65,6 +65,8 @@ class MainViewController: BaseViewController {
 }
 
 extension MainViewController: PresenterToViewMainProtocol{
+    
+    //MARK: Binding
 
     func bindToViews(with data: MainWeatherModel) {
         DispatchQueue.main.async {
