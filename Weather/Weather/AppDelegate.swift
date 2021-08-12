@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreData
 
 @main
@@ -14,6 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let config = Realm.Configuration(
+            schemaVersion: 2, // Set the new schema version.
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 2 {
+                    // The enumerateObjects(ofType:_:) method iterates over
+                    // every Person object stored in the Realm file
+                    migration.enumerateObjects(ofType: LocalWeather.className()) { oldObject, newObject in
+                        newObject!["lastRefreshDate"] = Date()
+                    }
+                }
+            }
+        )
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        // Now that we've told Realm how to handle the schema change, opening the file
+        // will automatically perform the migration
+        let realm = try! Realm()
+        
         return true
     }
 

@@ -38,6 +38,7 @@ struct MainWeatherModel: Codable {
     }
     
     init?(weatherResponse: WeatherResponse) {
+        // guard문 을 욺기면 optional init이 아닌 init을 가질 수 있어
         guard let countryName = WeatherConverter.countryName(countryCode: weatherResponse.city.country),
               let currentWeather = weatherResponse.list.first,
               let weather = currentWeather.weather.first

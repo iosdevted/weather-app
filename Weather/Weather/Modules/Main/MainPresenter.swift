@@ -14,12 +14,18 @@ class MainPresenter {
     var view: PresenterToViewMainProtocol?
     var interactor: PresenterToInteractorMainProtocol?
     var router: PresenterToRouterMainProtocol?
+    
+    private func fetchWeatherData() {
+        guard let shouldFetchWeatherData = interactor?.shouldFetchAPIWeatherData() else { return }
+        print("shouldFetchWeatherData: \(shouldFetchWeatherData)")
+        shouldFetchWeatherData ? interactor?.fetchAPIWeatherData() : interactor?.fetchLocalWeatherData()
+    }
 }
 
 extension MainPresenter: ViewToPresenterMainProtocol {
     
     func viewDidLoad() {
-        interactor?.fetchWeatherData()
+        fetchWeatherData()
     }
     
     func viewDidAppear() {
@@ -29,13 +35,12 @@ extension MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: Result<MainWeatherModel, WeatherServiceError>) {
-        switch result {
-        case .success(let model):
-            view?.bindToViews(with: model)
-            print(model)
-        case .failure(let error):
-            view?.showAlert(withMessage: error.localizedDescription, animated: true)
-        }
+    func handleResult(_ result: MainWeatherModel) {
+        view?.bindToViews(with: result)
+        print(result)
+    }
+    
+    func handleError(_ error: WeatherServiceError) {
+        view?.showAlert(withMessage: error.localizedDescription, animated: true)
     }
 }

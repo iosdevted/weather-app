@@ -8,8 +8,6 @@
 import Foundation
 import RealmSwift
 
-let realmObject = try! Realm()
-
 class RealmManager: NSObject {
     
     static let shared = RealmManager()
@@ -17,6 +15,9 @@ class RealmManager: NSObject {
     //MARK: - Local Weather
     
     func retrieveLocalWeather() -> MainWeatherModel? {
+        //https://stackoverflow.com/questions/45375468/realm-thread-safe-object-with-singleton
+        let realmObject = try! Realm()
+        
         guard let localWeather = realmObject.objects(LocalWeather.self).first,
               let weatherData = localWeather.weatherData
         else {
@@ -31,12 +32,14 @@ class RealmManager: NSObject {
         
         let localWeatherModel = LocalWeather()
         localWeatherModel.weatherId = UUID().uuidString
+        localWeatherModel.lastRefreshDate = Date()
         localWeatherModel.weatherData = encode(model: weather)
-        
+
         add(localWeatherModel)
     }
     
     func deleteLocalWeather() {
+        let realmObject = try! Realm()
         let localWeather = realmObject.objects(LocalWeather.self)
         
         try! realmObject.write {
@@ -45,6 +48,8 @@ class RealmManager: NSObject {
     }
     
     func checkIfLocalWeatherExists() -> Bool {
+        let realmObject = try! Realm()
+        
         guard let localWeather = realmObject.objects(LocalWeather.self).first,
               let _ = localWeather.weatherData
         else {
@@ -53,9 +58,26 @@ class RealmManager: NSObject {
         return true
     }
     
+    //MARK: - Last Refresh Date
+    
+    func retrieveLastRefreshDate() -> Date? {
+        let realmObject = try! Realm()
+        
+        guard let localWeather = realmObject.objects(LocalWeather.self).first,
+              let lastRefreshDate = localWeather.lastRefreshDate
+        else {
+            return nil
+        }
+        
+        return lastRefreshDate
+    }
+
+    
     //MARK: - User
     
     func retrieveUserId() -> String? {
+        let realmObject = try! Realm()
+        
         guard let user = realmObject.objects(User.self).first else {
             return nil
         }
@@ -84,6 +106,8 @@ class RealmManager: NSObject {
 extension RealmManager {
     
     private func add(_ object : Object) {
+        let realmObject = try! Realm()
+        
         try! realmObject.write {
             realmObject.add(object)
         }
@@ -110,6 +134,8 @@ extension RealmManager {
     }
     
     private func checkIfLocalUserExists() -> Bool {
+        let realmObject = try! Realm()
+        
         guard let _ = realmObject.objects(User.self).first else {
             return false
         }

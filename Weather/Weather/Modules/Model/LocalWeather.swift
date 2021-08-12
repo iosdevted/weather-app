@@ -10,6 +10,7 @@ import RealmSwift
 
 class LocalWeather: Object {
     @objc dynamic var weatherId: String?
+    @objc dynamic var lastRefreshDate: Date?
     @objc dynamic var weatherData: Data? = nil
     
     override class func primaryKey() -> String? {
