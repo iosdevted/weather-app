@@ -1,23 +1,17 @@
 //
-//  HourlyCollectionView.swift
+//  DailyCollectionView.swift
 //  Weather
 //
-//  Created by Ted on 2021/08/12.
+//  Created by Ted on 2021/08/13.
 //
 
 import UIKit
 
-class HourlyCollectionView: UICollectionView {
+class DailyCollectionView: UICollectionView {
     
     //MARK: - CallBack
     
-    var hourlyCellDidLoad: ((HourlyCollectionCell, IndexPath) -> Void)?
-    
-    //MARK: - UI Metrics
-    
-    private struct UI {
-        static let cellWidth = CGFloat(80)
-    }
+    var dailyCellDidLoad: ((DailyCollectionCell, IndexPath) -> Void)?
     
     //MARK: - Init
     
@@ -33,11 +27,11 @@ class HourlyCollectionView: UICollectionView {
 
 //MARK: - Setup Views
 
-extension HourlyCollectionView {
+extension DailyCollectionView {
     
     private func setupViews() {
-        backgroundColor = .white
-        showsHorizontalScrollIndicator = false
+        backgroundColor = .clear
+        allowsSelection = false
         
         dataSource = self
         delegate = self
@@ -46,23 +40,23 @@ extension HourlyCollectionView {
     }
     
     private func configureSubViews() {
-        register(cell: HourlyCollectionCell.self)
+        register(cell: DailyCollectionCell.self)
     }
 }
 
-//MARK: - UICollectionViewDataSource & UICollectionViewDelegateFlowLayout
+//MARK: - UICollectionViewDataSource
 
-extension HourlyCollectionView: UICollectionViewDataSource {
+extension DailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeue(HourlyCollectionCell.self, indexPath)
+        let cell = collectionView.dequeue(DailyCollectionCell.self, indexPath)
         
-        if let hourlyCellDidLoad = self.hourlyCellDidLoad {
-            hourlyCellDidLoad(cell, indexPath)
+        if let dailyCellDidLoad = dailyCellDidLoad {
+            dailyCellDidLoad(cell, indexPath)
         } else {
             return cell
         }
@@ -71,11 +65,11 @@ extension HourlyCollectionView: UICollectionViewDataSource {
     }
 }
 
-extension HourlyCollectionView: UICollectionViewDelegateFlowLayout {
-    
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UI.cellWidth, height: self.frame.height)
+        return CGSize(width: UIScreen.main.bounds.width,
+                      height: UIScreen.main.bounds.height * 0.05)
     }
 }
-
-

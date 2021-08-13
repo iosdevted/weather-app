@@ -50,18 +50,15 @@ extension HourlyCollectionCell {
     private func configureSubViews() {
         
         hourLabel.do {
-            $0.text = "19"
             $0.font = .hourlyFont()
             $0.textColor = .warmBlack
         }
         
         weatherIconImageView.do {
-            $0.image = UIImage(named: "shade")
             $0.contentMode = .scaleAspectFit
         }
         
         tempLabel.do {
-            $0.text = "31°"
             $0.font = .hourlyFont()
             $0.textColor = .warmBlack
         }
@@ -101,9 +98,9 @@ extension HourlyCollectionCell {
 
 extension HourlyCollectionCell {
     
-    func configureCell(hour: String, icon: String, temp: String) {
+    func configureCell(hour: String, image: String, temp: String) {
         hourLabel.text = hour
-        weatherIconImageView.image = UIImage(named: icon)
+        weatherIconImageView.image = UIImage(named: image)
         tempLabel.text = temp
     }
 }

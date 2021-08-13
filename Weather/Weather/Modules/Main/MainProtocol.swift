@@ -12,7 +12,7 @@ import Foundation
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol {
     
-    func bindToViews(with data: MainWeatherModel)
+    func bindToViews(with data: [WeatherModel])
     func showAlert(withMessage message: String, animated: Bool) 
 }
 
@@ -44,7 +44,7 @@ protocol PresenterToInteractorMainProtocol {
 
 protocol InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: MainWeatherModel)
+    func handleResult(_ result: [WeatherModel])
     func handleError(_ error: WeatherServiceError)
 }
 

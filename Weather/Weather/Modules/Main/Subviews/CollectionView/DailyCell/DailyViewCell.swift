@@ -1,5 +1,5 @@
 //
-//  HourlyCollectionReusableView.swift
+//  DailyViewCell.swift
 //  Weather
 //
 //  Created by Ted on 2021/08/12.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-class HourlyCollectionReusableView: UICollectionReusableView {
+class DailyViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
     private let separateLineView = SeparateLineView(frame: .zero)
-    lazy var hourlyCollectionView: HourlyCollectionView = {
+    lazy var dailyCollectionView: DailyCollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 0
         
-        let view = HourlyCollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = DailyCollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
     
@@ -35,37 +35,38 @@ class HourlyCollectionReusableView: UICollectionReusableView {
 
 //MARK: - Setup Views
 
-extension HourlyCollectionReusableView {
+extension DailyViewCell {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
         setupConstraints()
     }
     
     private func configureSubViews() {
-        addSubviews([hourlyCollectionView, separateLineView])
+        addSubviews([dailyCollectionView, separateLineView])
     }
 }
 
 //MARK: - Layout & Constraints
 
-extension HourlyCollectionReusableView {
+extension DailyViewCell {
     
     private func setupConstraints() {
         
-        hourlyCollectionView
+        dailyCollectionView
             .topAnchor(to: topAnchor)
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
             .bottomAnchor(to: bottomAnchor)
             .activateAnchors()
-        
+
         separateLineView
             .leadingAnchor(to: leadingAnchor)
             .trailingAnchor(to: trailingAnchor)
-            .setupConstraints(bottom: hourlyCollectionView.bottomAnchor)
+            .setupConstraints(bottom: dailyCollectionView.bottomAnchor)
     }
 }
+
 

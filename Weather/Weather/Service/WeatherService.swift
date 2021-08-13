@@ -12,7 +12,7 @@ class WeatherService: WeatherServiceType {
     private let baseURL = "https://api.openweathermap.org/data/2.5/forecast"
     private let API_KEY = "da69ade359c47e35161bf2e2dad374e8"
     
-    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<[WeatherModel], WeatherServiceError>) -> Void) {
         
         var urlComponent = URLComponents(string: baseURL)
         
@@ -28,7 +28,7 @@ class WeatherService: WeatherServiceType {
     }
     
     
-    func fetchWeather(byCity city: String, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+    func fetchWeather(byCity city: String, completion: @escaping (Result<[WeatherModel], WeatherServiceError>) -> Void) {
         let cityName = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? city
         
         var urlComponent = URLComponents(string: baseURL)
@@ -43,7 +43,7 @@ class WeatherService: WeatherServiceType {
         handleRequest(url: url, completion: completion)
     }
     
-    func handleRequest(url: URL, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+    func handleRequest(url: URL, completion: @escaping (Result<[WeatherModel], WeatherServiceError>) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
@@ -60,7 +60,7 @@ class WeatherService: WeatherServiceType {
             
             do {
                 let result = try JSONDecoder().decode(WeatherResponse.self, from: data)
-                completion(.success(MainWeatherModel(weatherResponse: result)!))
+                completion(.success(WeatherModel.getModelsWith(weatherResponse: result)))
             } catch {
                 completion(.failure(.decodeError))
             }

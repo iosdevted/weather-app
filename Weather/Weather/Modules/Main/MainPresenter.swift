@@ -25,7 +25,8 @@ class MainPresenter {
 extension MainPresenter: ViewToPresenterMainProtocol {
     
     func viewDidLoad() {
-        fetchWeatherData()
+//        fetchWeatherData()
+        interactor?.fetchAPIWeatherData()
     }
     
     func viewDidAppear() {
@@ -35,7 +36,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: MainWeatherModel) {
+    func handleResult(_ result: [WeatherModel]) {
         view?.bindToViews(with: result)
         print(result)
     }

@@ -6,7 +6,6 @@
 //  
 //
 
-import Then
 import UIKit
 
 class MainViewController: BaseViewController {
@@ -23,6 +22,7 @@ class MainViewController: BaseViewController {
     var presenter: ViewToPresenterMainProtocol?
     
     private let headerView = HeaderView()
+    private var alertView: UIAlertController?
     private lazy var collectionView: CollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,14 +33,12 @@ class MainViewController: BaseViewController {
         return view
     }()
     
-    private var alertView: UIAlertController?
-    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
         presenter?.viewDidLoad()
+        setupViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,24 +80,42 @@ class MainViewController: BaseViewController {
 
 extension MainViewController: PresenterToViewMainProtocol{
     
-    //MARK: Binding
+    //MARK: - Binding
     
-    func bindToViews(with data: MainWeatherModel) {
+    func bindToViews(with data: [WeatherModel]) {
         DispatchQueue.main.async {
-            self.headerView.configureView(image: data.conditionImage,
-                                          cityName: data.cityName,
-                                          currentTemperature: data.currentTemperature,
-                                          description: data.weatherDescription)
+            guard let recentData = data.first else { return }
+            self.headerView.configureView(image: recentData.conditionImage,
+                                          cityName: "Paris, France",
+                                          currentTemperature: recentData.temp,
+                                          description: recentData.description)
             
-            self.collectionView.headerDidLoad = { header in
-                header.hourlyCollectionView.hourlyCellDidLoad = { hourlyCell, hourlyIndexPath in
-                    //                    hourlyCell.configureCell(hour: , icon: , temp: /)
+            self.collectionView.hourlyCollectionDidLoad = { header in
+                header.hourlyCollectionView.reloadData()
+                header.hourlyCollectionView.hourlyCellDidLoad = { cell, indexPath in
+                    cell.configureCell(hour: data[indexPath.item].hour,
+                                       image: data[indexPath.item].conditionImage,
+                                       temp: data[indexPath.item].temp)
                 }
             }
+            
+            self.collectionView.dailyCollectionDidLoad = { daily in
+                daily.dailyCollectionView.reloadData()
+                daily.dailyCollectionView.dailyCellDidLoad = { cell, indexPath in
+                    cell.configureCell(day: data[indexPath.item].day,
+                                       image: data[indexPath.item].conditionImage,
+                                       maxTemp: data[indexPath.item].temp_max,
+                                       minTemp: data[indexPath.item].temp_min)
+                }
+            }
+            
+            
+            
+            self.collectionView.reloadData()
         }
     }
     
-    //MARK: Show Alert
+    //MARK: - Show Alert
     
     func showAlert(withMessage message: String, animated: Bool) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)

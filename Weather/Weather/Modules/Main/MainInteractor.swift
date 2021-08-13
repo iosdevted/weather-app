@@ -25,16 +25,8 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         }
         
         let currentDate = Date()
-//        print(currentDate.minutes(from: lastRefreshDate))
-//        print(lastRefreshDate)
-//        print(currentDate)
-        if currentDate.minutes(from: lastRefreshDate) >= 180,
-           //should i delete this???
-           !RealmManager.shared.checkIfLocalWeatherExists() {
-            return true
-        } else {
-            return false
-        }
+        //If the last refresh data is more than 180 minutes before, it return  true
+        return currentDate.minutes(from: lastRefreshDate) >= 180 ? true : false
     }
     
     func fetchAPIWeatherData() {

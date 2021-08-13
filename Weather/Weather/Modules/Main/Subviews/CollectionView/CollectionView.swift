@@ -11,10 +11,10 @@ class CollectionView: UICollectionView {
     
     // MARK: - Callback
     
-    internal var headerDidLoad: ((HourlyCollectionReusableView) -> Void)?
-    internal var firstCollectionCellDidLoad: ((DailyCell) -> Void)?
-    internal var secondCollectionCellDidLoad: ((SummaryCell) -> Void)?
-    internal var thirdCollectionCellDidLoad: ((SubInfoCell) -> Void)?
+    var hourlyCollectionDidLoad: ((HourlyCollectionReusableView) -> Void)?
+    var dailyCollectionDidLoad: ((DailyViewCell) -> Void)?
+    var summaryCollectionDidLoad: ((SummaryCell) -> Void)?
+    var SubInfoCollectionDidLoad: ((SubInfoCell) -> Void)?
     
     //MARK: - UI Metrics
     
@@ -36,12 +36,11 @@ class CollectionView: UICollectionView {
     }
     
     deinit {
-        headerDidLoad = nil
-        firstCollectionCellDidLoad = nil
-        secondCollectionCellDidLoad = nil
-        thirdCollectionCellDidLoad = nil
+        hourlyCollectionDidLoad = nil
+        dailyCollectionDidLoad = nil
+        summaryCollectionDidLoad = nil
+        SubInfoCollectionDidLoad = nil
     }
-    
 }
 
 //MARK: - Setup Views
@@ -63,7 +62,7 @@ extension CollectionView {
                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                  withReuseIdentifier: HourlyCollectionReusableView.identifier)
         
-        register(cell: DailyCell.self)
+        register(cell: DailyViewCell.self)
         register(cell: SummaryCell.self)
         register(cell: SubInfoCell.self)
     }
@@ -76,7 +75,7 @@ extension CollectionView: UICollectionViewDataSource {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HourlyCollectionReusableView.identifier, for: indexPath) as! HourlyCollectionReusableView
         
-        if let headerDidLoad = headerDidLoad {
+        if let headerDidLoad = hourlyCollectionDidLoad {
             headerDidLoad(header)
         } else {
             return header
@@ -93,8 +92,8 @@ extension CollectionView: UICollectionViewDataSource {
         
         switch indexPath.item {
         case 0:
-            let cell = collectionView.dequeue(DailyCell.self, indexPath)
-            if let firstCollectionCellDidLoad  = firstCollectionCellDidLoad {
+            let cell = collectionView.dequeue(DailyViewCell.self, indexPath)
+            if let firstCollectionCellDidLoad  = dailyCollectionDidLoad {
                 firstCollectionCellDidLoad(cell)
             } else {
                 return cell
@@ -102,7 +101,7 @@ extension CollectionView: UICollectionViewDataSource {
             return cell
         case 1:
             let cell = collectionView.dequeue(SummaryCell.self, indexPath)
-            if let secondCollectionCellDidLoad  = secondCollectionCellDidLoad {
+            if let secondCollectionCellDidLoad  = summaryCollectionDidLoad {
                 secondCollectionCellDidLoad(cell)
             } else {
                 return cell
@@ -110,7 +109,7 @@ extension CollectionView: UICollectionViewDataSource {
             return cell
         case 2:
             let cell = collectionView.dequeue(SubInfoCell.self, indexPath)
-            if let thirdCollectionCellDidLoad  = thirdCollectionCellDidLoad {
+            if let thirdCollectionCellDidLoad  = SubInfoCollectionDidLoad {
                 thirdCollectionCellDidLoad(cell)
             } else {
                 return cell

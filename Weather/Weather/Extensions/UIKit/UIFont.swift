@@ -16,5 +16,9 @@ extension UIFont {
     static func hourlyFont() -> UIFont? {
         return UIFont.systemFont(ofSize: 13)
     }
+    
+    static func dailyFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 13)
+    }
 }
 
