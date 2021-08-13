@@ -32,8 +32,8 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     //MARK: -> Presenter
     
     func viewDidLoad() {
-        shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
-//        interactor?.fetchWeatherAPI()
+//        shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
+        interactor?.fetchWeatherAPI()
     }
     
     func viewDidAppear() {
@@ -49,9 +49,12 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
 
         let weatherViewModel = WeatherViewModel.getModelsWith(weatherResponse: response)
         let weatherDailyViewModel = WeatherDailyViewModel.getModelWith(weatherViewModel: weatherViewModel)
+        let weatherInfoViewModel = WeatherInfoViewModel.getModelWith(weatherViewModel: weatherViewModel)
         
+        print(weatherViewModel)
         view?.bindToViews(with: weatherViewModel)
         view?.bindToViews(with: weatherDailyViewModel)
+        view?.bindToViews(with: weatherInfoViewModel)
     }
     
     func handleError(_ error: WeatherServiceError) {

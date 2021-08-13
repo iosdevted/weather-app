@@ -129,7 +129,7 @@ extension HeaderView {
         guard let recentData = viewModel.first else { return }
         
         weatherImageView.image = UIImage(named: recentData.conditionImage)
-        weatherLocationTitleView.title = "Paris, France"
+        weatherLocationTitleView.title = recentData.cityName
         temperatureLabel.text = recentData.temp
         weatherDescriptionLabel.text = recentData.description
         

@@ -20,8 +20,8 @@ class CollectionView: UICollectionView {
     
     private struct UI {
         static let dailyCellHeightRatio = CGFloat(0.4)
-        static let summaryCellHeightRatio = CGFloat(0.1)
-        static let subInfoCellHeightRatio = CGFloat(0.4)
+        static let summaryCellHeightRatio = CGFloat(0.08)
+        static let subInfoCellHeightRatio = CGFloat(0.25)
     }
     
     //MARK: - Init

@@ -20,11 +20,13 @@ struct WeatherListResponse: Codable {
     let main: WeatherListMainResponse
     let weather: [WeatherListWeatherResponse]
     let wind: WeatherListWindResponse
+    let visibility: Int
     let dt_txt: String
 }
 
 struct WeatherListMainResponse: Codable {
     let temp: Double
+    let feels_like: Double
     let temp_min: Double
     let temp_max: Double
     let pressure: Double

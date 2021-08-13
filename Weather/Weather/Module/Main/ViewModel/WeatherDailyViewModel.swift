@@ -28,20 +28,20 @@ struct WeatherDailyViewModel {
     
     static func getModelWith(weatherViewModel: [WeatherViewModel]) -> WeatherDailyViewModel {
         
-        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.dt_txt })
+        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.date })
         let keysArray = Array(temporaryDailyDictionary.keys).sorted(by: { $0 < $1 })
         var minTempArray = [String]()
         var maxTempArray = [String]()
         var conditionIDArray = [String]()
         
         temporaryDailyDictionary.forEach { key, value in
-            let max = value.max { $0.temp_max_int < $1.temp_max_int }
-            let min = value.min { $0.temp_max_int < $1.temp_max_int }
+            let max = value.max { $0.tempMaxInt < $1.tempMaxInt }
+            let min = value.min { $0.tempMaxInt < $1.tempMaxInt }
             guard let max = max else { return }
             guard let min = min else { return }
             
-            minTempArray.append(min.temp_min)
-            maxTempArray.append(max.temp_max)
+            minTempArray.append(min.tempMin)
+            maxTempArray.append(max.tempMax)
             conditionIDArray.append(max.conditionImage)
         }
         

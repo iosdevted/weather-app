@@ -20,6 +20,7 @@ class SubInfoCollectionCell: UICollectionViewCell {
     private let topLabel = UILabel()
     private let bottomLabel = UILabel()
     private let separateLineView = SeparateLineView(frame: .zero)
+    private let subInfoTitles = ["Feels like", "Humidity", "Pressure", "Wind Speed", "Wind Direction", "Visibility"]
     
     //MARK: - Init
     
@@ -89,8 +90,8 @@ extension SubInfoCollectionCell {
 
 extension SubInfoCollectionCell {
     
-    func configureCell(topText: String, bottomText: String) {
-        self.topLabel.text = topText
-        self.bottomLabel.text = bottomText
+    func configureCell(viewModel: WeatherInfoViewModel, item: Int) {
+        self.topLabel.text = subInfoTitles[item]
+        self.bottomLabel.text = viewModel.infos[item]
     }
 }

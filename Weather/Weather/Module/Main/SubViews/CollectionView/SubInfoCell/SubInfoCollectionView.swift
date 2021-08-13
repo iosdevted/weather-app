@@ -49,7 +49,7 @@ extension SubInfoCollectionView {
 
 extension SubInfoCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,6 +72,6 @@ extension SubInfoCollectionView: UICollectionViewDataSource {
 extension SubInfoCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width / 2,
-                      height: frame.height / 5)
+                      height: frame.height / 3)
     }
 }

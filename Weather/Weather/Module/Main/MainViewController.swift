@@ -90,12 +90,6 @@ extension MainViewController: PresenterToViewMainProtocol {
                 }
                 header.hourlyCollectionView.reloadData()
             }
-            self.collectionView.SubInfoCollectionDidLoad = { subInfo in
-                subInfo.subInfoCollectionView.collectionCellDidLoad = { cell, indexPath in
-                    cell.configureCell(topText: "", bottomText: "")
-                }
-                subInfo.subInfoCollectionView.reloadData()
-            }
             self.headerView.configureView(viewModel: viewModel)
             self.collectionView.reloadData()
         }
@@ -112,6 +106,18 @@ extension MainViewController: PresenterToViewMainProtocol {
             
             self.collectionView.summaryCollectionDidLoad = { summary in
                 summary.configureCell(viewModel: viewModel)
+            }
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func bindToViews(with viewModel: WeatherInfoViewModel) {
+        DispatchQueue.main.async {
+            self.collectionView.SubInfoCollectionDidLoad = { subInfo in
+                subInfo.subInfoCollectionView.collectionCellDidLoad = { cell, indexPath in
+                    cell.configureCell(viewModel: viewModel, item: indexPath.item)
+                }
+                subInfo.subInfoCollectionView.reloadData()
             }
             self.collectionView.reloadData()
         }
