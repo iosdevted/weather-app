@@ -10,7 +10,8 @@ import Foundation
 
 class MainInteractor {
 
-    // MARK: Properties
+    //MARK: Properties
+    
     var presenter: InteractorToPresenterMainProtocol?
     
     private let weatherService = WeatherService()
@@ -19,7 +20,9 @@ class MainInteractor {
 
 extension MainInteractor: PresenterToInteractorMainProtocol {
     
-    func shouldFetchAPIWeatherData() -> Bool {
+    //MARK: -> Interactor
+    
+    func fetchedAPI180MinutesAgo() -> Bool {
         guard let lastRefreshDate = RealmManager.shared.retrieveLastRefreshDate() else {
             return true
         }
@@ -29,7 +32,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         return currentDate.minutes(from: lastRefreshDate) >= 180 ? true : false
     }
     
-    func fetchAPIWeatherData() {
+    func fetchWeatherAPI() {
         weatherService.fetchWeather(byCity: "Paris") { [weak self] result in
             guard let `self` = self else { return }
             switch result {
@@ -42,7 +45,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         }
     }
     
-    func fetchLocalWeatherData() {
+    func fetchLocalWeather() {
         guard let weather = RealmManager.shared.retrieveLocalWeather() else {
             return
         }

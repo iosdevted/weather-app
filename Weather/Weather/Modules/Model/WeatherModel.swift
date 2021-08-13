@@ -13,6 +13,8 @@ struct WeatherModel: Codable {
     let hour: String
     let day: String
     let temp: String
+    let temp_min_int: Int
+    let temp_max_int: Int
     let temp_min: String
     let temp_max: String
     let description: String
@@ -37,11 +39,13 @@ struct WeatherModel: Codable {
         }
     }
     
-    init(dt_txt: String, hour: String, day: String, temp: String, temp_min: String, temp_max: String, description: String, conditionId: Int) {
+    init(dt_txt: String, hour: String, day: String, temp: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int) {
         self.dt_txt = dt_txt
         self.hour = hour
         self.day = day
         self.temp = temp
+        self.temp_min_int = temp_min_int
+        self.temp_max_int = temp_max_int
         self.temp_min = temp_min
         self.temp_max = temp_max
         self.description = description
@@ -57,6 +61,8 @@ struct WeatherModel: Codable {
         let hour = Date.getHHFormat(eachWeather.dt_txt)
         let day = Date.getWeekDay(eachWeather.dt_txt)
         let temp = "\(Int(eachWeather.main.temp)) °C"
+        let temp_min_int = (Int(eachWeather.main.temp_min))
+        let temp_max_int = (Int(eachWeather.main.temp_max))
         let temp_min = "\(Int(eachWeather.main.temp_min)) °C"
         let temp_max = "\(Int(eachWeather.main.temp_max)) °C"
         var description: String = ""
@@ -66,7 +72,7 @@ struct WeatherModel: Codable {
             conditionId = weather.id
         }
         
-        return WeatherModel(dt_txt: date, hour: hour, day: day, temp: temp, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId)
+        return WeatherModel(dt_txt: date, hour: hour, day: day, temp: temp, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int)
     }
     
 }

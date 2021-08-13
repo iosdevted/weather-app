@@ -80,10 +80,11 @@ class MainViewController: BaseViewController {
 
 extension MainViewController: PresenterToViewMainProtocol{
     
-    //MARK: - Binding
+    //MARK: <- View / Binding
     
     func bindToViews(with data: [WeatherModel]) {
         DispatchQueue.main.async {
+            
             guard let recentData = data.first else { return }
             self.headerView.configureView(image: recentData.conditionImage,
                                           cityName: "Paris, France",
@@ -91,31 +92,37 @@ extension MainViewController: PresenterToViewMainProtocol{
                                           description: recentData.description)
             
             self.collectionView.hourlyCollectionDidLoad = { header in
-                header.hourlyCollectionView.reloadData()
                 header.hourlyCollectionView.hourlyCellDidLoad = { cell, indexPath in
+                    
                     cell.configureCell(hour: data[indexPath.item].hour,
                                        image: data[indexPath.item].conditionImage,
                                        temp: data[indexPath.item].temp)
                 }
+                header.hourlyCollectionView.reloadData()
             }
-            
-            self.collectionView.dailyCollectionDidLoad = { daily in
-                daily.dailyCollectionView.reloadData()
-                daily.dailyCollectionView.dailyCellDidLoad = { cell, indexPath in
-                    cell.configureCell(day: data[indexPath.item].day,
-                                       image: data[indexPath.item].conditionImage,
-                                       maxTemp: data[indexPath.item].temp_max,
-                                       minTemp: data[indexPath.item].temp_min)
-                }
-            }
-            
-            
             
             self.collectionView.reloadData()
         }
     }
     
-    //MARK: - Show Alert
+    func bindToDailyCell(with dictionary: [String: Array<String>], keysArray: [String]) {
+        DispatchQueue.main.async {
+            self.collectionView.dailyCollectionDidLoad = { daily in
+                daily.dailyCollectionView.dailyCellDidLoad = { cell, indexPath in
+                    
+                    guard let elements = dictionary[keysArray[indexPath.item]] else { return }
+                    cell.configureCell(day: keysArray[indexPath.item],
+                                       image: elements[2],
+                                       maxTemp: elements[0],
+                                       minTemp: elements[1])
+                }
+                daily.dailyCollectionView.reloadData()
+            }
+            self.collectionView.reloadData()
+        }
+    }
+    
+    //MARK: Show Alert
     
     func showAlert(withMessage message: String, animated: Bool) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)

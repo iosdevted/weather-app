@@ -48,7 +48,7 @@ extension DailyCollectionView {
 
 extension DailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,6 +70,6 @@ extension DailyCollectionView: UICollectionViewDataSource {
 extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width,
-                      height: UIScreen.main.bounds.height * 0.05)
+                      height: UIScreen.main.bounds.height * 0.066)
     }
 }

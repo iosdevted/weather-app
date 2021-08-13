@@ -13,6 +13,7 @@ import Foundation
 protocol PresenterToViewMainProtocol {
     
     func bindToViews(with data: [WeatherModel])
+    func bindToDailyCell(with dictionary: [String: Array<String>], keysArray: [String])
     func showAlert(withMessage message: String, animated: Bool) 
 }
 
@@ -34,9 +35,9 @@ protocol PresenterToInteractorMainProtocol {
     
     var presenter: InteractorToPresenterMainProtocol? { get set }
     
-    func shouldFetchAPIWeatherData() -> Bool
-    func fetchAPIWeatherData()
-    func fetchLocalWeatherData()
+    func fetchedAPI180MinutesAgo() -> Bool
+    func fetchWeatherAPI()
+    func fetchLocalWeather()
 }
 
 

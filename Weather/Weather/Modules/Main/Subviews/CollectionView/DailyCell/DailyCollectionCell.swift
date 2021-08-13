@@ -13,7 +13,7 @@ class DailyCollectionCell: UICollectionViewCell {
     //MARK: - UI Metrics
     
     private struct UI {
-        static let margin = CGFloat(5)
+        static let margin = CGFloat(10)
         static let imageSize = CGFloat(30)
     }
     
