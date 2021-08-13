@@ -20,5 +20,9 @@ extension UIFont {
     static func dailyFont() -> UIFont? {
         return UIFont.systemFont(ofSize: 16)
     }
+    
+    static func summaryFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 16)
+    }
 }
 

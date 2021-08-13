@@ -93,24 +93,24 @@ extension CollectionView: UICollectionViewDataSource {
         switch indexPath.item {
         case 0:
             let cell = collectionView.dequeue(DailyViewCell.self, indexPath)
-            if let firstCollectionCellDidLoad  = dailyCollectionDidLoad {
-                firstCollectionCellDidLoad(cell)
+            if let dailyCollectionDidLoad  = dailyCollectionDidLoad {
+                dailyCollectionDidLoad(cell)
             } else {
                 return cell
             }
             return cell
         case 1:
             let cell = collectionView.dequeue(SummaryCell.self, indexPath)
-            if let secondCollectionCellDidLoad  = summaryCollectionDidLoad {
-                secondCollectionCellDidLoad(cell)
+            if let summaryCollectionDidLoad  = summaryCollectionDidLoad {
+                summaryCollectionDidLoad(cell)
             } else {
                 return cell
             }
             return cell
         case 2:
             let cell = collectionView.dequeue(SubInfoCell.self, indexPath)
-            if let thirdCollectionCellDidLoad  = SubInfoCollectionDidLoad {
-                thirdCollectionCellDidLoad(cell)
+            if let SubInfoCollectionDidLoad  = SubInfoCollectionDidLoad {
+                SubInfoCollectionDidLoad(cell)
             } else {
                 return cell
             }

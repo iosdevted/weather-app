@@ -23,19 +23,19 @@ struct WeatherModel: Codable {
     var conditionImage: String {
         switch conditionId {
         case 200...299:
-            return "thunder"
+            return "thunderstorms"
         case 300...399:
-            return "cry"
+            return "drizzling"
         case 500...599:
-            return "rain"
+            return "raining"
         case 600...699:
-            return "snow"
+            return "snowing"
         case 700...799:
-            return "thunder" //should change to wind
+            return "windy" //don't have a pic
         case 800:
             return "shine"
         default:
-            return "shade"
+            return "cloudy"
         }
     }
     

@@ -251,12 +251,12 @@
 		9FB7312326C3AD2200A719F5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				9FB7313326C3B4D400A719F5 /* Subviews */,
 				9FB7312426C3AD3100A719F5 /* MainProtocol.swift */,
 				9FB7312526C3AD3100A719F5 /* MainPresenter.swift */,
 				9FB7312626C3AD3100A719F5 /* MainRouter.swift */,
 				9FB7312726C3AD3100A719F5 /* MainViewController.swift */,
 				9FB7312826C3AD3100A719F5 /* MainInteractor.swift */,
+				9FB7313326C3B4D400A719F5 /* Subviews */,
 			);
 			path = Main;
 			sourceTree = "<group>";

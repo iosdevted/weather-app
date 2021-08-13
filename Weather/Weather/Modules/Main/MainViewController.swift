@@ -118,6 +118,15 @@ extension MainViewController: PresenterToViewMainProtocol{
                 }
                 daily.dailyCollectionView.reloadData()
             }
+            
+            self.collectionView.summaryCollectionDidLoad = { summary in
+                
+                guard let element = dictionary[keysArray[0]] else { return }
+                summary.configureCell(description: element[2],
+                                      maxTemp: element[0])
+            }
+            
+            
             self.collectionView.reloadData()
         }
     }

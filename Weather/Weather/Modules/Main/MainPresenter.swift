@@ -24,6 +24,10 @@ extension MainPresenter {
     
     //MARK: - Helpers
     
+    // Normally don't need this method because API is well refined
+    // But Open Weather API don't afford daily weather forecast
+    // So I made this method for making a dicitonary of daily weather forecast.
+    
     private func makeDailyWeatherDictionary(with dictionary: [String : [WeatherModel]]) -> [String: Array<String>] {
         var tempDictionary = [String: Array<String>]()
         
@@ -75,6 +79,7 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
         dailyWeatherDictionary = makeDailyWeatherDictionary(with: temporaryDailyDictionary)
         
         view?.bindToViews(with: model)
+        print(model)
         view?.bindToDailyCell(with: dailyWeatherDictionary, keysArray: dateKeysArray)
     }
     
