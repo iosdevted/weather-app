@@ -9,6 +9,6 @@ import Foundation
 
 protocol WeatherServiceType {
     
-    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<[WeatherModel], WeatherServiceError>) -> Void)
-    func fetchWeather(byCity city: String, completion: @escaping (Result<[WeatherModel], WeatherServiceError>) -> Void)
+    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void)
+    func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void)
 }

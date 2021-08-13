@@ -10,22 +10,22 @@ import Foundation
 
 class MockWeatherService: WeatherServiceType {
     
-    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-        handleRequest(completion: completion)
-    }
-    
-    
-    func fetchWeather(byCity city: String, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-        handleRequest(completion: completion)
-    }
-    
-    func handleRequest(completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-        
-        do {
-            let result = try JSONDecoder().decode(WeatherResponse.self, from: StubData.shared.stubWeatherData())
-            completion(.success(MainWeatherModel(weatherResponse: result)!))
-        } catch {
-            completion(.failure(.decodeError))
-        }
-    }
+//    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+//        handleRequest(completion: completion)
+//    }
+//
+//
+//    func fetchWeather(byCity city: String, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+//        handleRequest(completion: completion)
+//    }
+//
+//    func handleRequest(completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
+//
+//        do {
+//            let result = try JSONDecoder().decode(WeatherResponse.self, from: StubData.shared.stubWeatherData())
+//            completion(.success(MainWeatherModel(weatherResponse: result)!))
+//        } catch {
+//            completion(.failure(.decodeError))
+//        }
+//    }
 }

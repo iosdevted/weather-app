@@ -14,7 +14,7 @@ class RealmManager: NSObject {
     
     //MARK: - Local Weather
     
-    func retrieveLocalWeather() -> [WeatherModel]? {
+    func retrieveLocalWeather() -> WeatherResponse? {
         //https://stackoverflow.com/questions/45375468/realm-thread-safe-object-with-singleton
         let realmObject = try! Realm()
         
@@ -27,7 +27,7 @@ class RealmManager: NSObject {
         return decode(data: weatherData)
     }
     
-    func saveLocalWeather(_ weather: [WeatherModel]) {
+    func saveLocalWeather(_ weather: WeatherResponse) {
         deleteLocalWeather()
         
         let localWeatherModel = LocalWeather()
@@ -113,7 +113,7 @@ extension RealmManager {
         }
     }
     
-    private func encode(model: [WeatherModel]) -> Data? {
+    private func encode(model: WeatherResponse) -> Data? {
         do {
             let jsonData = try JSONEncoder().encode(model)
             return jsonData
@@ -123,9 +123,9 @@ extension RealmManager {
         return nil
     }
     
-    private func decode(data: Data) -> [WeatherModel]? {
+    private func decode(data: Data) -> WeatherResponse? {
         do {
-            let decodedWeather = try JSONDecoder().decode([WeatherModel].self, from: data)
+            let decodedWeather = try JSONDecoder().decode(WeatherResponse.self, from: data)
             return decodedWeather
         } catch {
             print(error)

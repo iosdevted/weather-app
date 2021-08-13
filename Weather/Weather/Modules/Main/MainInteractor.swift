@@ -36,9 +36,9 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         weatherService.fetchWeather(byCity: "Paris") { [weak self] result in
             guard let `self` = self else { return }
             switch result {
-            case .success(let weather):
-                RealmManager.shared.saveLocalWeather(weather)
-                self.presenter?.handleResult(weather)
+            case .success(let response):
+                RealmManager.shared.saveLocalWeather(response)
+                self.presenter?.handleResult(response)
             case .failure(let error):
                 self.presenter?.handleError(error)
             }

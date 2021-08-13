@@ -12,8 +12,8 @@ import Foundation
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol {
     
-    func bindToViews(with data: [WeatherModel])
-    func bindToDailyCell(with dictionary: [String: Array<String>], keysArray: [String])
+    func bindToViews(with viewModel: [WeatherViewModel])
+    func bindToViews(with viewModel: WeatherDailyViewModel)
     func showAlert(withMessage message: String, animated: Bool) 
 }
 
@@ -45,7 +45,7 @@ protocol PresenterToInteractorMainProtocol {
 
 protocol InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: [WeatherModel])
+    func handleResult(_ result: WeatherResponse)
     func handleError(_ error: WeatherServiceError)
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherModel: Codable {
+struct WeatherViewModel: Codable {
     
     let dt_txt: String
     let hour: String
@@ -52,11 +52,11 @@ struct WeatherModel: Codable {
         self.conditionId = conditionId
     }
     
-    static func getModelsWith(weatherResponse: WeatherResponse) -> [WeatherModel] {
+    static func getModelsWith(weatherResponse: WeatherResponse) -> [WeatherViewModel] {
         return weatherResponse.list.map { getModelWith(eachWeather: $0) }
     }
     
-    static func getModelWith(eachWeather: WeatherListResponse) -> WeatherModel {
+    static func getModelWith(eachWeather: WeatherListResponse) -> WeatherViewModel {
         let date = Date.getddMMYYYYFormat(eachWeather.dt_txt)
         let hour = Date.getHHFormat(eachWeather.dt_txt)
         let day = Date.getWeekDay(eachWeather.dt_txt)
@@ -72,7 +72,7 @@ struct WeatherModel: Codable {
             conditionId = weather.id
         }
         
-        return WeatherModel(dt_txt: date, hour: hour, day: day, temp: temp, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int)
+        return WeatherViewModel(dt_txt: date, hour: hour, day: day, temp: temp, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int)
     }
     
 }

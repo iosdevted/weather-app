@@ -15,36 +15,11 @@ class MainPresenter {
     var view: PresenterToViewMainProtocol?
     var interactor: PresenterToInteractorMainProtocol?
     var router: PresenterToRouterMainProtocol?
-    
-    private var dateKeysArray = [String]()
-    private var dailyWeatherDictionary = [String: Array<String>]()
 }
 
 extension MainPresenter {
     
     //MARK: - Helpers
-    
-    // Normally don't need this method because API is well refined
-    // But Open Weather API don't afford daily weather forecast
-    // So I made this method for making a dicitonary of daily weather forecast.
-    
-    private func makeDailyWeatherDictionary(with dictionary: [String : [WeatherModel]]) -> [String: Array<String>] {
-        var tempDictionary = [String: Array<String>]()
-        
-        dictionary.forEach { key, value in
-            let max = value.max { $0.temp_max_int < $1.temp_max_int }
-            let min = value.min { $0.temp_max_int < $1.temp_max_int }
-            guard let max = max else { return }
-            guard let min = min else { return }
-            
-            tempDictionary.updateValue([max.temp_max, min.temp_min, max.conditionImage], forKey: key)
-        }
-        return tempDictionary
-    }
-    
-    private func makeKeysArray(with dictionary: [String : [WeatherModel]]) -> Array<String> {
-        return Array(dictionary.keys).sorted(by: { $0 < $1 })
-    }
     
     private func shouldFetchWeatherAPI() -> Bool {
         guard let shouldFetchWeatherData = interactor?.fetchedAPI180MinutesAgo() else { return false }
@@ -58,6 +33,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     
     func viewDidLoad() {
         shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
+//        interactor?.fetchWeatherAPI()
     }
     
     func viewDidAppear() {
@@ -69,18 +45,13 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
     
     //MARK: <- Presenter
     
-    func handleResult(_ model: [WeatherModel]) {
-        // Make a dictionary with keys(Date; 13/08/2021)
-        let temporaryDailyDictionary = Dictionary(grouping: model, by: { $0.dt_txt })
+    func handleResult(_ response: WeatherResponse) {
+
+        let weatherViewModel = WeatherViewModel.getModelsWith(weatherResponse: response)
+        let weatherDailyViewModel = WeatherDailyViewModel.getModelWith(weatherViewModel: weatherViewModel)
         
-        // Make a Array and a dictionary for getting minimum and maximum temperature
-        
-        dateKeysArray = makeKeysArray(with: temporaryDailyDictionary)
-        dailyWeatherDictionary = makeDailyWeatherDictionary(with: temporaryDailyDictionary)
-        
-        view?.bindToViews(with: model)
-        print(model)
-        view?.bindToDailyCell(with: dailyWeatherDictionary, keysArray: dateKeysArray)
+        view?.bindToViews(with: weatherViewModel)
+        view?.bindToViews(with: weatherDailyViewModel)
     }
     
     func handleError(_ error: WeatherServiceError) {

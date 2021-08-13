@@ -75,8 +75,8 @@ extension CollectionView: UICollectionViewDataSource {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HourlyCollectionReusableView.identifier, for: indexPath) as! HourlyCollectionReusableView
         
-        if let headerDidLoad = hourlyCollectionDidLoad {
-            headerDidLoad(header)
+        if let hourlyCollectionDidLoad = hourlyCollectionDidLoad {
+            hourlyCollectionDidLoad(header)
         } else {
             return header
         }
