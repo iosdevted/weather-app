@@ -15,7 +15,7 @@ class HourlyCollectionCell: UICollectionViewCell {
     private struct UI {
         static let labelHeightRatio = CGFloat(0.15)
         static let iconImageHeightRatio = CGFloat(0.6)
-        static let margin = CGFloat(0.1)
+        static let bottomMarginRatio = CGFloat(0.1)
     }
     
     //MARK: - Properties
@@ -82,7 +82,7 @@ extension HourlyCollectionCell {
         tempLabel
             .centerXAnchor(to: centerXAnchor)
             .heightAnchor(constant: bounds.height * UI.labelHeightRatio)
-            .bottomAnchor(to: bottomAnchor, constant: -bounds.height * UI.margin)
+            .bottomAnchor(to: bottomAnchor, constant: -bounds.height * UI.bottomMarginRatio)
             .activateAnchors()
         
         weatherIconImageView
@@ -98,9 +98,9 @@ extension HourlyCollectionCell {
 
 extension HourlyCollectionCell {
     
-    func configureCell(hour: String, image: String, temp: String) {
-        hourLabel.text = hour
-        weatherIconImageView.image = UIImage(named: image)
-        tempLabel.text = temp
+    func configureCell(viewModel: [WeatherViewModel], item: Int) {
+        hourLabel.text = viewModel[item].hour
+        weatherIconImageView.image = UIImage(named: viewModel[item].conditionImage)
+        tempLabel.text = viewModel[item].temp
     }
 }

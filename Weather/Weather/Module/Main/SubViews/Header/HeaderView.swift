@@ -125,11 +125,13 @@ extension HeaderView {
 //MARK: - Configure View
 
 extension HeaderView {
-    func configureView(image: String, cityName: String, currentTemperature: String, description: String) {
-        weatherImageView.image = UIImage(named: image)
-        weatherLocationTitleView.title = cityName
-        temperatureLabel.text = currentTemperature
-        weatherDescriptionLabel.text = description
+    func configureView(viewModel: [WeatherViewModel]) {
+        guard let recentData = viewModel.first else { return }
+        
+        weatherImageView.image = UIImage(named: recentData.conditionImage)
+        weatherLocationTitleView.title = "Paris, France"
+        temperatureLabel.text = recentData.temp
+        weatherDescriptionLabel.text = recentData.description
         
     }
 }

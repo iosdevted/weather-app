@@ -13,7 +13,13 @@ extension UIColor {
         return .init(red: 0.29, green: 0.29, blue: 0.28, alpha: 1.00)
     }
     
+    static var warmGray: UIColor {
+        return .systemGray
+    }
+    
     static var separateLineColor: UIColor {
         return .black
     }
+    
+    
 }

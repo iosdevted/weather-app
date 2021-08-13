@@ -24,5 +24,13 @@ extension UIFont {
     static func summaryFont() -> UIFont? {
         return UIFont.systemFont(ofSize: 16)
     }
+    
+    static func subInfoSmallFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 12)
+    }
+    
+    static func subInfoBigFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 20)
+    }
 }
 

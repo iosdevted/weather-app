@@ -63,6 +63,7 @@ extension DailyCollectionView: UICollectionViewDataSource {
         
         return cell
     }
+    
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -70,6 +71,6 @@ extension DailyCollectionView: UICollectionViewDataSource {
 extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width,
-                      height: UIScreen.main.bounds.height * 0.066)
+                      height: frame.height / 6)
     }
 }

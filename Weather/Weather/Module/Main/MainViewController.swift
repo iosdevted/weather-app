@@ -78,29 +78,25 @@ class MainViewController: BaseViewController {
     }
 }
 
-extension MainViewController: PresenterToViewMainProtocol{
+extension MainViewController: PresenterToViewMainProtocol {
     
     //MARK: <- View / Binding
     
     func bindToViews(with viewModel: [WeatherViewModel]) {
         DispatchQueue.main.async {
-            
-            guard let recentData = viewModel.first else { return }
-            self.headerView.configureView(image: recentData.conditionImage,
-                                          cityName: "Paris, France",
-                                          currentTemperature: recentData.temp,
-                                          description: recentData.description)
-            
             self.collectionView.hourlyCollectionDidLoad = { header in
                 header.hourlyCollectionView.hourlyCellDidLoad = { cell, indexPath in
-                    
-                    cell.configureCell(hour: viewModel[indexPath.item].hour,
-                                       image: viewModel[indexPath.item].conditionImage,
-                                       temp: viewModel[indexPath.item].temp)
+                    cell.configureCell(viewModel: viewModel, item: indexPath.item)
                 }
                 header.hourlyCollectionView.reloadData()
             }
-            
+            self.collectionView.SubInfoCollectionDidLoad = { subInfo in
+                subInfo.subInfoCollectionView.collectionCellDidLoad = { cell, indexPath in
+                    cell.configureCell(topText: "", bottomText: "")
+                }
+                subInfo.subInfoCollectionView.reloadData()
+            }
+            self.headerView.configureView(viewModel: viewModel)
             self.collectionView.reloadData()
         }
     }
@@ -109,22 +105,14 @@ extension MainViewController: PresenterToViewMainProtocol{
         DispatchQueue.main.async {
             self.collectionView.dailyCollectionDidLoad = { daily in
                 daily.dailyCollectionView.dailyCellDidLoad = { cell, indexPath in
-                    
-                    cell.configureCell(day: viewModel.day[indexPath.item],
-                                       image: viewModel.conditionImage[indexPath.item],
-                                       maxTemp: viewModel.temp_min[indexPath.item],
-                                       minTemp: viewModel.temp_max[indexPath.item])
+                    cell.configureCell(viewModel: viewModel, item: indexPath.item)
                 }
                 daily.dailyCollectionView.reloadData()
             }
             
             self.collectionView.summaryCollectionDidLoad = { summary in
-                
-                summary.configureCell(description: viewModel.conditionImage[0],
-                                      maxTemp: viewModel.temp_max[0])
+                summary.configureCell(viewModel: viewModel)
             }
-            
-            
             self.collectionView.reloadData()
         }
     }

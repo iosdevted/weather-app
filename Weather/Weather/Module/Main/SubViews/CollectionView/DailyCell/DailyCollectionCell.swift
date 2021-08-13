@@ -68,7 +68,7 @@ extension DailyCollectionCell {
         }
         
         minTempLabel.do {
-            $0.textColor = .lightGray
+            $0.textColor = .warmGray
             $0.font = .dailyFont()
         }
         
@@ -112,11 +112,11 @@ extension DailyCollectionCell {
 
 extension DailyCollectionCell {
     
-    func configureCell(day: String, image: String, maxTemp: String, minTemp: String) {
-        self.dayLabel.text = day
-        self.weatherIconImageView.image = UIImage(named: image)
-        self.maxTempLabel.text = maxTemp
-        self.minTempLabel.text = minTemp
+    func configureCell(viewModel: WeatherDailyViewModel, item: Int) {
+        self.dayLabel.text = viewModel.day[item]
+        self.weatherIconImageView.image = UIImage(named: viewModel.conditionImage[item])
+        self.maxTempLabel.text = viewModel.temp_max[item]
+        self.minTempLabel.text = viewModel.temp_min[item]
     }
 }
 

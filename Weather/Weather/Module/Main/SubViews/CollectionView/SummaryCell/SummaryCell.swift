@@ -80,8 +80,8 @@ extension SummaryCell {
 
 extension SummaryCell {
     
-    func configureCell(description: String, maxTemp: String) {
-        descriptionLabel.text = "Today: Mostly \(description). The high today was forecast as \(maxTemp)"
+    func configureCell(viewModel: WeatherDailyViewModel) {
+        descriptionLabel.text = "Today: Mostly \(viewModel.conditionImage[0]). The high today was forecast as \(viewModel.temp_max[0])"
     }
 }
 
