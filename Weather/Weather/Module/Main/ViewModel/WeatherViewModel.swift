@@ -14,6 +14,7 @@ struct WeatherViewModel {
     let hour: String
     let day: String
     let temp: String
+    let tempOriginal: String
     let tempMinInt: Int
     let tempMaxInt: Int
     let tempMin: String
@@ -46,12 +47,13 @@ struct WeatherViewModel {
         }
     }
     
-    init(cityName: String, dt_txt: String, hour: String, day: String, temp: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
+    init(cityName: String, dt_txt: String, hour: String, day: String, temp: String, tempOriginal: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
         self.cityName = cityName
         self.date = dt_txt
         self.hour = hour
         self.day = day
         self.temp = temp
+        self.tempOriginal = tempOriginal
         self.tempMinInt = temp_min_int
         self.tempMaxInt = temp_max_int
         self.tempMin = temp_min
@@ -72,20 +74,21 @@ struct WeatherViewModel {
     
     static func getModelWith(eachWeather: WeatherListResponse, weatherResponse: WeatherResponse) -> WeatherViewModel {
         
-        var cityName = "\(weatherResponse.city.name)"
+        let cityName = "\(weatherResponse.city.name)"
         let date = Date.getddMMYYYYFormat(eachWeather.dt_txt)
         let hour = Date.getHHFormat(eachWeather.dt_txt)
         let day = Date.getWeekDay(eachWeather.dt_txt)
-        let temp = "\(Int(eachWeather.main.temp)) °C"
+        let tempOriginal = "\(Int(eachWeather.main.temp))"
+        let temp = "\(Int(eachWeather.main.temp))°C"
         let temp_min_int = (Int(eachWeather.main.temp_min))
         let temp_max_int = (Int(eachWeather.main.temp_max))
-        let temp_min = "\(Int(eachWeather.main.temp_min)) °C"
-        let temp_max = "\(Int(eachWeather.main.temp_max)) °C"
+        let temp_min = "\(Int(eachWeather.main.temp_min))°C"
+        let temp_max = "\(Int(eachWeather.main.temp_max))°C"
         var description: String = ""
-        let feelslike = "\(Int(eachWeather.main.feels_like)) °C"
-        let humidity = "\(eachWeather.main.humidity) %"
-        let pressure = "\(Int(eachWeather.main.pressure)) hPa"
-        let windSpeed = "\(Int(eachWeather.wind.speed * 3.6)) km/h"
+        let feelslike = "\(Int(eachWeather.main.feels_like))°C"
+        let humidity = "\(eachWeather.main.humidity)%"
+        let pressure = "\(Int(eachWeather.main.pressure))hPa"
+        let windSpeed = "\(Int(eachWeather.wind.speed * 3.6))km/h"
         let windDirection = WeatherConverter.degToCompass(eachWeather.wind.deg)
         let visibility = "\(eachWeather.visibility / 1000)km"
         var conditionId: Int = 800
@@ -95,10 +98,10 @@ struct WeatherViewModel {
             conditionId = weather.id
         }
         
-        if let countryName = WeatherConverter.countryName(countryCode: weatherResponse.city.country) {
-            cityName = "\(weatherResponse.city.name), \(countryName)"
-        }
+//        if let countryName = WeatherConverter.countryName(countryCode: weatherResponse.city.country) {
+//            cityName = "\(weatherResponse.city.name), \(countryName)"
+//        }
         
-        return WeatherViewModel(cityName: cityName, dt_txt: date, hour: hour, day: day, temp: temp, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
+        return WeatherViewModel(cityName: cityName, dt_txt: date, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
     }
 }

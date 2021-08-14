@@ -32,8 +32,8 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     //MARK: -> Presenter
     
     func viewDidLoad() {
-//        shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
-        interactor?.fetchWeatherAPI()
+        shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
+//        interactor?.fetchWeatherAPI()
     }
     
     func viewDidAppear() {

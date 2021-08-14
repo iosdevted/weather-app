@@ -13,6 +13,18 @@ extension UIFont {
         return UIFont.systemFont(ofSize: size)
     }
     
+    static func mainDescriptionFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 20)
+    }
+    
+    static func mainCityNameBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 30)
+    }
+    
+    static func mainTemperatureBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 70)
+    }
+    
     static func hourlyFont() -> UIFont? {
         return UIFont.systemFont(ofSize: 13)
     }

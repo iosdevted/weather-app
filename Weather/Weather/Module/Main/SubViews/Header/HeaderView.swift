@@ -14,32 +14,13 @@ class HeaderView: UIView {
     
     private struct UI {
         
-        struct WeatherImageView {
-            static let top = CGFloat(80)
-            static let width = CGFloat(100)
-            static let height = CGFloat(100)
-        }
-        
-        struct LocationTitleView {
-            static let top = CGFloat(20)
-            static let width = CGFloat(300)
-            static let height = CGFloat(20)
-        }
-        
-        struct TemperatureLabel {
-            static let top = CGFloat(10)
-            static let height = CGFloat(46)
-        }
-        
-        struct DescriptionLabel {
-            static let top = CGFloat(5)
-            static let height = CGFloat(23)
-        }
+        static let margin = CGFloat(10)
+        static let viewWidth = CGFloat(200)
     }
     
     //MARK: - Properties
     
-    private let weatherImageView = UIImageView()
+//    private let weatherImageView = UIImageView()
     private let weatherLocationTitleView = HeaderLocationTitleView()
     private let temperatureLabel = UILabel()
     private let weatherDescriptionLabel = UILabel()
@@ -49,10 +30,6 @@ class HeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    override func setNeedsLayout() {
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -68,6 +45,7 @@ extension HeaderView {
         backgroundColor = .white
         
         configureSubViews()
+        setupConstraints()
     }
     
     private func configureSubViews() {
@@ -75,19 +53,18 @@ extension HeaderView {
         //FIXME: change font and color
         
         temperatureLabel.do {
-            $0.font = .mainFont(size: 35)
+            $0.font = .mainTemperatureBoldFont()
             $0.textColor = .warmBlack
             $0.textAlignment = .center
         }
         
         weatherDescriptionLabel.do {
-            $0.font = .mainFont(size: 20)
+            $0.font = .mainDescriptionFont()
             $0.textColor = .warmBlack
             $0.textAlignment = .center
-            
         }
         
-        addSubviews([weatherImageView, weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
+        addSubviews([weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
     }
 }
 
@@ -96,31 +73,26 @@ extension HeaderView {
 extension HeaderView {
     
     private func setupConstraints() {
-        weatherImageView
-            .topAnchor(to: topAnchor, constant: frame.height * 0.15)
-            .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: frame.width * 0.5)
-            .bottomAnchor(to: bottomAnchor, constant: -frame.height * 0.4)
-            .activateAnchors()
         
         weatherLocationTitleView
-            .topAnchor(to: weatherImageView.bottomAnchor)
-            .heightAnchor(constant: frame.height * 0.1)
+            .bottomAnchor(to: weatherDescriptionLabel.topAnchor, constant: -UI.margin)
             .centerXAnchor(to: centerXAnchor)
-            .activateAnchors()
-        
-        temperatureLabel
-            .topAnchor(to: weatherLocationTitleView.bottomAnchor)
-            .heightAnchor(constant: frame.height * 0.15)
-            .leadingAnchor(to: leadingAnchor)
-            .trailingAnchor(to: trailingAnchor)
+            .widthAnchor(constant: UI.viewWidth)
+            .heightAnchor(constant: 40)
             .activateAnchors()
         
         weatherDescriptionLabel
-            .topAnchor(to: temperatureLabel.bottomAnchor)
-            .heightAnchor(constant: frame.height * 0.1)
-            .leadingAnchor(to: leadingAnchor)
-            .trailingAnchor(to: trailingAnchor)
+            .centerYAnchor(to: centerYAnchor)
+            .centerXAnchor(to: centerXAnchor)
+            .widthAnchor(constant: UI.viewWidth / 2)
+            .heightAnchor(constant: 30)
+            .activateAnchors()
+        
+        temperatureLabel
+            .topAnchor(to: weatherDescriptionLabel.bottomAnchor, constant: UI.margin)
+            .centerXAnchor(to: centerXAnchor)
+            .widthAnchor(constant: UI.viewWidth)
+            .heightAnchor(constant: 60)
             .activateAnchors()
     }
 }
@@ -130,10 +102,9 @@ extension HeaderView {
 extension HeaderView {
     func configureView(viewModel: [WeatherViewModel]) {
         guard let recentData = viewModel.first else { return }
-        weatherLocationTitleView.arrowImageView.image = UIImage(systemName: "location.fill")
-        weatherImageView.image = UIImage(named: recentData.conditionImage)
-        weatherLocationTitleView.title = recentData.cityName
-        temperatureLabel.text = recentData.temp
+//        weatherLocationTitleView.arrowImageView.image = UIImage(systemName: "location.fill")
+        weatherLocationTitleView.cityNameLabel.text = recentData.cityName
+        temperatureLabel.text = recentData.tempOriginal
         weatherDescriptionLabel.text = recentData.description
     }
 }

@@ -16,7 +16,7 @@ class HourlyCollectionView: UICollectionView {
     //MARK: - UI Metrics
     
     private struct UI {
-        static let cellWidth = CGFloat(80)
+        static let cellWidth = CGFloat(65)
     }
     
     //MARK: - Init

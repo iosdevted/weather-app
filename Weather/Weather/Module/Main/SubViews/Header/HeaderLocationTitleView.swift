@@ -10,27 +10,19 @@ import UIKit
 
 class HeaderLocationTitleView: UIView {
     
-    //MARK: - UI Metrics
-    
-    private struct UI {
-        
-        struct ArrowImageView {
-            static let trailing = CGFloat(4)
-            static let width = CGFloat(12)
-            static let height = CGFloat(12)
-        }
-    }
+//    private struct UI {
+//
+//        struct ArrowImageView {
+//            static let trailing = CGFloat(4)
+//            static let width = CGFloat(20)
+//            static let height = CGFloat(20)
+//        }
+//    }
     
     //MARK: - Properties
     
-    let arrowImageView = UIImageView()
-    private let cityNameLabel = UILabel()
-    
-    var title: String? {
-        didSet {
-            cityNameLabel.text = title
-        }
-    }
+//    let arrowImageView = UIImageView()
+    let cityNameLabel = UILabel()
     
     //MARK: - Init
     
@@ -57,12 +49,16 @@ extension HeaderLocationTitleView {
     
     private func configureSubViews() {
         
+//        arrowImageView.do {
+//            $0.tintColor = .warmBlack
+//        }
+        
         cityNameLabel.do {
-            $0.font = .mainFont(size: 20)
+            $0.font = .mainCityNameBoldFont()
             $0.textColor = .warmBlack
         }
         
-        addSubviews([arrowImageView, cityNameLabel])
+        addSubviews([cityNameLabel])
     }
 }
 
@@ -76,11 +72,11 @@ extension HeaderLocationTitleView {
             .centerYAnchor(to: centerYAnchor)
             .activateAnchors()
         
-        arrowImageView
-            .trailingAnchor(to: cityNameLabel.leadingAnchor, constant: -UI.ArrowImageView.trailing)
-            .centerYAnchor(to: centerYAnchor)
-            .widthAnchor(constant: UI.ArrowImageView.width)
-            .heightAnchor(constant: UI.ArrowImageView.height)
-            .activateAnchors()
+//        arrowImageView
+//            .trailingAnchor(to: cityNameLabel.leadingAnchor, constant: -UI.ArrowImageView.trailing)
+//            .centerYAnchor(to: centerYAnchor)
+//            .widthAnchor(constant: UI.ArrowImageView.width)
+//            .heightAnchor(constant: UI.ArrowImageView.height)
+//            .activateAnchors()
     }
 }
