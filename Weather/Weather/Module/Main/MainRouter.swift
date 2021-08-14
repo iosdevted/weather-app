@@ -6,7 +6,6 @@
 //  
 //
 
-import Foundation
 import UIKit
 
 class MainRouter: PresenterToRouterMainProtocol {
@@ -27,4 +26,16 @@ class MainRouter: PresenterToRouterMainProtocol {
         return viewController
     }
     
+    func openWeatherWebsite() {
+        guard let url = URL(string: "https://weather.com/weather/today/l/1a8af5b9d8971c46dd5a52547f9221e22cd895d8d8639267a87df614d0912830"),
+              UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func pushAnotherViewController(from view: UIViewController?, animated: Bool) {
+//        let router =
+
+//        view?.navigationController?.pushViewController(router.viewController, animated: animated)
+    }
 }

@@ -12,9 +12,9 @@ import Foundation
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol {
     
-    func bindToViews(with viewModel: [WeatherViewModel])
-    func bindToViews(with viewModel: WeatherDailyViewModel)
-    func bindToViews(with viewModel: WeatherInfoViewModel)
+    func setupUIBinding(with viewModel: [WeatherViewModel])
+    func setupUIBinding(with viewModel: WeatherDailyViewModel)
+    func setupUIBinding(with viewModel: WeatherInfoViewModel)
     func reloadCollectionView()
     func showAlert(withMessage message: String, animated: Bool) 
 }
@@ -29,6 +29,8 @@ protocol ViewToPresenterMainProtocol {
     
     func viewDidLoad()
     func viewDidAppear()
+    func weatherButtonClicked()
+    func locationListButtonClicked()
 }
 
 
@@ -54,5 +56,5 @@ protocol InteractorToPresenterMainProtocol {
 
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterMainProtocol {
-    
+    func openWeatherWebsite()
 }

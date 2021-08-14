@@ -39,6 +39,14 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     func viewDidAppear() {
         //request Location Authorization If needed
     }
+    
+    func weatherButtonClicked() {
+        router?.openWeatherWebsite()
+    }
+    
+    func locationListButtonClicked() {
+        print("clicked")
+    }
 }
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
@@ -51,9 +59,9 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
         let weatherDailyViewModel = WeatherDailyViewModel.getModelWith(weatherViewModel: weatherViewModel)
         let weatherInfoViewModel = WeatherInfoViewModel.getModelWith(weatherViewModel: weatherViewModel)
         
-        view?.bindToViews(with: weatherViewModel)
-        view?.bindToViews(with: weatherDailyViewModel)
-        view?.bindToViews(with: weatherInfoViewModel)
+        view?.setupUIBinding(with: weatherViewModel)
+        view?.setupUIBinding(with: weatherDailyViewModel)
+        view?.setupUIBinding(with: weatherInfoViewModel)
         view?.reloadCollectionView()
     }
     
