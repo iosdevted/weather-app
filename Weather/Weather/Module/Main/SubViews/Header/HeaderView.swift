@@ -10,61 +10,7 @@ import UIKit
 
 class HeaderView: UIView {
     
-    //MARK: - Properties
-    
-    private let weatherImageView = UIImageView()
-    private let weatherLocationTitleView = HeaderLocationTitleView()
-    private let temperatureLabel = UILabel()
-    private let weatherDescriptionLabel = UILabel()
-    
-    //MARK: - Init
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-//MARK: - Setup Views
-
-extension HeaderView {
-    
-    private func setupViews() {
-        backgroundColor = .white
-        
-        configureSubViews()
-        setupConstraints()
-    }
-    
-    private func configureSubViews() {
-        
-        //FIXME: change font and color
-        
-        temperatureLabel.do {
-            $0.font = .mainFont(size: 35)
-            $0.textColor = .warmBlack
-            $0.textAlignment = .center
-        }
-        
-        weatherDescriptionLabel.do {
-            $0.font = .mainFont(size: 20)
-            $0.textColor = .warmBlack
-            $0.textAlignment = .center
-        }
-        
-        addSubviews([weatherImageView, weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension HeaderView {
-    
-    //UI Metrics
+    //MARK: - UI Metrics
     
     private struct UI {
         
@@ -91,33 +37,90 @@ extension HeaderView {
         }
     }
     
-    //Setup Constraints
+    //MARK: - Properties
+    
+    private let weatherImageView = UIImageView()
+    private let weatherLocationTitleView = HeaderLocationTitleView()
+    private let temperatureLabel = UILabel()
+    private let weatherDescriptionLabel = UILabel()
+    
+    //MARK: - Init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    override func setNeedsLayout() {
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - Setup Views
+
+extension HeaderView {
+    
+    private func setupViews() {
+        backgroundColor = .white
+        
+        configureSubViews()
+    }
+    
+    private func configureSubViews() {
+        
+        //FIXME: change font and color
+        
+        temperatureLabel.do {
+            $0.font = .mainFont(size: 35)
+            $0.textColor = .warmBlack
+            $0.textAlignment = .center
+        }
+        
+        weatherDescriptionLabel.do {
+            $0.font = .mainFont(size: 20)
+            $0.textColor = .warmBlack
+            $0.textAlignment = .center
+            
+        }
+        
+        addSubviews([weatherImageView, weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
+    }
+}
+
+//MARK: - Layout & Constraints
+
+extension HeaderView {
     
     private func setupConstraints() {
         weatherImageView
-            .topAnchor(to: topAnchor, constant: UI.WeatherImageView.top)
-            .widthAnchor(constant: UI.WeatherImageView.width)
-            .heightAnchor(constant: UI.WeatherImageView.height)
+            .topAnchor(to: topAnchor, constant: frame.height * 0.15)
             .centerXAnchor(to: centerXAnchor)
+            .widthAnchor(constant: frame.width * 0.5)
+            .bottomAnchor(to: bottomAnchor, constant: -frame.height * 0.4)
             .activateAnchors()
         
         weatherLocationTitleView
-            .topAnchor(to: weatherImageView.bottomAnchor, constant: UI.LocationTitleView.top)
-            .widthAnchor(constant: UI.LocationTitleView.width)
-            .heightAnchor(constant: UI.LocationTitleView.height)
+            .topAnchor(to: weatherImageView.bottomAnchor)
+            .heightAnchor(constant: frame.height * 0.1)
             .centerXAnchor(to: centerXAnchor)
             .activateAnchors()
         
         temperatureLabel
-            .topAnchor(to: weatherLocationTitleView.bottomAnchor, constant: UI.TemperatureLabel.top)
-            .heightAnchor(constant: UI.TemperatureLabel.height)
-            .centerXAnchor(to: centerXAnchor)
+            .topAnchor(to: weatherLocationTitleView.bottomAnchor)
+            .heightAnchor(constant: frame.height * 0.15)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .activateAnchors()
         
         weatherDescriptionLabel
-            .topAnchor(to: temperatureLabel.bottomAnchor, constant: UI.DescriptionLabel.top)
-            .heightAnchor(constant: UI.DescriptionLabel.height)
-            .centerXAnchor(to: centerXAnchor)
+            .topAnchor(to: temperatureLabel.bottomAnchor)
+            .heightAnchor(constant: frame.height * 0.1)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .activateAnchors()
     }
 }
@@ -127,11 +130,10 @@ extension HeaderView {
 extension HeaderView {
     func configureView(viewModel: [WeatherViewModel]) {
         guard let recentData = viewModel.first else { return }
-        
+        weatherLocationTitleView.arrowImageView.image = UIImage(systemName: "location.fill")
         weatherImageView.image = UIImage(named: recentData.conditionImage)
         weatherLocationTitleView.title = recentData.cityName
         temperatureLabel.text = recentData.temp
         weatherDescriptionLabel.text = recentData.description
-        
     }
 }

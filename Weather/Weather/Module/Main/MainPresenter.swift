@@ -51,7 +51,6 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
         let weatherDailyViewModel = WeatherDailyViewModel.getModelWith(weatherViewModel: weatherViewModel)
         let weatherInfoViewModel = WeatherInfoViewModel.getModelWith(weatherViewModel: weatherViewModel)
         
-        print(weatherViewModel)
         view?.bindToViews(with: weatherViewModel)
         view?.bindToViews(with: weatherDailyViewModel)
         view?.bindToViews(with: weatherInfoViewModel)

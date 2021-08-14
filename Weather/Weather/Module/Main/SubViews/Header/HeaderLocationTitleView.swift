@@ -10,9 +10,20 @@ import UIKit
 
 class HeaderLocationTitleView: UIView {
     
+    //MARK: - UI Metrics
+    
+    private struct UI {
+        
+        struct ArrowImageView {
+            static let trailing = CGFloat(4)
+            static let width = CGFloat(12)
+            static let height = CGFloat(12)
+        }
+    }
+    
     //MARK: - Properties
     
-    private let arrowImageView = UIImageView()
+    let arrowImageView = UIImageView()
     private let cityNameLabel = UILabel()
     
     var title: String? {
@@ -46,10 +57,6 @@ extension HeaderLocationTitleView {
     
     private func configureSubViews() {
         
-        arrowImageView.do {
-            $0.image = UIImage(systemName: "location.fill")
-        }
-        
         cityNameLabel.do {
             $0.font = .mainFont(size: 20)
             $0.textColor = .warmBlack
@@ -62,20 +69,7 @@ extension HeaderLocationTitleView {
 //MARK: - Layout & Constraints
 
 extension HeaderLocationTitleView {
-    
-    //UI Metrics
-    
-    private struct UI {
-        
-        struct ArrowImageView {
-            static let trailing = CGFloat(4)
-            static let width = CGFloat(12)
-            static let height = CGFloat(12)
-        }
-    }
-    
-    //Setup Constraints
-    
+
     private func setupConstraints() {
         cityNameLabel
             .centerXAnchor(to: centerXAnchor)

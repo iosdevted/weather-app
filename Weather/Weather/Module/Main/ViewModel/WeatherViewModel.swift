@@ -38,7 +38,7 @@ struct WeatherViewModel {
         case 600...699:
             return "snowing"
         case 700...799:
-            return "windy" //don't have a pic
+            return "windy"
         case 800:
             return "shine"
         default:
