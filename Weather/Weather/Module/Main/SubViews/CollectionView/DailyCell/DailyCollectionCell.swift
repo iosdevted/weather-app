@@ -13,17 +13,33 @@ class DailyCollectionCell: UICollectionViewCell {
     //MARK: - UI Metrics
     
     private struct UI {
-        static let margin = CGFloat(10)
+        static let basicMargin = CGFloat(10)
         static let imageSize = CGFloat(30)
     }
     
     //MARK: - Properties
     
-    private let dayLabel = UILabel()
-    private let weatherIconImageView = UIImageView()
-    private let maxTempLabel = UILabel()
-    private let minTempLabel = UILabel()
-    private var tempStackView: UIStackView!
+    private lazy var dayLabel = UILabel().then {
+        $0.textColor = .warmBlack
+        $0.font = .dailyBoldFont()
+    }
+    private lazy var weatherIconImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
+    private lazy var maxTempLabel = UILabel().then {
+        $0.textColor = .warmBlack
+        $0.font = .dailyBoldFont()
+    }
+    private lazy var minTempLabel = UILabel().then {
+        $0.textColor = .warmGray
+        $0.font = .dailyBoldFont()
+    }
+    private lazy var tempStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 15
+        $0.alignment = .fill
+        $0.distribution = .fill
+    }
     
     //MARK: - Init
     
@@ -43,53 +59,15 @@ extension DailyCollectionCell {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        tempStackView = UIStackView(arrangedSubviews: [maxTempLabel, minTempLabel])
+        addSubviews([dayLabel, weatherIconImageView, tempStackView])
         setupConstraints()
     }
-    
-    private func configureSubViews() {
-        
-        tempStackView = UIStackView(arrangedSubviews: [maxTempLabel, minTempLabel])
-        
-        dayLabel.do {
-            $0.textColor = .warmBlack
-            $0.font = .dailyBoldFont()
-        }
-        
-        weatherIconImageView.do {
-            $0.contentMode = .scaleAspectFit
-        }
-        
-        maxTempLabel.do {
-            $0.textColor = .warmBlack
-            $0.font = .dailyBoldFont()
-        }
-        
-        minTempLabel.do {
-            $0.textColor = .warmGray
-            $0.font = .dailyBoldFont()
-        }
-        
-        tempStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 15
-            $0.alignment = .fill
-            $0.distribution = .fill
-        }
-        
-        addSubviews([dayLabel, weatherIconImageView, tempStackView])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension DailyCollectionCell {
     
     private func setupConstraints() {
         
         dayLabel
-            .leadingAnchor(to: leadingAnchor, constant: UI.margin)
+            .leadingAnchor(to: leadingAnchor, constant: UI.basicMargin)
             .centerYAnchor(to: centerYAnchor)
             .activateAnchors()
         
@@ -102,7 +80,7 @@ extension DailyCollectionCell {
             
         tempStackView
             .centerYAnchor(to: centerYAnchor)
-            .trailingAnchor(to: trailingAnchor, constant: -UI.margin)
+            .trailingAnchor(to: trailingAnchor, constant: -UI.basicMargin)
             .activateAnchors()
     }
 }

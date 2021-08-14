@@ -33,14 +33,8 @@ extension SubInfoCollectionView {
         backgroundColor = .clear
         allowsSelection = false
         isScrollEnabled = false
-        
         dataSource = self
         delegate = self
-        
-        configureSubViews()
-    }
-    
-    private func configureSubViews() {
         register(cell: SubInfoCollectionCell.self)
     }
 }

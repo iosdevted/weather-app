@@ -9,15 +9,15 @@ import UIKit
 
 class HourlyCollectionView: UICollectionView {
     
-    //MARK: - CallBack
-    
-    var hourlyCellDidLoad: ((HourlyCollectionCell, IndexPath) -> Void)?
-    
     //MARK: - UI Metrics
     
     private struct UI {
         static let cellWidth = CGFloat(65)
     }
+    
+    //MARK: - CallBack
+    
+    var hourlyCellDidLoad: ((HourlyCollectionCell, IndexPath) -> Void)?
     
     //MARK: - Init
     
@@ -38,14 +38,8 @@ extension HourlyCollectionView {
     private func setupViews() {
         backgroundColor = .clear
         showsHorizontalScrollIndicator = false
-        
         dataSource = self
         delegate = self
-        
-        configureSubViews()
-    }
-    
-    private func configureSubViews() {
         register(cell: HourlyCollectionCell.self)
     }
 }

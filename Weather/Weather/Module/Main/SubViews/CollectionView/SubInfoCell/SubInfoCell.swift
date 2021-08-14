@@ -10,7 +10,7 @@ import UIKit
 class SubInfoCell: UICollectionViewCell {
     
     private struct UI {
-        static let margin = CGFloat(10)
+        static let basicMargin = CGFloat(10)
     }
     
     //MARK: - Properties
@@ -42,29 +42,18 @@ extension SubInfoCell {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        addSubview(subInfoCollectionView)
         setupConstraints()
     }
-    
-    private func configureSubViews() {
-        addSubview(subInfoCollectionView)
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension SubInfoCell {
     
     private func setupConstraints() {
         
         subInfoCollectionView
             .topAnchor(to: topAnchor)
-            .leadingAnchor(to: leadingAnchor, constant: UI.margin)
-            .trailingAnchor(to: trailingAnchor, constant: -UI.margin)
+            .leadingAnchor(to: leadingAnchor, constant: UI.basicMargin)
+            .trailingAnchor(to: trailingAnchor, constant: -UI.basicMargin)
             .bottomAnchor(to: bottomAnchor)
             .activateAnchors()
     }
 }
-
 

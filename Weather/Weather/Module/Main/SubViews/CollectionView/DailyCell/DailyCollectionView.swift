@@ -38,14 +38,8 @@ extension DailyCollectionView {
     private func setupViews() {
         backgroundColor = .clear
         allowsSelection = false
-        
         dataSource = self
         delegate = self
-        
-        configureSubViews()
-    }
-    
-    private func configureSubViews() {
         register(cell: DailyCollectionCell.self)
     }
 }

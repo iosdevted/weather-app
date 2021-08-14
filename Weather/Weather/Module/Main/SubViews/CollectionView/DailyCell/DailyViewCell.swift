@@ -11,7 +11,7 @@ class DailyViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    private let separateLineView = SeparateLineView()
+    private lazy var separateLineView = SeparateLineView()
     lazy var dailyCollectionView: DailyCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -39,19 +39,9 @@ extension DailyViewCell {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        addSubviews([dailyCollectionView, separateLineView])
         setupConstraints()
     }
-    
-    private func configureSubViews() {
-        addSubviews([dailyCollectionView, separateLineView])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension DailyViewCell {
     
     private func setupConstraints() {
         
@@ -68,5 +58,3 @@ extension DailyViewCell {
             .setupConstraints(bottom: dailyCollectionView.bottomAnchor)
     }
 }
-
-

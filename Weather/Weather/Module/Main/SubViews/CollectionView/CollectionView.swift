@@ -9,13 +9,6 @@ import UIKit
 
 class CollectionView: UICollectionView {
     
-    // MARK: - Callback
-    
-    var hourlyCollectionDidLoad: ((HourlyCollectionReusableView) -> Void)?
-    var dailyCollectionDidLoad: ((DailyViewCell) -> Void)?
-    var summaryCollectionDidLoad: ((SummaryCell) -> Void)?
-    var SubInfoCollectionDidLoad: ((SubInfoCell) -> Void)?
-    
     //MARK: - UI Metrics
     
     private struct UI {
@@ -23,6 +16,13 @@ class CollectionView: UICollectionView {
         static let summaryCellHeightRatio = CGFloat(0.1)
         static let subInfoCellHeightRatio = CGFloat(0.25)
     }
+    
+    // MARK: - Callback
+    
+    var hourlyCollectionDidLoad: ((HourlyCollectionReusableView) -> Void)?
+    var dailyCollectionDidLoad: ((DailyViewCell) -> Void)?
+    var summaryCollectionDidLoad: ((SummaryCell) -> Void)?
+    var SubInfoCollectionDidLoad: ((SubInfoCell) -> Void)?
     
     //MARK: - Init
     

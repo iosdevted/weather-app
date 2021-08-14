@@ -279,7 +279,6 @@
 				9FB7312726C3AD3100A719F5 /* MainViewController.swift */,
 				9FB7312826C3AD3100A719F5 /* MainInteractor.swift */,
 				9F80726C26C6A8A600682004 /* ViewModel */,
-				9F80727326C7D7B100682004 /* ToolBar */,
 				9FB7313326C3B4D400A719F5 /* SubViews */,
 			);
 			path = Main;
@@ -300,6 +299,7 @@
 				9FB7318D26C517AE00A719F5 /* Common */,
 				9FB7314126C3CD4000A719F5 /* Header */,
 				9FB7317B26C50BCD00A719F5 /* CollectionView */,
+				9F80727326C7D7B100682004 /* ToolBar */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";

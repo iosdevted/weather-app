@@ -17,23 +17,12 @@ class MainPresenter {
     var router: PresenterToRouterMainProtocol?
 }
 
-extension MainPresenter {
-    
-    //MARK: - Helpers
-    
-    private func shouldFetchWeatherAPI() -> Bool {
-        guard let shouldFetchWeatherData = interactor?.fetchedAPI180MinutesAgo() else { return false }
-        return shouldFetchWeatherData
-    }
-}
-
 extension MainPresenter: ViewToPresenterMainProtocol {
     
     //MARK: -> Presenter
     
     func viewDidLoad() {
-        shouldFetchWeatherAPI() ? interactor?.fetchWeatherAPI() : interactor?.fetchLocalWeather()
-//        interactor?.fetchWeatherAPI()
+        interactor?.fetchWeatherData()
     }
     
     func viewDidAppear() {

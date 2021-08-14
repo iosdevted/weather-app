@@ -21,9 +21,9 @@ class MainViewController: BaseViewController {
     
     var presenter: ViewToPresenterMainProtocol?
     
-    private let headerView = HeaderView()
     private var alertView: UIAlertController?
-    private let toolBar = ToolBar()
+    private lazy var headerView = HeaderView()
+    private lazy var toolBar = ToolBar()
     private lazy var collectionView: CollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -52,16 +52,10 @@ class MainViewController: BaseViewController {
     
     override func setupViews() {
         view.backgroundColor = .white
-        
-        configureSubViews()
+        navigationController?.navigationBar.barStyle = .default
+        view.addSubviews([headerView, collectionView, toolBar])
         setupConstraints()
     }
-    
-    override func configureSubViews() {
-        view.addSubviews([headerView, collectionView, toolBar])
-    }
-    
-    //MARK: - Layout & Constraints
     
     override func setupConstraints() {
         headerView
@@ -149,8 +143,6 @@ extension MainViewController: PresenterToViewMainProtocol {
             self.collectionView.reloadData()
         }
     }
-    
-    //MARK: Show Alert
     
     func showAlert(withMessage message: String, animated: Bool) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)

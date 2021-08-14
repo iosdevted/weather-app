@@ -5,6 +5,7 @@
 //  Created by Ted on 2021/08/13.
 //
 
+import Then
 import UIKit
 
 class SubInfoCollectionCell: UICollectionViewCell {
@@ -12,15 +13,21 @@ class SubInfoCollectionCell: UICollectionViewCell {
     //MARK: - UI Metrics
     
     private struct UI {
-        static let margin = CGFloat(5)
+        static let basicMargin = CGFloat(5)
     }
     
     //MARK: - Properties
     
-    private let topLabel = UILabel()
-    private let bottomLabel = UILabel()
-    private let separateLineView = SeparateLineView()
     private let subInfoTitles = ["Feels like", "Humidity", "Pressure", "Wind Speed", "Wind Direction", "Visibility"]
+    private lazy var separateLineView = SeparateLineView()
+    private lazy var topLabel = UILabel().then {
+        $0.textColor = .warmGray
+        $0.font = .subInfoFont()
+    }
+    private lazy var  bottomLabel = UILabel().then {
+        $0.textColor = .warmBlack
+        $0.font = .subInfoBoldFont()
+    }
     
     //MARK: - Init
     
@@ -40,37 +47,15 @@ extension SubInfoCollectionCell {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        addSubviews([topLabel, bottomLabel])
         setupConstraints()
     }
-    
-    private func configureSubViews() {
-        
-        
-        topLabel.do {
-            $0.textColor = .warmGray
-            $0.font = .subInfoFont()
-        }
-        
-        bottomLabel.do {
-            $0.textColor = .warmBlack
-            $0.font = .subInfoBoldFont()
-        }
-        
-        addSubviews([topLabel, bottomLabel])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension SubInfoCollectionCell {
     
     private func setupConstraints() {
         
         topLabel
             .leadingAnchor(to: leadingAnchor)
-            .topAnchor(to: topAnchor, constant: UI.margin)
+            .topAnchor(to: topAnchor, constant: UI.basicMargin)
             .trailingAnchor(to: trailingAnchor)
             .heightAnchor(constant: self.frame.height * 0.3)
             .activateAnchors()
@@ -82,8 +67,8 @@ extension SubInfoCollectionCell {
             .bottomAnchor(to: bottomAnchor)
             .activateAnchors()
     }
-}
 
+}
 //MARK: - Configure Cell
 
 extension SubInfoCollectionCell {

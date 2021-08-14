@@ -18,11 +18,11 @@ class MainInteractor {
     private var lastRefreshDate: Date?
 }
 
-extension MainInteractor: PresenterToInteractorMainProtocol {
+extension MainInteractor {
     
-    //MARK: -> Interactor
+    //MARK: - Helpers
     
-    func fetchedAPI180MinutesAgo() -> Bool {
+    private func fetchedAPI180MinutesAgo() -> Bool {
         guard let lastRefreshDate = RealmManager.shared.retrieveLastRefreshDate() else {
             return true
         }
@@ -32,7 +32,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         return currentDate.minutes(from: lastRefreshDate) >= 180 ? true : false
     }
     
-    func fetchWeatherAPI() {
+    private func fetchWeatherAPI() {
         weatherService.fetchWeather(byCity: "Paris") { [weak self] result in
             guard let `self` = self else { return }
             switch result {
@@ -45,10 +45,19 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         }
     }
     
-    func fetchLocalWeather() {
+    private func fetchLocalWeather() {
         guard let weather = RealmManager.shared.retrieveLocalWeather() else {
             return
         }
         self.presenter?.handleResult(weather)
+    }
+}
+
+extension MainInteractor: PresenterToInteractorMainProtocol {
+    
+    //MARK: -> Interactor
+    
+    func fetchWeatherData() {
+        fetchedAPI180MinutesAgo() ? fetchWeatherAPI() : fetchLocalWeather()
     }
 }

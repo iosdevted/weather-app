@@ -39,9 +39,7 @@ protocol PresenterToInteractorMainProtocol {
     
     var presenter: InteractorToPresenterMainProtocol? { get set }
     
-    func fetchedAPI180MinutesAgo() -> Bool
-    func fetchWeatherAPI()
-    func fetchLocalWeather()
+    func fetchWeatherData()
 }
 
 

@@ -11,7 +11,7 @@ class HourlyCollectionReusableView: UICollectionReusableView {
     
     //MARK: - Properties
     
-    private let separateLineView = SeparateLineView(frame: .zero)
+    private lazy var separateLineView = SeparateLineView()
     lazy var hourlyCollectionView: HourlyCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -39,19 +39,9 @@ extension HourlyCollectionReusableView {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        addSubviews([hourlyCollectionView, separateLineView])
         setupConstraints()
     }
-    
-    private func configureSubViews() {
-        addSubviews([hourlyCollectionView, separateLineView])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension HourlyCollectionReusableView {
     
     private func setupConstraints() {
         
@@ -68,4 +58,3 @@ extension HourlyCollectionReusableView {
             .setupConstraints(bottom: hourlyCollectionView.bottomAnchor)
     }
 }
-

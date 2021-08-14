@@ -13,16 +13,27 @@ class HeaderView: UIView {
     //MARK: - UI Metrics
     
     private struct UI {
-        
-        static let margin = CGFloat(10)
-        static let viewWidth = CGFloat(200)
+        static let basicMargin = CGFloat(10)
+        static let basicWidth = CGFloat(200)
     }
     
     //MARK: - Properties
     
-    private let cityNameLabel = UILabel()
-    private let temperatureLabel = UILabel()
-    private let weatherDescriptionLabel = UILabel()
+    private lazy var cityNameLabel = UILabel().then {
+        $0.font = .mainCityNameBoldFont()
+        $0.textColor = .warmBlack
+        $0.textAlignment = .center
+    }
+    private lazy var temperatureLabel = UILabel().then {
+        $0.font = .mainTemperatureBoldFont()
+        $0.textColor = .warmBlack
+        $0.textAlignment = .center
+    }
+    private lazy var weatherDescriptionLabel = UILabel().then {
+        $0.font = .mainDescriptionFont()
+        $0.textColor = .warmBlack
+        $0.textAlignment = .center
+    }
     
     //MARK: - Init
     
@@ -42,59 +53,30 @@ extension HeaderView {
     
     private func setupViews() {
         backgroundColor = .clear
-        
-        configureSubViews()
+        addSubviews([cityNameLabel, temperatureLabel, weatherDescriptionLabel])
         setupConstraints()
     }
     
-    private func configureSubViews() {
-        
-        cityNameLabel.do {
-            $0.font = .mainCityNameBoldFont()
-            $0.textColor = .warmBlack
-            $0.textAlignment = .center
-        }
-        
-        temperatureLabel.do {
-            $0.font = .mainTemperatureBoldFont()
-            $0.textColor = .warmBlack
-            $0.textAlignment = .center
-        }
-        
-        weatherDescriptionLabel.do {
-            $0.font = .mainDescriptionFont()
-            $0.textColor = .warmBlack
-            $0.textAlignment = .center
-        }
-        
-        addSubviews([cityNameLabel, temperatureLabel, weatherDescriptionLabel])
-    }
-}
-
-//MARK: - Layout & Constraints
-
-extension HeaderView {
-    
     private func setupConstraints() {
-        
+    
         cityNameLabel
-            .bottomAnchor(to: weatherDescriptionLabel.topAnchor, constant: -UI.margin)
+            .bottomAnchor(to: weatherDescriptionLabel.topAnchor, constant: -UI.basicMargin)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.viewWidth)
+            .widthAnchor(constant: UI.basicWidth)
             .heightAnchor(constant: 40)
             .activateAnchors()
         
         weatherDescriptionLabel
             .centerYAnchor(to: centerYAnchor)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.viewWidth / 2)
+            .widthAnchor(constant: UI.basicWidth / 2)
             .heightAnchor(constant: 30)
             .activateAnchors()
         
         temperatureLabel
-            .topAnchor(to: weatherDescriptionLabel.bottomAnchor, constant: UI.margin)
+            .topAnchor(to: weatherDescriptionLabel.bottomAnchor, constant: UI.basicMargin)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.viewWidth)
+            .widthAnchor(constant: UI.basicWidth)
             .heightAnchor(constant: 60)
             .activateAnchors()
     }
