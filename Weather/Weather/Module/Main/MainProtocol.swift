@@ -15,6 +15,7 @@ protocol PresenterToViewMainProtocol {
     func bindToViews(with viewModel: [WeatherViewModel])
     func bindToViews(with viewModel: WeatherDailyViewModel)
     func bindToViews(with viewModel: WeatherInfoViewModel)
+    func reloadCollectionView()
     func showAlert(withMessage message: String, animated: Bool) 
 }
 

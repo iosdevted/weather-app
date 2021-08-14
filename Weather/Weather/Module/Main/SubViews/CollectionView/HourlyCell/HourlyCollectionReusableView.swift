@@ -38,7 +38,7 @@ class HourlyCollectionReusableView: UICollectionReusableView {
 extension HourlyCollectionReusableView {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
         setupConstraints()

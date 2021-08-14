@@ -52,7 +52,7 @@ extension CollectionView {
         delegate = self
         
         showsVerticalScrollIndicator = false
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
     }

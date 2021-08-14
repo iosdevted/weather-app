@@ -20,8 +20,7 @@ class HeaderView: UIView {
     
     //MARK: - Properties
     
-//    private let weatherImageView = UIImageView()
-    private let weatherLocationTitleView = HeaderLocationTitleView()
+    private let cityNameLabel = UILabel()
     private let temperatureLabel = UILabel()
     private let weatherDescriptionLabel = UILabel()
     
@@ -42,7 +41,7 @@ class HeaderView: UIView {
 extension HeaderView {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
         setupConstraints()
@@ -50,7 +49,11 @@ extension HeaderView {
     
     private func configureSubViews() {
         
-        //FIXME: change font and color
+        cityNameLabel.do {
+            $0.font = .mainCityNameBoldFont()
+            $0.textColor = .warmBlack
+            $0.textAlignment = .center
+        }
         
         temperatureLabel.do {
             $0.font = .mainTemperatureBoldFont()
@@ -64,7 +67,7 @@ extension HeaderView {
             $0.textAlignment = .center
         }
         
-        addSubviews([weatherLocationTitleView, temperatureLabel, weatherDescriptionLabel])
+        addSubviews([cityNameLabel, temperatureLabel, weatherDescriptionLabel])
     }
 }
 
@@ -74,7 +77,7 @@ extension HeaderView {
     
     private func setupConstraints() {
         
-        weatherLocationTitleView
+        cityNameLabel
             .bottomAnchor(to: weatherDescriptionLabel.topAnchor, constant: -UI.margin)
             .centerXAnchor(to: centerXAnchor)
             .widthAnchor(constant: UI.viewWidth)
@@ -102,8 +105,7 @@ extension HeaderView {
 extension HeaderView {
     func configureView(viewModel: [WeatherViewModel]) {
         guard let recentData = viewModel.first else { return }
-//        weatherLocationTitleView.arrowImageView.image = UIImage(systemName: "location.fill")
-        weatherLocationTitleView.cityNameLabel.text = recentData.cityName
+        cityNameLabel.text = recentData.cityName
         temperatureLabel.text = recentData.tempOriginal
         weatherDescriptionLabel.text = recentData.description
     }

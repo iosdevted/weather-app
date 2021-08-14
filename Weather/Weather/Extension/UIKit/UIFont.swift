@@ -25,8 +25,8 @@ extension UIFont {
         return UIFont.boldSystemFont(ofSize: 70)
     }
     
-    static func hourlyFont() -> UIFont? {
-        return UIFont.systemFont(ofSize: 13)
+    static func hourlyBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 13)
     }
     
     static func dailyFont() -> UIFont? {
@@ -41,12 +41,12 @@ extension UIFont {
         return UIFont.boldSystemFont(ofSize: 16)
     }
     
-    static func subInfoSmallFont() -> UIFont? {
-        return UIFont.systemFont(ofSize: 12)
+    static func subInfoFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 15)
     }
     
-    static func subInfoBigFont() -> UIFont? {
-        return UIFont.systemFont(ofSize: 20)
+    static func subInfoBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 23)
     }
 }
 

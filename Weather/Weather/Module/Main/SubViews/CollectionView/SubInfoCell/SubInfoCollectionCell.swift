@@ -19,7 +19,7 @@ class SubInfoCollectionCell: UICollectionViewCell {
     
     private let topLabel = UILabel()
     private let bottomLabel = UILabel()
-    private let separateLineView = SeparateLineView(frame: .zero)
+    private let separateLineView = SeparateLineView()
     private let subInfoTitles = ["Feels like", "Humidity", "Pressure", "Wind Speed", "Wind Direction", "Visibility"]
     
     //MARK: - Init
@@ -49,15 +49,13 @@ extension SubInfoCollectionCell {
         
         
         topLabel.do {
-            $0.text = "Humidity"
             $0.textColor = .warmGray
-            $0.font = .subInfoSmallFont()
+            $0.font = .subInfoFont()
         }
         
         bottomLabel.do {
-            $0.text = "50%"
             $0.textColor = .warmBlack
-            $0.font = .subInfoBigFont()
+            $0.font = .subInfoBoldFont()
         }
         
         addSubviews([topLabel, bottomLabel])

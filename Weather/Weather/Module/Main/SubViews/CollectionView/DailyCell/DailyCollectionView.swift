@@ -9,6 +9,12 @@ import UIKit
 
 class DailyCollectionView: UICollectionView {
     
+    //MARK: - UI Metrics
+    
+    private struct UI {
+        static let numberOfItemsInSection = Int(6)
+    }
+    
     //MARK: - CallBack
     
     var dailyCellDidLoad: ((DailyCollectionCell, IndexPath) -> Void)?
@@ -48,7 +54,7 @@ extension DailyCollectionView {
 
 extension DailyCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return UI.numberOfItemsInSection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -71,6 +77,6 @@ extension DailyCollectionView: UICollectionViewDataSource {
 extension DailyCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width,
-                      height: frame.height / 6)
+                      height: frame.height / CGFloat(UI.numberOfItemsInSection))
     }
 }

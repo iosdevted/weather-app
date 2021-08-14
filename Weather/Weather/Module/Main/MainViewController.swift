@@ -13,8 +13,8 @@ class MainViewController: BaseViewController {
     //MARK: - UI Metrics
     
     private struct UI {
-        static let headerViewHeightRatio = CGFloat(0.4)
-        static let hourlyCellHeightRatio = CGFloat(0.1)
+        static let headerViewHeightRatio = CGFloat(0.38)
+        static let hourlyCellHeightRatio = CGFloat(0.12)
     }
     
     //MARK: - Properties
@@ -84,14 +84,13 @@ extension MainViewController: PresenterToViewMainProtocol {
     
     func bindToViews(with viewModel: [WeatherViewModel]) {
         DispatchQueue.main.async {
+            self.headerView.configureView(viewModel: viewModel)
             self.collectionView.hourlyCollectionDidLoad = { header in
                 header.hourlyCollectionView.hourlyCellDidLoad = { cell, indexPath in
                     cell.configureCell(viewModel: viewModel, item: indexPath.item)
                 }
                 header.hourlyCollectionView.reloadData()
             }
-            self.headerView.configureView(viewModel: viewModel)
-            self.collectionView.reloadData()
         }
     }
     
@@ -107,7 +106,6 @@ extension MainViewController: PresenterToViewMainProtocol {
             self.collectionView.summaryCollectionDidLoad = { summary in
                 summary.configureCell(viewModel: viewModel)
             }
-            self.collectionView.reloadData()
         }
     }
     
@@ -119,6 +117,11 @@ extension MainViewController: PresenterToViewMainProtocol {
                 }
                 subInfo.subInfoCollectionView.reloadData()
             }
+        }
+    }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }

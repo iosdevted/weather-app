@@ -11,7 +11,7 @@ class DailyViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    private let separateLineView = SeparateLineView(frame: .zero)
+    private let separateLineView = SeparateLineView()
     lazy var dailyCollectionView: DailyCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

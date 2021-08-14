@@ -21,19 +21,28 @@ struct WeatherListResponse: Codable {
     let weather: [WeatherListWeatherResponse]
     let wind: WeatherListWindResponse
     let visibility: Int
-    let dt_txt: String
+    let dtTxt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case dt, main, weather, wind, visibility
+        case dtTxt = "dt_txt"
+    }
 }
 
 struct WeatherListMainResponse: Codable {
     let temp: Double
-    let feels_like: Double
-    let temp_min: Double
-    let temp_max: Double
+    let feelsLike: Double
+    let tempMin: Double
+    let tempMax: Double
     let pressure: Double
-    let sea_level: Double
-    let grnd_level: Double
     let humidity: Int
-    let temp_kf: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case temp, pressure, humidity
+        case feelsLike = "feels_like"
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+    }
 }
 
 struct WeatherListWeatherResponse: Codable {

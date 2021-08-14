@@ -41,7 +41,7 @@ class HourlyCollectionCell: UICollectionViewCell {
 extension HourlyCollectionCell {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
         setupConstraints()
@@ -50,7 +50,7 @@ extension HourlyCollectionCell {
     private func configureSubViews() {
         
         hourLabel.do {
-            $0.font = .hourlyFont()
+            $0.font = .hourlyBoldFont()
             $0.textColor = .warmBlack
         }
         
@@ -59,7 +59,7 @@ extension HourlyCollectionCell {
         }
         
         tempLabel.do {
-            $0.font = .hourlyFont()
+            $0.font = .hourlyBoldFont()
             $0.textColor = .warmBlack
         }
         

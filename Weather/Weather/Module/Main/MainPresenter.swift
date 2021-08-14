@@ -54,6 +54,7 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
         view?.bindToViews(with: weatherViewModel)
         view?.bindToViews(with: weatherDailyViewModel)
         view?.bindToViews(with: weatherInfoViewModel)
+        view?.reloadCollectionView()
     }
     
     func handleError(_ error: WeatherServiceError) {

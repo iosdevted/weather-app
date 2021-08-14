@@ -38,7 +38,7 @@ class SummaryCell: UICollectionViewCell {
 extension SummaryCell {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         
         configureSubViews()
         setupConstraints()

@@ -20,13 +20,13 @@ enum WeatherServiceError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .clientError:
-            return "clientError"
+            return "client Error"
         case .invalidStatusCode:
-            return "invalidStatusCode"
+            return "Hey, this is a invalid status code"
         case .noData:
-            return "noData"
+            return "Hey, There is No Data"
         case .decodeError:
-            return "decodeError"
+            return "Hey, this is a decode Error!"
         case .unknown:
             return "Hey, this is an unknown Error!"
         case .invalidCity:

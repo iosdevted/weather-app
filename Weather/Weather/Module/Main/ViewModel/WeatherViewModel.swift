@@ -77,18 +77,18 @@ struct WeatherViewModel {
     static func getModelWith(eachWeather: WeatherListResponse, weatherResponse: WeatherResponse) -> WeatherViewModel {
         
         let cityName = "\(weatherResponse.city.name)"
-        let date = Date.getddMMYYYYFormat(eachWeather.dt_txt)
-        let dateWithMonth = Date.getddMMFormat(eachWeather.dt_txt)
-        let hour = Date.getHHFormat(eachWeather.dt_txt)
-        let day = Date.getWeekDay(eachWeather.dt_txt)
+        let date = Date.getddMMYYYYFormat(eachWeather.dtTxt)
+        let dateWithMonth = Date.getddMMFormat(eachWeather.dtTxt)
+        let hour = Date.getHHFormat(eachWeather.dtTxt)
+        let day = Date.getWeekDay(eachWeather.dtTxt)
         let tempOriginal = "\(Int(eachWeather.main.temp))"
         let temp = "\(Int(eachWeather.main.temp))°C"
-        let temp_min_int = (Int(eachWeather.main.temp_min))
-        let temp_max_int = (Int(eachWeather.main.temp_max))
-        let temp_min = "\(Int(eachWeather.main.temp_min))°C"
-        let temp_max = "\(Int(eachWeather.main.temp_max))°C"
+        let temp_min_int = (Int(eachWeather.main.tempMin))
+        let temp_max_int = (Int(eachWeather.main.tempMax))
+        let temp_min = "\(Int(eachWeather.main.tempMin))°C"
+        let temp_max = "\(Int(eachWeather.main.tempMax))°C"
         var description: String = ""
-        let feelslike = "\(Int(eachWeather.main.feels_like))°C"
+        let feelslike = "\(Int(eachWeather.main.feelsLike))°C"
         let humidity = "\(eachWeather.main.humidity)%"
         let pressure = "\(Int(eachWeather.main.pressure))hPa"
         let windSpeed = "\(Int(eachWeather.wind.speed * 3.6))km/h"
@@ -100,10 +100,6 @@ struct WeatherViewModel {
             description = weather.description
             conditionId = weather.id
         }
-        
-//        if let countryName = WeatherConverter.countryName(countryCode: weatherResponse.city.country) {
-//            cityName = "\(weatherResponse.city.name), \(countryName)"
-//        }
         
         return WeatherViewModel(cityName: cityName, dt_txt: date, dateWithMonth: dateWithMonth, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
     }

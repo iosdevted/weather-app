@@ -36,7 +36,7 @@ class HourlyCollectionView: UICollectionView {
 extension HourlyCollectionView {
     
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         showsHorizontalScrollIndicator = false
         
         dataSource = self
