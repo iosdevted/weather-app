@@ -33,9 +33,11 @@ class MainRouter: PresenterToRouterMainProtocol {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func pushAnotherViewController(from view: UIViewController?, animated: Bool) {
-//        let router =
-
-//        view?.navigationController?.pushViewController(router.viewController, animated: animated)
+    func pushListViewController(view: PresenterToViewMainProtocol) {
+        let listViewController = ListRouter.createModule()
+        
+        let viewController = view as! MainViewController
+        viewController.navigationController?
+            .pushViewController(listViewController, animated: true)
     }
 }

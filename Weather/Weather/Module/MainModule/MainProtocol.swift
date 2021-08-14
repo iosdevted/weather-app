@@ -6,8 +6,7 @@
 //  
 //
 
-import Foundation
-
+import UIKit
 
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol {
@@ -55,4 +54,5 @@ protocol InteractorToPresenterMainProtocol {
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterMainProtocol {
     func openWeatherWebsite()
+    func pushListViewController(view: PresenterToViewMainProtocol)
 }

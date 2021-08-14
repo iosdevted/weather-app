@@ -23,17 +23,18 @@ class ToolBar: UIToolbar {
     
     //MARK: - Properties
     
+    private let configuration = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)
     private lazy var weatherButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "safari", withConfiguration: UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)), for: .normal)
         $0.sizeToFit()
         $0.tintColor = .warmBlack
+        $0.setImage(UIImage(systemName: "safari", withConfiguration: configuration), for: .normal)
         $0.addTarget(self, action: #selector(weatherButtondidTap(_:)), for: .touchUpInside)
     }
     
     private lazy var locationListButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "list.dash", withConfiguration: UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)), for: .normal)
         $0.sizeToFit()
         $0.tintColor = .warmBlack
+        $0.setImage(UIImage(systemName: "list.dash", withConfiguration: configuration), for: .normal)
         $0.addTarget(self, action: #selector(locationButtondidTap(_:)), for: .touchUpInside)
     }
 

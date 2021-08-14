@@ -34,12 +34,7 @@ class DailyCollectionCell: UICollectionViewCell {
         $0.textColor = .warmGray
         $0.font = .dailyBoldFont()
     }
-    private lazy var tempStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 15
-        $0.alignment = .fill
-        $0.distribution = .fill
-    }
+    private var stackView = UIStackView()
     
     //MARK: - Init
     
@@ -59,8 +54,16 @@ extension DailyCollectionCell {
     
     private func setupViews() {
         backgroundColor = .clear
-        tempStackView = UIStackView(arrangedSubviews: [maxTempLabel, minTempLabel])
-        addSubviews([dayLabel, weatherIconImageView, tempStackView])
+        stackView = UIStackView(arrangedSubviews: [maxTempLabel, minTempLabel])
+        
+        stackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 15
+            $0.alignment = .fill
+            $0.distribution = .fill
+        }
+        
+        addSubviews([dayLabel, weatherIconImageView, stackView])
         setupConstraints()
     }
     
@@ -78,7 +81,7 @@ extension DailyCollectionCell {
             .widthAnchor(constant: UI.imageSize)
             .activateAnchors()
             
-        tempStackView
+        stackView
             .centerYAnchor(to: centerYAnchor)
             .trailingAnchor(to: trailingAnchor, constant: -UI.basicMargin)
             .activateAnchors()

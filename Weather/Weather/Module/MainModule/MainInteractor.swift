@@ -26,9 +26,7 @@ extension MainInteractor {
         guard let lastRefreshDate = RealmManager.shared.retrieveLastRefreshDate() else {
             return true
         }
-        
         let currentDate = Date()
-        //If the last refresh data is more than 180 minutes before, it return  true
         return currentDate.minutes(from: lastRefreshDate) >= 180 ? true : false
     }
     

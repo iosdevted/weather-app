@@ -34,7 +34,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     }
     
     func locationListButtonClicked() {
-        print("clicked")
+        router?.pushListViewController(view: view!)
     }
 }
 

@@ -51,8 +51,11 @@ class MainViewController: BaseViewController {
     //MARK: - Setup Views
     
     override func setupViews() {
-        view.backgroundColor = .white
         navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.layoutIfNeeded()
+        view.backgroundColor = .white
         view.addSubviews([headerView, collectionView, toolBar])
         setupConstraints()
     }
