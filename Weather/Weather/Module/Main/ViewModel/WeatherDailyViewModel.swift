@@ -28,7 +28,7 @@ struct WeatherDailyViewModel {
     
     static func getModelWith(weatherViewModel: [WeatherViewModel]) -> WeatherDailyViewModel {
         
-        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.date })
+        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.dateWithMonth })
         let keysArray = Array(temporaryDailyDictionary.keys).sorted(by: { $0 < $1 })
         var minTempArray = [String]()
         var maxTempArray = [String]()

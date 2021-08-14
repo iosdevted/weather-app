@@ -13,7 +13,7 @@ class SeparateLineView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .separateLineColor
+        backgroundColor = .warmBlack
     }
     
     required init?(coder aDecoder: NSCoder) {

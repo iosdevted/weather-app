@@ -11,6 +11,7 @@ struct WeatherViewModel {
     
     let cityName: String
     let date: String
+    let dateWithMonth: String
     let hour: String
     let day: String
     let temp: String
@@ -47,9 +48,10 @@ struct WeatherViewModel {
         }
     }
     
-    init(cityName: String, dt_txt: String, hour: String, day: String, temp: String, tempOriginal: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
+    init(cityName: String, dt_txt: String, dateWithMonth: String, hour: String, day: String, temp: String, tempOriginal: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
         self.cityName = cityName
         self.date = dt_txt
+        self.dateWithMonth = dateWithMonth
         self.hour = hour
         self.day = day
         self.temp = temp
@@ -76,6 +78,7 @@ struct WeatherViewModel {
         
         let cityName = "\(weatherResponse.city.name)"
         let date = Date.getddMMYYYYFormat(eachWeather.dt_txt)
+        let dateWithMonth = Date.getddMMFormat(eachWeather.dt_txt)
         let hour = Date.getHHFormat(eachWeather.dt_txt)
         let day = Date.getWeekDay(eachWeather.dt_txt)
         let tempOriginal = "\(Int(eachWeather.main.temp))"
@@ -102,6 +105,6 @@ struct WeatherViewModel {
 //            cityName = "\(weatherResponse.city.name), \(countryName)"
 //        }
         
-        return WeatherViewModel(cityName: cityName, dt_txt: date, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
+        return WeatherViewModel(cityName: cityName, dt_txt: date, dateWithMonth: dateWithMonth, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
     }
 }

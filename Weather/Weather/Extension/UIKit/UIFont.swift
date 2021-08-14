@@ -30,11 +30,15 @@ extension UIFont {
     }
     
     static func dailyFont() -> UIFont? {
-        return UIFont.systemFont(ofSize: 16)
+        return UIFont.systemFont(ofSize: 17)
     }
     
-    static func summaryFont() -> UIFont? {
-        return UIFont.systemFont(ofSize: 16)
+    static func dailyBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 17)
+    }
+    
+    static func summaryBoldFont() -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 16)
     }
     
     static func subInfoSmallFont() -> UIFont? {

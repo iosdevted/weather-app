@@ -48,7 +48,7 @@ extension SummaryCell {
         
         descriptionLabel.do {
             $0.textColor = .warmBlack
-            $0.font = .summaryFont()
+            $0.font = .summaryBoldFont()
             $0.numberOfLines = 0
         }
         

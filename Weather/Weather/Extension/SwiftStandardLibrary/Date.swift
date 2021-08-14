@@ -22,6 +22,15 @@ extension Date {
         return df.string(from: date)
     }
     
+    static func getddMMFormat(_ timestamp: String) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = df.date(from: timestamp) else { return "404" }
+        df.dateFormat = "dd/MM"
+        
+        return df.string(from: date)
+    }
+    
     static func getHHFormat(_ timestamp: String) -> String {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"

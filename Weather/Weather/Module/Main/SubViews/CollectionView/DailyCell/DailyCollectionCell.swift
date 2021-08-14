@@ -54,27 +54,26 @@ extension DailyCollectionCell {
         
         dayLabel.do {
             $0.textColor = .warmBlack
-            $0.font = .dailyFont()
+            $0.font = .dailyBoldFont()
         }
         
         weatherIconImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.layer.masksToBounds = true
         }
         
         maxTempLabel.do {
             $0.textColor = .warmBlack
-            $0.font = .dailyFont()
+            $0.font = .dailyBoldFont()
         }
         
         minTempLabel.do {
             $0.textColor = .warmGray
-            $0.font = .dailyFont()
+            $0.font = .dailyBoldFont()
         }
         
         tempStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 25
+            $0.spacing = 15
             $0.alignment = .fill
             $0.distribution = .fill
         }
