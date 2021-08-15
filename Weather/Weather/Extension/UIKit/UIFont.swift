@@ -48,5 +48,9 @@ extension UIFont {
     static func subInfoBoldFont() -> UIFont? {
         return UIFont.boldSystemFont(ofSize: 23)
     }
+    
+    static func searchFont() -> UIFont? {
+        return UIFont.systemFont(ofSize: 15)
+    }
 }
 

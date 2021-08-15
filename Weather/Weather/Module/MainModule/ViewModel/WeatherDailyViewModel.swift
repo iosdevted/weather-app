@@ -26,7 +26,7 @@ struct WeatherDailyViewModel {
         self.conditionImage = conditionImage
     }
     
-    static func getModelWith(weatherViewModel: [WeatherViewModel]) -> WeatherDailyViewModel {
+    static func getViewModel(with weatherViewModel: [WeatherViewModel]) -> WeatherDailyViewModel {
         
         let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.dateWithMonth })
         let keysArray = Array(temporaryDailyDictionary.keys).sorted(by: { $0 < $1 })

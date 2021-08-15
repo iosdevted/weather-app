@@ -14,7 +14,6 @@ class HeaderView: UIView {
     
     private struct UI {
         static let basicMargin = CGFloat(10)
-        static let basicWidth = CGFloat(200)
     }
     
     //MARK: - Properties
@@ -62,21 +61,24 @@ extension HeaderView {
         cityNameLabel
             .bottomAnchor(to: weatherDescriptionLabel.topAnchor, constant: -UI.basicMargin)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.basicWidth)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .heightAnchor(constant: 40)
             .activateAnchors()
         
         weatherDescriptionLabel
             .centerYAnchor(to: centerYAnchor)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.basicWidth / 2)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .heightAnchor(constant: 30)
             .activateAnchors()
         
         temperatureLabel
             .topAnchor(to: weatherDescriptionLabel.bottomAnchor, constant: UI.basicMargin)
             .centerXAnchor(to: centerXAnchor)
-            .widthAnchor(constant: UI.basicWidth)
+            .leadingAnchor(to: leadingAnchor)
+            .trailingAnchor(to: trailingAnchor)
             .heightAnchor(constant: 60)
             .activateAnchors()
     }
@@ -85,9 +87,9 @@ extension HeaderView {
 //MARK: - Configure View
 
 extension HeaderView {
-    func configureView(viewModel: [WeatherViewModel]) {
+    func configureView(viewModel: [WeatherViewModel], cityName: String) {
         guard let recentData = viewModel.first else { return }
-        cityNameLabel.text = recentData.cityName
+        cityNameLabel.text = cityName
         temperatureLabel.text = recentData.tempOriginal
         weatherDescriptionLabel.text = recentData.description
     }

@@ -21,7 +21,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     
     //MARK: -> Presenter
     
-    func viewDidLoad() {
+    func viewWillAppear() {
         interactor?.fetchWeatherData()
     }
     
@@ -34,7 +34,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
     }
     
     func locationListButtonClicked() {
-        router?.pushListViewController(view: view!)
+        router?.pushToSettingViewController(view: view)
     }
 }
 
@@ -42,13 +42,13 @@ extension MainPresenter: InteractorToPresenterMainProtocol {
     
     //MARK: <- Presenter
     
-    func handleResult(_ response: WeatherResponse) {
+    func handleResult(_ response: WeatherResponse, cityName: String) {
 
-        let weatherViewModel = WeatherViewModel.getModelsWith(weatherResponse: response)
-        let weatherDailyViewModel = WeatherDailyViewModel.getModelWith(weatherViewModel: weatherViewModel)
-        let weatherInfoViewModel = WeatherInfoViewModel.getModelWith(weatherViewModel: weatherViewModel)
+        let weatherViewModel = WeatherViewModel.getViewModels(with: response)
+        let weatherDailyViewModel = WeatherDailyViewModel.getViewModel(with: weatherViewModel)
+        let weatherInfoViewModel = WeatherInfoViewModel.getViewModel(with: weatherViewModel)
         
-        view?.setupUIBinding(with: weatherViewModel)
+        view?.setupUIBinding(with: weatherViewModel, cityName: cityName)
         view?.setupUIBinding(with: weatherDailyViewModel)
         view?.setupUIBinding(with: weatherInfoViewModel)
         view?.reloadCollectionView()

@@ -27,17 +27,18 @@ class MainRouter: PresenterToRouterMainProtocol {
     }
     
     func openWeatherWebsite() {
-        guard let url = URL(string: "https://weather.com/weather/today/l/1a8af5b9d8971c46dd5a52547f9221e22cd895d8d8639267a87df614d0912830"),
+        guard let url = URL(string: "https://weather.com/"),
               UIApplication.shared.canOpenURL(url) else { return }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func pushListViewController(view: PresenterToViewMainProtocol) {
-        let listViewController = ListRouter.createModule()
+    func pushToSettingViewController(view: PresenterToViewMainProtocol?) {
+        let settingViewController = SettingRouter.createModule()
         
         let viewController = view as! MainViewController
+//        viewController.present(settingViewController, animated: true, completion: nil)
         viewController.navigationController?
-            .pushViewController(listViewController, animated: true)
+            .pushViewController(settingViewController, animated: true)
     }
 }

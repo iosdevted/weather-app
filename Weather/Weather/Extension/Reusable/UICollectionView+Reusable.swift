@@ -13,9 +13,7 @@ protocol Identifiable {
 }
 // id 값을 자신의 타입 이름으로 설정되도록 하기 (class SomeCell: UITableViewCell 의 id 는 SomeCell)
 extension Identifiable {
-    public static var identifier: String {
-        return String(describing: self)
-    }
+    static var identifier: String { return String(describing: self) }
 }
 
 //extension UICollectionViewCell: Identifiable { }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: BaseViewController {
+class MainViewController: UIViewController {
     
     //MARK: - UI Metrics
     
@@ -38,9 +38,13 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
         setupViews()
         setupEventBinding()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,17 +54,13 @@ class MainViewController: BaseViewController {
     
     //MARK: - Setup Views
     
-    override func setupViews() {
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.layoutIfNeeded()
+    private func setupViews() {
         view.backgroundColor = .white
         view.addSubviews([headerView, collectionView, toolBar])
         setupConstraints()
     }
     
-    override func setupConstraints() {
+    private func setupConstraints() {
         headerView
             .leadingAnchor(to: view.leadingAnchor)
             .trailingAnchor(to: view.trailingAnchor)
@@ -103,9 +103,9 @@ extension MainViewController: PresenterToViewMainProtocol {
     
     //MARK: <- View / UI Binding
     
-    func setupUIBinding(with viewModel: [WeatherViewModel]) {
+    func setupUIBinding(with viewModel: [WeatherViewModel], cityName: String) {
         DispatchQueue.main.async {
-            self.headerView.configureView(viewModel: viewModel)
+            self.headerView.configureView(viewModel: viewModel, cityName: cityName)
             self.collectionView.hourlyCollectionDidLoad = { header in
                 header.hourlyCollectionView.hourlyCellDidLoad = { cell, indexPath in
                     cell.configureCell(viewModel: viewModel, item: indexPath.item)

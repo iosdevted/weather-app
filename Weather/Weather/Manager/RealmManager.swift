@@ -38,6 +38,20 @@ class RealmManager: NSObject {
         add(localWeatherModel)
     }
     
+    func saveLocalWeatherWithLocation(weather: WeatherResponse, location: Location) {
+        deleteLocalWeather()
+        
+        let localWeatherModel = LocalWeather()
+        localWeatherModel.weatherId = UUID().uuidString
+        localWeatherModel.location = location.location
+        localWeatherModel.longitude = location.longitude
+        localWeatherModel.latitude = location.latitude
+        localWeatherModel.lastRefreshDate = Date()
+        localWeatherModel.weatherData = encode(model: weather)
+
+        add(localWeatherModel)
+    }
+    
     func deleteLocalWeather() {
         let realmObject = try! Realm()
         let localWeather = realmObject.objects(LocalWeather.self)
@@ -52,6 +66,57 @@ class RealmManager: NSObject {
         
         guard let localWeather = realmObject.objects(LocalWeather.self).first,
               let _ = localWeather.weatherData
+        else {
+            return false
+        }
+        return true
+    }
+    
+    //MARK: - Location
+    
+    func retrieveLocation() -> Location? {
+        
+        let realmObject = try! Realm()
+        guard let location = realmObject.objects(LocalWeather.self).first,
+              let locationData = location.location
+        else {
+            return nil
+        }
+
+        let longitudeData = location.longitude
+        let latitudeData = location.latitude
+        
+        let data = Location(location: locationData, latitude: latitudeData, longitude: longitudeData)
+        print(data)
+        return data 
+    }
+    
+    func saveLocation(_ location: Location) {
+        deleteLocation()
+        
+        let LocationModel = LocalWeather()
+        LocationModel.location = location.location
+        LocationModel.latitude = location.latitude
+        LocationModel.longitude = location.longitude
+
+        add(LocationModel)
+        print(LocationModel)
+    }
+    
+    func deleteLocation() {
+        let realmObject = try! Realm()
+        let localWeather = realmObject.objects(LocalWeather.self)
+        
+        try! realmObject.write {
+            realmObject.delete(localWeather)
+        }
+    }
+    
+    func checkIfLocationDataExists() -> Bool {
+        let realmObject = try! Realm()
+
+        guard let localWeather = realmObject.objects(LocalWeather.self).first,
+              let _ = localWeather.location
         else {
             return false
         }
@@ -94,6 +159,15 @@ class RealmManager: NSObject {
         add(user)
     }
     
+    private func checkIfLocalUserExists() -> Bool {
+        let realmObject = try! Realm()
+        
+        guard let _ = realmObject.objects(User.self).first else {
+            return false
+        }
+        return true
+    }
+    
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -131,14 +205,5 @@ extension RealmManager {
             print(error)
         }
         return nil
-    }
-    
-    private func checkIfLocalUserExists() -> Bool {
-        let realmObject = try! Realm()
-        
-        guard let _ = realmObject.objects(User.self).first else {
-            return false
-        }
-        return true
     }
 }

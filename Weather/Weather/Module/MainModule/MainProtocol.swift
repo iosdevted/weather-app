@@ -11,7 +11,7 @@ import UIKit
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol {
     
-    func setupUIBinding(with viewModel: [WeatherViewModel])
+    func setupUIBinding(with viewModel: [WeatherViewModel], cityName: String)
     func setupUIBinding(with viewModel: WeatherDailyViewModel)
     func setupUIBinding(with viewModel: WeatherInfoViewModel)
     func reloadCollectionView()
@@ -26,7 +26,7 @@ protocol ViewToPresenterMainProtocol {
     var interactor: PresenterToInteractorMainProtocol? { get set }
     var router: PresenterToRouterMainProtocol? { get set }
     
-    func viewDidLoad()
+    func viewWillAppear()
     func viewDidAppear()
     func weatherButtonClicked()
     func locationListButtonClicked()
@@ -46,7 +46,7 @@ protocol PresenterToInteractorMainProtocol {
 
 protocol InteractorToPresenterMainProtocol {
     
-    func handleResult(_ result: WeatherResponse)
+    func handleResult(_ result: WeatherResponse, cityName: String)
     func handleError(_ error: WeatherServiceError)
 }
 
@@ -54,5 +54,5 @@ protocol InteractorToPresenterMainProtocol {
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterMainProtocol {
     func openWeatherWebsite()
-    func pushListViewController(view: PresenterToViewMainProtocol)
+    func pushToSettingViewController(view: PresenterToViewMainProtocol?)
 }

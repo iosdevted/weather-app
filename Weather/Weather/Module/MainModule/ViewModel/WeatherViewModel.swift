@@ -9,7 +9,6 @@ import Foundation
 
 struct WeatherViewModel {
     
-    let cityName: String
     let date: String
     let dateWithMonth: String
     let hour: String
@@ -48,8 +47,7 @@ struct WeatherViewModel {
         }
     }
     
-    init(cityName: String, dt_txt: String, dateWithMonth: String, hour: String, day: String, temp: String, tempOriginal: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
-        self.cityName = cityName
+    init(dt_txt: String, dateWithMonth: String, hour: String, day: String, temp: String, tempOriginal: String, temp_min: String, temp_max: String, description: String, conditionId: Int, temp_min_int: Int, temp_max_int: Int, feelslike: String, humidity: String, pressure: String, windSpeed: String, windDirection: String, visibility: String) {
         self.date = dt_txt
         self.dateWithMonth = dateWithMonth
         self.hour = hour
@@ -70,13 +68,12 @@ struct WeatherViewModel {
         self.visibility = visibility
     }
     
-    static func getModelsWith(weatherResponse: WeatherResponse) -> [WeatherViewModel] {
-        return weatherResponse.list.map { getModelWith(eachWeather: $0, weatherResponse: weatherResponse) }
+    static func getViewModels(with weatherResponse: WeatherResponse) -> [WeatherViewModel] {
+        return weatherResponse.list.map { getViewModel(eachWeather: $0) }
     }
     
-    static func getModelWith(eachWeather: WeatherListResponse, weatherResponse: WeatherResponse) -> WeatherViewModel {
+    static func getViewModel(eachWeather: WeatherListResponse) -> WeatherViewModel {
         
-        let cityName = "\(weatherResponse.city.name)"
         let date = Date.getddMMYYYYFormat(eachWeather.dtTxt)
         let dateWithMonth = Date.getddMMFormat(eachWeather.dtTxt)
         let hour = Date.getHHFormat(eachWeather.dtTxt)
@@ -101,6 +98,6 @@ struct WeatherViewModel {
             conditionId = weather.id
         }
         
-        return WeatherViewModel(cityName: cityName, dt_txt: date, dateWithMonth: dateWithMonth, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
+        return WeatherViewModel(dt_txt: date, dateWithMonth: dateWithMonth, hour: hour, day: day, temp: temp, tempOriginal: tempOriginal, temp_min: temp_min, temp_max: temp_max, description: description, conditionId: conditionId, temp_min_int: temp_min_int, temp_max_int: temp_max_int, feelslike: feelslike, humidity: humidity, pressure: pressure, windSpeed: windSpeed, windDirection: windDirection, visibility: visibility)
     }
 }

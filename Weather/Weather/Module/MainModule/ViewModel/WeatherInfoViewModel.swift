@@ -15,7 +15,7 @@ struct WeatherInfoViewModel {
         self.infos = infos
     }
     
-    static func getModelWith(weatherViewModel: [WeatherViewModel]) -> WeatherInfoViewModel {
+    static func getViewModel(with weatherViewModel: [WeatherViewModel]) -> WeatherInfoViewModel {
         var infos = [String]()
         if let recentWeather = weatherViewModel.first {
             infos.append(recentWeather.feelslike)

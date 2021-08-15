@@ -17,7 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = UINavigationController(rootViewController: MainRouter.createModule())
+        let navigationController = UINavigationController(rootViewController: MainRouter.createModule())
+        navigationController.navigationBar.barStyle = .default
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.layoutIfNeeded()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
