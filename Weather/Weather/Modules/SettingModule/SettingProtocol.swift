@@ -34,16 +34,23 @@ protocol ViewToPresenterSettingProtocol {
 protocol PresenterToInteractorSettingProtocol {
     
     var presenter: InteractorToPresenterSettingProtocol? { get set }
+    
+    func deliverDelegate()
+    func locationSearchResultsCount() -> Int
+    func searchResultsText(indexPath: IndexPath) -> String
+    func saveSelectedLocationData(indexPath: IndexPath)
+    func enterQueryFragment(with searchText: String)
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterSettingProtocol {
-    
+    func reloadTableView()
+    func popToRootViewController()
 }
 
 
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterSettingProtocol {
-    func popToViewController(view: PresenterToViewSettingProtocol?)
+    func popToRootViewController(view: PresenterToViewSettingProtocol?)
 }

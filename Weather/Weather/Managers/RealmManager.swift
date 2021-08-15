@@ -87,7 +87,6 @@ class RealmManager: NSObject {
         let latitudeData = location.latitude
         
         let data = Location(location: locationData, latitude: latitudeData, longitude: longitudeData)
-        print(data)
         return data 
     }
     

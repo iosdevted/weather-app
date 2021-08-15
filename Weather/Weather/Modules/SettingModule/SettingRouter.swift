@@ -27,7 +27,7 @@ class SettingRouter: PresenterToRouterSettingProtocol {
         return viewController
     }
     
-    func popToViewController(view: PresenterToViewSettingProtocol?) {
+    func popToRootViewController(view: PresenterToViewSettingProtocol?) {
         
         let viewController = view as! SettingViewController
         viewController.navigationController?.popToRootViewController(animated: true)

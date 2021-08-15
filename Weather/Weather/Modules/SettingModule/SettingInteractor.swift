@@ -1,5 +1,5 @@
 //
-//  SettingPresenter.swift
+//  SettingInteractor.swift
 //  Weather
 //
 //  Created by Ted on 2021/08/15.
@@ -7,46 +7,38 @@
 //
 
 import MapKit
-import Then
 import Foundation
 
-class SettingPresenter: NSObject {
-    
+class SettingInteractor: NSObject {
+
     // MARK: Properties
-    
-    var view: PresenterToViewSettingProtocol?
-    var interactor: PresenterToInteractorSettingProtocol?
-    var router: PresenterToRouterSettingProtocol?
+    var presenter: InteractorToPresenterSettingProtocol?
     
     private var searchResults = [MKLocalSearchCompletion]()
-    private var searchCompleter = MKLocalSearchCompleter().then {
-        $0.filterType = .locationsOnly
-    }
+    private var searchCompleter = MKLocalSearchCompleter()
 }
 
-extension SettingPresenter: ViewToPresenterSettingProtocol {
-    func viewDidLoad() {
+//MARK: -> Interactor
+
+extension SettingInteractor: PresenterToInteractorSettingProtocol {
+    func deliverDelegate() {
         searchCompleter.delegate = self
     }
     
-    func numberOfRows(in section: Int) -> Int {
+    func locationSearchResultsCount() -> Int {
         return searchResults.count
     }
     
-    func configureCell(_ cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func searchResultsText(indexPath: IndexPath) -> String {
         let searchResult = searchResults[indexPath.row]
-        
-        
-        
-        cell.textLabel?.text = searchResult.title
+        return searchResult.title
     }
     
-    func didSelectTableViewRow(at indexPath: IndexPath) {
-        
-        
+    func saveSelectedLocationData(indexPath: IndexPath) {
         let selectedResult = searchResults[indexPath.row]
         let searchRequest = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchRequest)
+        
         search.start { (response, error) in
             guard error == nil else {
                 print("")
@@ -60,39 +52,30 @@ extension SettingPresenter: ViewToPresenterSettingProtocol {
             
             let location = Location(location: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
             RealmManager.shared.saveLocation(location)
-            
+            self.presenter?.popToRootViewController()
         }
-        
-        router?.popToViewController(view: view)
     }
     
-    func textDidChange(searchText: String) {
-        
-        
-        
+    func enterQueryFragment(with searchText: String) {
         if searchText == "" {
             searchResults.removeAll()
-            view?.reloadTableView()
+            presenter?.reloadTableView()
         }
-        // 사용자가 search bar 에 입력한 text를 자동완성 대상에 넣는다
+        // The text entered by the user in the search bar is put into the auto-completion target.
         searchCompleter.queryFragment = searchText
     }
 }
 
-extension SettingPresenter: InteractorToPresenterSettingProtocol {
-    
-    
-}
-
-
 //MARK: - MKLocalSearchCompleterDelegate
 
-extension SettingPresenter: MKLocalSearchCompleterDelegate {
+extension SettingInteractor: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        // completer updated results
         searchResults = completer.results
-        view?.reloadTableView()
+        presenter?.reloadTableView()
     }
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("failed")
+        print("Cancel")
     }
 }
+

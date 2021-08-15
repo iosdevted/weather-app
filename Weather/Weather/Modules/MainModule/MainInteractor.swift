@@ -93,6 +93,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
             location = fetchLocation()
             guard let location = location else { return }
             if didChangeLocationInSettingModule() {
+                print("didChangerLocation")
                 fetchWeatherAPI(byLocation: location)
             } else {
                 print("weather data exists")

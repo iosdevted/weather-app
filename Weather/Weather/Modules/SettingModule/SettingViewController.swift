@@ -92,7 +92,7 @@ extension SettingViewController: UISearchBarDelegate {
     }
 }
 
-//MARK: <- View
+//MARK: View <-
 
 extension SettingViewController: PresenterToViewSettingProtocol{
    
