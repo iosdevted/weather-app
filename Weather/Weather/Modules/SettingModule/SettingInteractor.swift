@@ -50,8 +50,8 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
             
             guard let locationName = placeMark.name else { return }
             
-            let location = Location(location: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
-            RealmManager.shared.saveLocation(location)
+            let location = Location(name: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
+            RealmManager.shared.saveOnlyLocationData(location)
             self.presenter?.popToRootViewController()
         }
     }
