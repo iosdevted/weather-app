@@ -15,13 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let config = Realm.Configuration(
-            schemaVersion: 3, // Set the new schema version.
+            schemaVersion: 5, // Set the new schema version.
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 3 {
+                if oldSchemaVersion < 5 {
                     // The enumerateObjects(ofType:_:) method iterates over
                     // every Person object stored in the Realm file
                     migration.enumerateObjects(ofType: LocalWeather.className()) { oldObject, newObject in
-                        newObject!["location"] = String()
+                        newObject!["locationName"] = String()
                     }
                     migration.enumerateObjects(ofType: LocalWeather.className()) { oldObject, newObject in
                         newObject!["latitude"] = Double()
@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["longitude"] = Double()
                     }
                     migration.enumerateObjects(ofType: LocalWeather.className()) { oldObject, newObject in
-                        newObject!["lastRefreshDate"] = Date()
+                        newObject!["lastRefreshedDate"] = Date()
                     }
                 }
             }

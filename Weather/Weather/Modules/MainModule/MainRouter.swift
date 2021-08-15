@@ -37,7 +37,6 @@ class MainRouter: PresenterToRouterMainProtocol {
         let settingViewController = SettingRouter.createModule()
         
         let viewController = view as! MainViewController
-//        viewController.present(settingViewController, animated: true, completion: nil)
         viewController.navigationController?
             .pushViewController(settingViewController, animated: true)
     }

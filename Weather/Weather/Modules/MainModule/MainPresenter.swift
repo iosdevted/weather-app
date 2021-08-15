@@ -40,14 +40,14 @@ extension MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: InteractorToPresenterMainProtocol {
     
-    //MARK: <- Presenter
+    //MARK: Presenter <-
     
     func handleResult(_ response: WeatherResponse, cityName: String) {
 
         let weatherViewModel = WeatherViewModel.getViewModels(with: response)
         let weatherDailyViewModel = WeatherDailyViewModel.getViewModel(with: weatherViewModel)
         let weatherInfoViewModel = WeatherInfoViewModel.getViewModel(with: weatherViewModel)
-        
+
         view?.setupUIBinding(with: weatherViewModel, cityName: cityName)
         view?.setupUIBinding(with: weatherDailyViewModel)
         view?.setupUIBinding(with: weatherInfoViewModel)

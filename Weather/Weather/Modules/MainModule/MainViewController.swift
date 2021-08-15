@@ -101,7 +101,7 @@ extension MainViewController {
 
 extension MainViewController: PresenterToViewMainProtocol {
     
-    //MARK: <- View / UI Binding
+    //MARK: UI Binding / View <-
     
     func setupUIBinding(with viewModel: [WeatherViewModel], cityName: String) {
         DispatchQueue.main.async {
