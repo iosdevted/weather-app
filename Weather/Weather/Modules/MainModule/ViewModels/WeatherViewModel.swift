@@ -69,15 +69,15 @@ struct WeatherViewModel {
     }
     
     static func getViewModels(with weatherResponse: WeatherResponse) -> [WeatherViewModel] {
-        return weatherResponse.list.map { getViewModel(eachWeather: $0) }
+        return weatherResponse.list.map { getViewModel(eachWeather: $0, response: weatherResponse) }
     }
     
-    static func getViewModel(eachWeather: WeatherListResponse) -> WeatherViewModel {
-        
-        let date = Date.getddMMYYYYFormat(eachWeather.dtTxt)
-        let dateWithMonth = Date.getddMMFormat(eachWeather.dtTxt)
-        let hour = Date.getHHFormat(eachWeather.dtTxt)
-        let day = Date.getWeekDay(eachWeather.dtTxt)
+    static func getViewModel(eachWeather: WeatherListResponse, response: WeatherResponse) -> WeatherViewModel {
+        let timeZone = response.city.timezone
+        let date = Date.getddMMYYYYFormat(eachWeather.dtTxt, timeZone: timeZone)
+        let dateWithMonth = Date.getddMMFormat(eachWeather.dtTxt, timeZone: timeZone)
+        let hour = Date.getHHFormat(eachWeather.dtTxt, timeZone: timeZone)
+        let day = Date.getWeekDay(eachWeather.dtTxt, timeZone: timeZone)
         let tempOriginal = "\(Int(eachWeather.main.temp))"
         let temp = "\(Int(eachWeather.main.temp))°C"
         let temp_min_int = (Int(eachWeather.main.tempMin))
@@ -89,7 +89,7 @@ struct WeatherViewModel {
         let humidity = "\(eachWeather.main.humidity)%"
         let pressure = "\(Int(eachWeather.main.pressure))hPa"
         let windSpeed = "\(Int(eachWeather.wind.speed * 3.6))km/h"
-        let windDirection = WeatherConverter.degToCompass(eachWeather.wind.deg)
+        let windDirection = (eachWeather.wind.deg).degToCompass()
         let visibility = "\(eachWeather.visibility / 1000)km"
         var conditionId: Int = 800
         

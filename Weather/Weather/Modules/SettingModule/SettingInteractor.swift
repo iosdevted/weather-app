@@ -25,31 +25,28 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
         searchCompleter.delegate = self
     }
     
+    // numberOfRows
     func locationSearchResultsCount() -> Int {
         return searchResults.count
     }
     
+    // configureCell
     func searchResultsText(indexPath: IndexPath) -> String {
         let searchResult = searchResults[indexPath.row]
         return searchResult.title
     }
     
+    // didSelectTableViewRow
     func saveSelectedLocationData(indexPath: IndexPath) {
         let selectedResult = searchResults[indexPath.row]
         let searchRequest = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchRequest)
         
         search.start { (response, error) in
-            guard error == nil else {
-                print("")
-                return
-            }
-            guard let placeMark = response?.mapItems[0].placemark else {
-                return
-            }
-            
+            guard error == nil else { return }
+            guard let placeMark = response?.mapItems[0].placemark else { return }
             guard let locationName = placeMark.name else { return }
-            
+             
             let location = Location(name: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
             // Delete All local data and Save Only Location Data (No Weather Data)
             RealmManager.shared.saveOnlyLocationData(location)
@@ -57,6 +54,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
         }
     }
     
+    // textDidChange
     func enterQueryFragment(with searchText: String) {
         if searchText == "" {
             searchResults.removeAll()

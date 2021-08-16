@@ -62,6 +62,7 @@ struct WeatherCityResponse: Codable {
     let name: String
     let coord: WeatherCityCoordResponse
     let country: String
+    let timezone: Int
     let population: Int?
 }
 

@@ -13,39 +13,62 @@ extension Date {
         return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
     }
     
-    static func getddMMYYYYFormat(_ timestamp: String) -> String {
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        guard let date = df.date(from: timestamp) else { return "404" }
-        df.dateFormat = "dd/MM/YYYY"
-        
-        return df.string(from: date)
+    static func calcuateGMT(time: Int) -> String {
+        let timeZone = abs(time / 3600)
+        let compare = time < 0 ? "-" : "+"
+
+        if timeZone < 10 {
+            return "GMT\(compare)0\(timeZone)"
+        } else {
+            return "GMT\(compare)\(timeZone)"
+        }
     }
     
-    static func getddMMFormat(_ timestamp: String) -> String {
+    static func getddMMYYYYFormat(_ timestamp: String, timeZone: Int) -> String {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        guard let date = df.date(from: timestamp) else { return "404" }
-        df.dateFormat = "dd/MM"
+        df.timeZone = TimeZone(abbreviation: "UTC")
+        let date = df.date(from: timestamp)
         
-        return df.string(from: date)
+        let anotherDf = DateFormatter()
+        anotherDf.timeZone = TimeZone(abbreviation: calcuateGMT(time: timeZone))
+        anotherDf.dateFormat = "dd/MM/YYYY"
+        return anotherDf.string(from: date!)
     }
     
-    static func getHHFormat(_ timestamp: String) -> String {
+    static func getddMMFormat(_ timestamp: String, timeZone: Int) -> String {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        guard let date = df.date(from: timestamp) else { return "404" }
-        df.dateFormat = "HH'h'"
+        df.timeZone = TimeZone(abbreviation: "UTC")
+        let date = df.date(from: timestamp)
         
-        return df.string(from: date)
+        let anotherDf = DateFormatter()
+        anotherDf.timeZone = TimeZone(abbreviation: calcuateGMT(time: timeZone))
+        anotherDf.dateFormat = "dd/MM"
+        return anotherDf.string(from: date!)
     }
     
-    static func getWeekDay(_ timestamp: String) -> String {
+    static func getHHFormat(_ timestamp: String, timeZone: Int) -> String {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        guard let date = df.date(from: timestamp) else { return "404" }
-        df.dateFormat = "EEEE"
+        df.timeZone = TimeZone(abbreviation: "UTC")
+        let date = df.date(from: timestamp)
         
-        return df.string(from: date)
+        let anotherDf = DateFormatter()
+        anotherDf.timeZone = TimeZone(abbreviation: calcuateGMT(time: timeZone))
+        anotherDf.dateFormat = "HH'h'"
+        return anotherDf.string(from: date!)
+    }
+    
+    static func getWeekDay(_ timestamp: String, timeZone: Int) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        df.timeZone = TimeZone(abbreviation: "UTC")
+        let date = df.date(from: timestamp)
+        
+        let anotherDf = DateFormatter()
+        anotherDf.timeZone = TimeZone(abbreviation: calcuateGMT(time: timeZone))
+        anotherDf.dateFormat = "EEEE"
+        return anotherDf.string(from: date!)
     }
 }

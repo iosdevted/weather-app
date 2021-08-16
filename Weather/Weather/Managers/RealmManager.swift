@@ -106,17 +106,17 @@ extension RealmManager {
             let jsonData = try JSONEncoder().encode(model)
             return jsonData
         } catch {
-            print(error)
+            print(RealmManagerError.encodeError)
         }
         return nil
     }
     
-    func decode(data: Data) -> WeatherResponse? {
+    private func decode(data: Data) -> WeatherResponse? {
         do {
             let decodedWeather = try JSONDecoder().decode(WeatherResponse.self, from: data)
             return decodedWeather
         } catch {
-            print(error)
+            print(RealmManagerError.decodeError)
         }
         return nil
     }
