@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainRouter: PresenterToRouterMainProtocol {
+class MainRouter: BaseRouter, PresenterToRouterMainProtocol {
     
     // MARK: Static methods
     static func createModule() -> UIViewController {
@@ -35,9 +35,7 @@ class MainRouter: PresenterToRouterMainProtocol {
     
     func pushToSettingViewController(view: PresenterToViewMainProtocol?) {
         let settingViewController = SettingRouter.createModule()
-        
         let viewController = view as! MainViewController
-        viewController.navigationController?
-            .pushViewController(settingViewController, animated: true)
+        show(from: viewController, to: settingViewController, with: .push)
     }
 }

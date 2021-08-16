@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SettingRouter: PresenterToRouterSettingProtocol {
+class SettingRouter: BaseRouter, PresenterToRouterSettingProtocol {
     
     // MARK: Static methods
     static func createModule() -> UIViewController {
@@ -30,7 +30,7 @@ class SettingRouter: PresenterToRouterSettingProtocol {
     func popToRootViewController(view: PresenterToViewSettingProtocol?) {
         
         let viewController = view as! SettingViewController
-        viewController.navigationController?.popToRootViewController(animated: true)
+        pop(from: viewController, animated: true)
     }
     
 }

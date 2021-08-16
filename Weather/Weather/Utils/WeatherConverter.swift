@@ -10,8 +10,8 @@ import UIKit
 class WeatherConverter {
     
     static func degToCompass(_ deg: Double) -> String {
-        let val = floor(Double((deg / 22.5) + 0.5))
+        let val = round(Double((deg / 22.5))) // round off the value
         let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
-        return arr[Int(val.truncatingRemainder(dividingBy: 16.0))]
+        return arr[Int(val.truncatingRemainder(dividingBy: 16.0))] // truncatingRemainder -> Double % Double
     }
 }

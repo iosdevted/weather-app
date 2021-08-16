@@ -19,6 +19,9 @@
 		9F80729A26C8F0E500682004 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F80729526C8F0E500682004 /* SettingRouter.swift */; };
 		9F80729B26C8F0E500682004 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F80729626C8F0E500682004 /* SettingViewController.swift */; };
 		9F80729C26C8F0E500682004 /* SettingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F80729726C8F0E500682004 /* SettingInteractor.swift */; };
+		9F80729F26CA2B3600682004 /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F80729E26CA2B3600682004 /* TransitionType.swift */; };
+		9F8072A126CA2B8200682004 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072A026CA2B8200682004 /* BaseRouter.swift */; };
+		9F8072A326CA300000682004 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072A226CA300000682004 /* BaseViewController.swift */; };
 		9FB730EB26C3A6EC00A719F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB730EA26C3A6EC00A719F5 /* AppDelegate.swift */; };
 		9FB730ED26C3A6EC00A719F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB730EC26C3A6EC00A719F5 /* SceneDelegate.swift */; };
 		9FB730F726C3A6EE00A719F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB730F626C3A6EE00A719F5 /* Assets.xcassets */; };
@@ -88,6 +91,9 @@
 		9F80729526C8F0E500682004 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		9F80729626C8F0E500682004 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9F80729726C8F0E500682004 /* SettingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingInteractor.swift; sourceTree = "<group>"; };
+		9F80729E26CA2B3600682004 /* TransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionType.swift; sourceTree = "<group>"; };
+		9F8072A026CA2B8200682004 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		9F8072A226CA300000682004 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9FB730E726C3A6EC00A719F5 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB730EA26C3A6EC00A719F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FB730EC26C3A6EC00A719F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +192,16 @@
 			path = SettingModule;
 			sourceTree = "<group>";
 		};
+		9F80729D26CA2B0100682004 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9F80729E26CA2B3600682004 /* TransitionType.swift */,
+				9F8072A026CA2B8200682004 /* BaseRouter.swift */,
+				9F8072A226CA300000682004 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		9FB730DE26C3A6EC00A719F5 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +273,7 @@
 		9FB7311F26C3A96000A719F5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				9F80729D26CA2B0100682004 /* Base */,
 				9FB7314826C3F0AF00A719F5 /* Models */,
 				9FB7312326C3AD2200A719F5 /* MainModule */,
 				9F80728E26C8407A00682004 /* SettingModule */,
@@ -594,6 +611,7 @@
 			files = (
 				9FB7317626C4703800A719F5 /* LocalWeather.swift in Sources */,
 				9F80727226C6D3AD00682004 /* WeatherInfoViewModel.swift in Sources */,
+				9F8072A126CA2B8200682004 /* BaseRouter.swift in Sources */,
 				9F80726E26C6BEF500682004 /* SubInfoCollectionView.swift in Sources */,
 				9FB7318C26C5119F00A719F5 /* UICollectionView.swift in Sources */,
 				9FB7315926C4130400A719F5 /* Date.swift in Sources */,
@@ -620,6 +638,7 @@
 				9FB7319C26C63F0F00A719F5 /* DailyCollectionCell.swift in Sources */,
 				9F80729826C8F0E500682004 /* SettingProtocol.swift in Sources */,
 				9FB7313226C3B4A300A719F5 /* UIView+Subviews.swift in Sources */,
+				9F80729F26CA2B3600682004 /* TransitionType.swift in Sources */,
 				9F80729A26C8F0E500682004 /* SettingRouter.swift in Sources */,
 				9F80727026C6BF1600682004 /* SubInfoCollectionCell.swift in Sources */,
 				9FB7318926C510A800A719F5 /* SubInfoCell.swift in Sources */,
@@ -635,6 +654,7 @@
 				9FB7319526C587A800A719F5 /* WeatherViewModel.swift in Sources */,
 				9FB730ED26C3A6EC00A719F5 /* SceneDelegate.swift in Sources */,
 				9FB7318726C5108200A719F5 /* SummaryCell.swift in Sources */,
+				9F8072A326CA300000682004 /* BaseViewController.swift in Sources */,
 				9FB7312B26C3AD3100A719F5 /* MainRouter.swift in Sources */,
 				9FB7318326C5103100A719F5 /* HourlyCollectionReusableView.swift in Sources */,
 				9FB7315226C3FBE800A719F5 /* Double.swift in Sources */,

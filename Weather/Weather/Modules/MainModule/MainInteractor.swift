@@ -61,16 +61,6 @@ extension MainInteractor {
                                with response: WeatherResponse) {
         self.presenter?.handleResult(response, cityName: locationName)
     }
-    
-    func decode(data: Data) -> WeatherResponse? {
-        do {
-            let weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
-            return weatherResponse
-        } catch let error {
-            print(error)
-        }
-        return nil
-    }
 }
 
 extension MainInteractor: PresenterToInteractorMainProtocol {
@@ -80,7 +70,8 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
     func fetchWeatherData() {
         localData = retrieveLocalData()
         
-        //location을 바꾼적이 없을 경우 -> Never changed the location
+        // #Case 1: When the location information is not saved
+        // Because the location has never been changed
         guard let locationName = localData?.locationName,
               let locationLatitude = localData?.latitude,
               let locationLongitude = localData?.longitude
@@ -88,17 +79,21 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
             fetchWeatherData(by: "Paris")
             return
         }
-        
-        //지금막 location을 바꾼 경우 -> location을 바꾸는 과정에서 weather data를 지우기 때문에 없어
+        // Save the location information so that we can use later
         let location = Location(name: locationName, latitude: locationLatitude, longitude: locationLongitude)
-        guard let weatherData = localData?.weatherData,
-              let weatherResponse = decode(data: weatherData)
+        
+        // #Case 2: When location information is changed in settingModule,
+        // In this case, location information exists but no weather information.
+        guard let _ = localData?.weatherData,
+              let weatherResponse = RealmManager.shared.retrieveDecodedWeatherData()
         else {
             fetchWeatherData(by: location)
             return
         }
         
-        // 그 외의 경우
+        // #Case 3: All Local Data Exsits but if the API was fetched 3 hours ago,
+        // local Realm data will be used,
+        // otherwise, we fetch the API newly.
         if let lastRefreshDate = localData?.lastRefreshedDate {
             fetchedAPI180MinutesAgo(from: lastRefreshDate) ?
                 fetchWeatherData(by: location) :

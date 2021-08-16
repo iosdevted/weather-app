@@ -25,6 +25,18 @@ class RealmManager: NSObject {
         return localWeather
     }
     
+    func retrieveDecodedWeatherData() -> WeatherResponse? {
+        let realmObject = try! Realm()
+        
+        guard let localWeather = realmObject.objects(LocalWeather.self).first,
+              let weatherData = localWeather.weatherData
+        else {
+            return nil
+        }
+        
+        return decode(data: weatherData)
+    }
+    
     func saveAllData(weather: WeatherResponse, location: Location) {
         deleteAllLocalData()
         

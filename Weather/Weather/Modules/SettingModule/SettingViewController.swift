@@ -9,7 +9,7 @@
 import Then
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -40,7 +40,7 @@ class SettingViewController: UIViewController {
     
     //MARK: - Setup Views
     
-    func setupViews() {
+    override func setupViews() {
         searchBar.delegate = self
         searchTableView.dataSource = self
         searchTableView.delegate = self
@@ -51,7 +51,7 @@ class SettingViewController: UIViewController {
         setupConstraints()
     }
     
-    func setupConstraints() {
+    override func setupConstraints() {
         searchBar
             .topAnchor(to: view.safeAreaLayoutGuide.topAnchor)
             .leadingAnchor(to: view.leadingAnchor)
@@ -95,7 +95,6 @@ extension SettingViewController: UISearchBarDelegate {
 //MARK: View <-
 
 extension SettingViewController: PresenterToViewSettingProtocol{
-   
     func reloadTableView() {
         searchTableView.reloadData()
     }

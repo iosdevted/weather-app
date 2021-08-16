@@ -11,7 +11,35 @@
 
 ![design-pattern](./image/viper.png)
 
+`Interactor` — contains business logic related to the data (Entities) or networking, like creating new instances of entities or fetching them from the server. For those purposes you’ll use some Services and Managers which are not considered as a part of VIPER module but rather an external dependency.
+
+`Presenter` — contains the UI related (but UIKit independent) business logic, invokes methods on the Interactor.
+
+`Entities` — your plain data objects, not the data access layer, because that is a responsibility of the Interactor.
+
+`Router` — responsible for the segues between the VIPER modules.
+
+In this project, I used `view models` to tranform lots of data from the model and inject information to the view directly.
+
+### API
+
+[5 day weather forecast documentation](https://openweathermap.org/forecast5)
+
+[Weather conditions documentation](https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2)
+
+[API Example](https://api.openweathermap.org/data/2.5/forecast?q=paris&APPID=da69ade359c47e35161bf2e2dad374e8&units=metric)
+
 ### Structure
+
+SOLID
+
+Realm
+
+MKLocalSearchcompleter
+
+### Features
+
+### Limit
 
 ### Icons
 

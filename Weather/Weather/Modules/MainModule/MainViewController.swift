@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
     //MARK: - UI Metrics
     
@@ -54,13 +54,13 @@ class MainViewController: UIViewController {
     
     //MARK: - Setup Views
     
-    private func setupViews() {
+    override func setupViews() {
         view.backgroundColor = .white
         view.addSubviews([headerView, collectionView, toolBar])
         setupConstraints()
     }
     
-    private func setupConstraints() {
+    override func setupConstraints() {
         headerView
             .leadingAnchor(to: view.leadingAnchor)
             .trailingAnchor(to: view.trailingAnchor)

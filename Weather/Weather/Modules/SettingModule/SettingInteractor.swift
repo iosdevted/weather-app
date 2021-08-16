@@ -51,6 +51,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
             guard let locationName = placeMark.name else { return }
             
             let location = Location(name: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
+            // Delete All local data and Save Only Location Data (No Weather Data)
             RealmManager.shared.saveOnlyLocationData(location)
             self.presenter?.popToRootViewController()
         }
@@ -70,7 +71,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
 
 extension SettingInteractor: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        // completer updated results
+        // update search results
         searchResults = completer.results
         presenter?.reloadTableView()
     }
