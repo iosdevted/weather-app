@@ -74,10 +74,10 @@ struct WeatherViewModel {
     
     static func getViewModel(eachWeather: WeatherListResponse, response: WeatherResponse) -> WeatherViewModel {
         let timeZone = response.city.timezone
-        let date = Date.getddMMYYYYFormat(eachWeather.dtTxt, timeZone: timeZone)
-        let dateWithMonth = Date.getddMMFormat(eachWeather.dtTxt, timeZone: timeZone)
-        let hour = Date.getHHFormat(eachWeather.dtTxt, timeZone: timeZone)
-        let day = Date.getWeekDay(eachWeather.dtTxt, timeZone: timeZone)
+        let date = Date.getddMMYYYYFormat(timestamp: eachWeather.dtTxt, timeZone: timeZone)
+        let dateWithMonth = Date.getddMMFormat(timestamp: eachWeather.dtTxt, timeZone: timeZone)
+        let hour = Date.getHHFormat(timestamp: eachWeather.dtTxt, timeZone: timeZone)
+        let day = Date.getWeekDay(timestamp: eachWeather.dtTxt, timeZone: timeZone)
         let tempOriginal = "\(Int(eachWeather.main.temp))"
         let temp = "\(Int(eachWeather.main.temp))°C"
         let temp_min_int = (Int(eachWeather.main.tempMin))

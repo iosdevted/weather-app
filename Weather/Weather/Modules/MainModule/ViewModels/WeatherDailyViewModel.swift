@@ -35,14 +35,13 @@ struct WeatherDailyViewModel {
         var conditionIDArray = [String]()
         
         temporaryDailyDictionary.forEach { key, value in
-            let max = value.max { $0.tempMaxInt < $1.tempMaxInt }
-            let min = value.min { $0.tempMaxInt < $1.tempMaxInt }
-            guard let max = max else { return }
-            guard let min = min else { return }
+            let tempMax = value.max { $0.tempMaxInt < $1.tempMaxInt }
+            let tempMin = value.min { $0.tempMinInt < $1.tempMinInt }
+            guard let tempMax = tempMax, let tempMin = tempMin else { return }
             
-            minTempArray.append(min.tempMin)
-            maxTempArray.append(max.tempMax)
-            conditionIDArray.append(max.conditionImage)
+            maxTempArray.append(tempMax.tempMax)
+            minTempArray.append(tempMin.tempMin)
+            conditionIDArray.append(tempMax.conditionImage)
         }
         
         return WeatherDailyViewModel(temp_min: minTempArray, temp_max: maxTempArray, conditionImage: conditionIDArray, day: keysArray)
