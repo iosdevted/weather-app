@@ -9,7 +9,7 @@
 
 ### Design Pattern
 
-![design-pattern](./image/viper.png)
+![design-pattern](./image/1.png)
 
 `Interactor` — contains business logic related to the data (Entities) or networking, like creating new instances of entities or fetching them from the server. For those purposes you’ll use some Services and Managers which are not considered as a part of VIPER module but rather an external dependency.
 
@@ -21,17 +21,25 @@
 
 In this project, I used `view models` to tranform lots of data from the model and inject information to the view directly.
 
+The VIPER architecture is based on the single responsibility principle (S.O.L.I.D.) which leads us to the theory of a clean architecture.
+
+Using this architecture one can easily test at the boundaries between each layers. One feature, one module. For each module VIPER has six (sometimes four) different classes with distinct roles. VIPER makes the code easier to isolate dependencies and to test the interactions at the boundaries between layers.
+
 ### Structure
 
-![MKLocalSearchcompleter-pattern](./image/structure.png)
+![2](./image/2.png)
 
-![MKLocalSearchcompleter-pattern](./image/api.png)
+![3](./image/3.png)
 
-![MKLocalSearchcompleter-pattern](./image/mklocal.png)
+![4](./image/4.png)
 
-### Icons
+![5](./image/5.png)
 
-![design-pattern](./image/icons.png)
+![6](./image/6.png)
+
+![7](./image/7.png)
+
+![8](./image/8.png)
 
 ### API
 
