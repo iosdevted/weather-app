@@ -2,30 +2,24 @@
 //  MockWeatherService.swift
 //  WeatherTests
 //
-//  Created by Ted on 2021/08/12.
+//  Created by Ted on 2021/08/16.
 //
 
-import Foundation
+import XCTest
 @testable import Weather
 
-class MockWeatherService: WeatherServiceType {
+class MockWeatherService: WeatherService {
     
-//    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-//        handleRequest(completion: completion)
-//    }
-//
-//
-//    func fetchWeather(byCity city: String, completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-//        handleRequest(completion: completion)
-//    }
-//
-//    func handleRequest(completion: @escaping (Result<MainWeatherModel, WeatherServiceError>) -> Void) {
-//
-//        do {
-//            let result = try JSONDecoder().decode(WeatherResponse.self, from: StubData.shared.stubWeatherData())
-//            completion(.success(MainWeatherModel(weatherResponse: result)!))
-//        } catch {
-//            completion(.failure(.decodeError))
-//        }
-//    }
+    var fetchWeatherByCityCalled = 0
+    var fetchWeatherByLotLon = 0
+
+    override func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void) {
+        self.fetchWeatherByCityCalled += 1
+        super.fetchWeather(byCity: city, completion: completion)
+    }
+    
+    override func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void) {
+        self.fetchWeatherByLotLon += 1
+        super.fetchWeather(lat: lat, lon: lon, completion: completion)
+    }
 }

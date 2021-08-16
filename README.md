@@ -21,6 +21,18 @@
 
 In this project, I used `view models` to tranform lots of data from the model and inject information to the view directly.
 
+### Structure
+
+![MKLocalSearchcompleter-pattern](./image/structure.png)
+
+![MKLocalSearchcompleter-pattern](./image/api.png)
+
+![MKLocalSearchcompleter-pattern](./image/mklocal.png)
+
+### Icons
+
+![design-pattern](./image/icons.png)
+
 ### API
 
 [5 day weather forecast documentation](https://openweathermap.org/forecast5)
@@ -28,22 +40,6 @@ In this project, I used `view models` to tranform lots of data from the model an
 [Weather conditions documentation](https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2)
 
 [API Example](https://api.openweathermap.org/data/2.5/forecast?q=paris&APPID=da69ade359c47e35161bf2e2dad374e8&units=metric)
-
-### Structure
-
-SOLID
-
-Realm
-
-MKLocalSearchcompleter
-
-### Features
-
-### Limit
-
-### Icons
-
-![design-pattern](./image/icons.png)
 
 ### Git Commit Message Guide
 

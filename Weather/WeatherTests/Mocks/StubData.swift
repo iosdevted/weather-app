@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import Weather
 
 class StubData {
     static let shared = StubData()
