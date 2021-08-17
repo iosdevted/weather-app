@@ -26,6 +26,7 @@
 		9F8072AA26CA449400682004 /* RealmManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072A926CA449400682004 /* RealmManagerTests.swift */; };
 		9F8072AC26CA58B300682004 /* MockWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072AB26CA58B300682004 /* MockWeatherService.swift */; };
 		9F8072B026CA6B4300682004 /* RealmManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072AF26CA6B4300682004 /* RealmManagerError.swift */; };
+		9F8072B226CB840C00682004 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8072B126CB840C00682004 /* Reusable.swift */; };
 		9FB730EB26C3A6EC00A719F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB730EA26C3A6EC00A719F5 /* AppDelegate.swift */; };
 		9FB730ED26C3A6EC00A719F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB730EC26C3A6EC00A719F5 /* SceneDelegate.swift */; };
 		9FB730F726C3A6EE00A719F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FB730F626C3A6EE00A719F5 /* Assets.xcassets */; };
@@ -100,6 +101,7 @@
 		9F8072A926CA449400682004 /* RealmManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerTests.swift; sourceTree = "<group>"; };
 		9F8072AB26CA58B300682004 /* MockWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWeatherService.swift; sourceTree = "<group>"; };
 		9F8072AF26CA6B4300682004 /* RealmManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerError.swift; sourceTree = "<group>"; };
+		9F8072B126CB840C00682004 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		9FB730E726C3A6EC00A719F5 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB730EA26C3A6EC00A719F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FB730EC26C3A6EC00A719F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -335,7 +337,6 @@
 		9FB7313326C3B4D400A719F5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				9FB7318D26C517AE00A719F5 /* Common */,
 				9FB7314126C3CD4000A719F5 /* Header */,
 				9FB7317B26C50BCD00A719F5 /* CollectionView */,
 				9F80727326C7D7B100682004 /* ToolBar */,
@@ -402,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				9FB7317C26C50C0800A719F5 /* CollectionView.swift */,
+				9FB7318D26C517AE00A719F5 /* Common */,
 				9FB7318126C50EF000A719F5 /* HourlyCell */,
 				9FB7318026C50EEA00A719F5 /* DailyCell */,
 				9FB7317F26C50ED600A719F5 /* SummaryCell */,
@@ -451,6 +453,7 @@
 		9FB7318A26C5118300A719F5 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				9F8072B126CB840C00682004 /* Reusable.swift */,
 				9FB7318B26C5119F00A719F5 /* UICollectionView.swift */,
 				9F80728C26C8344C00682004 /* UITableView.swift */,
 			);
@@ -587,6 +590,7 @@
 				9F80727226C6D3AD00682004 /* WeatherInfoViewModel.swift in Sources */,
 				9F8072A126CA2B8200682004 /* BaseRouter.swift in Sources */,
 				9F80726E26C6BEF500682004 /* SubInfoCollectionView.swift in Sources */,
+				9F8072B226CB840C00682004 /* Reusable.swift in Sources */,
 				9FB7318C26C5119F00A719F5 /* UICollectionView.swift in Sources */,
 				9FB7315926C4130400A719F5 /* Date.swift in Sources */,
 				9FB7319326C51CEC00A719F5 /* HourlyCollectionCell.swift in Sources */,

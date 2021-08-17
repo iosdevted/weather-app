@@ -15,9 +15,9 @@ enum RealmManagerError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .encodeError:
-            return "Hey, this is a encode Error!"
+            return "Hey, This is a Encode Error!"
         case .decodeError:
-            return "Hey, this is a decode Error!"
+            return "Hey, This is a Decode Error!"
         }
     }
 }

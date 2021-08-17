@@ -30,7 +30,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
         return searchResults.count
     }
     
-    // configureCell
+    // cellForRowAt / configureCell
     func searchResultsText(indexPath: IndexPath) -> String {
         let searchResult = searchResults[indexPath.row]
         return searchResult.title
@@ -42,6 +42,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
         let searchRequest = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchRequest)
         
+        // find the location name, latitude and, longitude
         search.start { (response, error) in
             guard error == nil else { return }
             guard let placeMark = response?.mapItems[0].placemark else { return }
@@ -49,7 +50,8 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
              
             let location = Location(name: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
             // Delete All local data and Save Only Location Data (No Weather Data)
-            RealmManager.shared.saveOnlyLocationData(location)
+            RealmManager.shared.saveLocationData(location)
+            // go back to RootViewController
             self.presenter?.popToRootViewController()
         }
     }

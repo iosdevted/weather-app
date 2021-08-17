@@ -25,7 +25,7 @@ struct WeatherInfoViewModel {
             infos.append(recentWeather.windDirection)
             infos.append(recentWeather.visibility)
         }
-        
+        //infos -> [[feelslike, humidity, pressure, windSpeed, windDirection, visibility], [..], [..] ..]
         return WeatherInfoViewModel(infos: infos)
     }
 }

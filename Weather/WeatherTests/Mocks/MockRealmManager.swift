@@ -18,34 +18,34 @@ class MockRealmManager: RealmManager {
     var retrieveDecodedWeatherDataCalled = 0
     var retrieveLocationDataCalled = 0
     
-    override func saveAllData(weather: WeatherResponse, location: Location) {
+    override func saveLocalWeatherData(weather: WeatherResponse, location: Location) {
         self.saveAllDataCalled += 1
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        super.saveAllData(weather: weather, location: location)
+        super.saveLocalWeatherData(weather: weather, location: location)
     }
     
-    override func saveOnlyLocationData(_ location: Location) {
+    override func saveLocationData(_ location: Location) {
         self.saveOnlyLocationDataCalled += 1
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        super.saveOnlyLocationData(location)
+        super.saveLocationData(location)
     }
     
-    override func saveOnlyWeatherData(_ weather: WeatherResponse) {
+    override func saveWeatherResponse(_ weather: WeatherResponse) {
         self.saveOnlyWeatherDataCalled += 1
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        super.saveOnlyWeatherData(weather)
+        super.saveWeatherResponse(weather)
     }
     
-    override func retrieveAllData() -> LocalWeather? {
+    override func retrieveLocalWeatherData() -> LocalWeather? {
         self.retrieveAllDataCalled += 1
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        return super.retrieveAllData()
+        return super.retrieveLocalWeatherData()
     }
     
-    override func retrieveDecodedWeatherData() -> WeatherResponse? {
+    override func retrieveWeatherResponse() -> WeatherResponse? {
         self.retrieveDecodedWeatherDataCalled += 1
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        return self.retrieveDecodedWeatherData()
+        return self.retrieveWeatherResponse()
     }
     
     func retrieveLocationData() -> Location? {
@@ -64,8 +64,8 @@ class MockRealmManager: RealmManager {
         return location
     }
     
-    override func deleteAllLocalData() {
+    override func deleteLocalWeatherData() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "weather-realmManager-tests"
-        super.deleteAllLocalData()
+        super.deleteLocalWeatherData()
     }
 }

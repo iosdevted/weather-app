@@ -24,13 +24,13 @@ class RealmManagerTests: XCTestCase {
     }
     
     override func tearDown() {
-        self.mockRealmManager?.deleteAllLocalData()
+        self.mockRealmManager?.deleteLocalWeatherData()
         self.mockWeatherService = nil
     }
     
     func testSaveData_WhenLocationDataProvided_ShouldReturnTrue() throws {
         
-        mockRealmManager?.saveOnlyLocationData(locationData)
+        mockRealmManager?.saveLocationData(locationData)
         let realmData = mockRealmManager?.retrieveLocationData()
         
         XCTAssert(locationData.name == realmData?.name, "Expect created location name is Paris")

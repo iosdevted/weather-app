@@ -29,7 +29,7 @@ protocol ViewToPresenterMainProtocol {
     func viewWillAppear()
     func viewDidAppear()
     func weatherButtonClicked()
-    func locationListButtonClicked()
+    func settingButtonClicked()
 }
 
 

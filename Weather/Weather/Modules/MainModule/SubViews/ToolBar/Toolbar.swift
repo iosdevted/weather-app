@@ -19,7 +19,7 @@ class ToolBar: UIToolbar {
     // MARK: - Callback
     
     var weatherButtonDidTap: (() -> ())?
-    var locationListButtonDidTap: (() -> ())?
+    var settingButtonDidTap: (() -> ())?
     
     //MARK: - Properties
     
@@ -34,7 +34,7 @@ class ToolBar: UIToolbar {
     private lazy var locationListButton = UIButton().then {
         $0.sizeToFit()
         $0.tintColor = .warmBlack
-        $0.setImage(UIImage(systemName: "list.dash", withConfiguration: configuration), for: .normal)
+        $0.setImage(UIImage(systemName: "location.viewfinder", withConfiguration: configuration), for: .normal)
         $0.addTarget(self, action: #selector(locationButtondidTap(_:)), for: .touchUpInside)
     }
 
@@ -87,7 +87,7 @@ extension ToolBar {
     
     @objc private func locationButtondidTap(_ sender: UIButton) {
         
-        if let locationListButtonDidTap = locationListButtonDidTap {
+        if let locationListButtonDidTap = settingButtonDidTap {
           locationListButtonDidTap()
         }
     }

@@ -60,11 +60,11 @@ extension CollectionView {
     private func configureSubViews() {
         register(HourlyCollectionReusableView.self,
                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                 withReuseIdentifier: HourlyCollectionReusableView.identifier)
+                 withReuseIdentifier: HourlyCollectionReusableView.reuseIdentifier)
         
-        register(cell: DailyViewCell.self)
-        register(cell: SummaryCell.self)
-        register(cell: SubInfoCell.self)
+        register(cellType: DailyViewCell.self)
+        register(cellType: SummaryCell.self)
+        register(cellType: SubInfoCell.self)
     }
 }
 
@@ -73,7 +73,7 @@ extension CollectionView {
 extension CollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HourlyCollectionReusableView.identifier, for: indexPath) as! HourlyCollectionReusableView
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HourlyCollectionReusableView.reuseIdentifier, for: indexPath) as! HourlyCollectionReusableView
         
         if let hourlyCollectionDidLoad = hourlyCollectionDidLoad {
             hourlyCollectionDidLoad(header)
@@ -92,7 +92,7 @@ extension CollectionView: UICollectionViewDataSource {
         
         switch indexPath.item {
         case 0:
-            let cell = collectionView.dequeue(DailyViewCell.self, indexPath)
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DailyViewCell.self)
             if let dailyCollectionDidLoad  = dailyCollectionDidLoad {
                 dailyCollectionDidLoad(cell)
             } else {
@@ -100,7 +100,7 @@ extension CollectionView: UICollectionViewDataSource {
             }
             return cell
         case 1:
-            let cell = collectionView.dequeue(SummaryCell.self, indexPath)
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SummaryCell.self)
             if let summaryCollectionDidLoad  = summaryCollectionDidLoad {
                 summaryCollectionDidLoad(cell)
             } else {
@@ -108,7 +108,7 @@ extension CollectionView: UICollectionViewDataSource {
             }
             return cell
         case 2:
-            let cell = collectionView.dequeue(SubInfoCell.self, indexPath)
+            let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubInfoCell.self)
             if let SubInfoCollectionDidLoad  = SubInfoCollectionDidLoad {
                 SubInfoCollectionDidLoad(cell)
             } else {

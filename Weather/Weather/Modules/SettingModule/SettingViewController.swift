@@ -44,7 +44,7 @@ class SettingViewController: BaseViewController {
         searchBar.delegate = self
         searchTableView.dataSource = self
         searchTableView.delegate = self
-        searchTableView.register(cell: UITableViewCell.self)
+        searchTableView.register(cellType: UITableViewCell.self)
         
         view.backgroundColor = .white
         view.addSubviews([searchBar, searchTableView])
@@ -76,7 +76,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(UITableViewCell.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: UITableViewCell.self)
         presenter?.configureCell(cell, forRowAt: indexPath)
         return cell
     }

@@ -14,7 +14,8 @@ class RealmManager: NSObject {
     
     //MARK: - Weather
     
-    func retrieveAllData() -> LocalWeather? {
+    // Retrieve ALL Data
+    func retrieveLocalWeatherData() -> LocalWeather? {
         let realmObject = try! Realm()
         
         guard let localWeather = realmObject.objects(LocalWeather.self).first
@@ -25,7 +26,8 @@ class RealmManager: NSObject {
         return localWeather
     }
     
-    func retrieveDecodedWeatherData() -> WeatherResponse? {
+    // Retrieve ONLY Weather Response
+    func retrieveWeatherResponse() -> WeatherResponse? {
         let realmObject = try! Realm()
         
         guard let localWeather = realmObject.objects(LocalWeather.self).first,
@@ -37,8 +39,19 @@ class RealmManager: NSObject {
         return decode(data: weatherData)
     }
     
-    func saveAllData(weather: WeatherResponse, location: Location) {
-        deleteAllLocalData()
+    // Delete ALL Data
+    func deleteLocalWeatherData() {
+        let realmObject = try! Realm()
+        let localWeather = realmObject.objects(LocalWeather.self)
+        
+        try! realmObject.write {
+            realmObject.delete(localWeather)
+        }
+    }
+    
+    // Save ALL Data
+    func saveLocalWeatherData(weather: WeatherResponse, location: Location) {
+        deleteLocalWeatherData()
         
         let localWeatherModel = LocalWeather()
         localWeatherModel.weatherId = UUID().uuidString
@@ -51,8 +64,9 @@ class RealmManager: NSObject {
         add(localWeatherModel)
     }
     
-    func saveOnlyWeatherData(_ weather: WeatherResponse) {
-        deleteAllLocalData()
+    // Save ONLY Weather Response
+    func saveWeatherResponse(_ weather: WeatherResponse) {
+        deleteLocalWeatherData()
         
         let localWeatherModel = LocalWeather()
         localWeatherModel.weatherId = UUID().uuidString
@@ -62,8 +76,9 @@ class RealmManager: NSObject {
         add(localWeatherModel)
     }
     
-    func saveOnlyLocationData(_ location: Location) {
-        deleteAllLocalData()
+    // Save Only Location Data
+    func saveLocationData(_ location: Location) {
+        deleteLocalWeatherData()
         
         let LocationModel = LocalWeather()
         LocationModel.locationName = location.name
@@ -71,15 +86,6 @@ class RealmManager: NSObject {
         LocationModel.longitude = location.longitude
 
         add(LocationModel)
-    }
-    
-    func deleteAllLocalData() {
-        let realmObject = try! Realm()
-        let localWeather = realmObject.objects(LocalWeather.self)
-        
-        try! realmObject.write {
-            realmObject.delete(localWeather)
-        }
     }
     
     func getDocumentsDirectory() -> URL {

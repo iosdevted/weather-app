@@ -22,11 +22,11 @@ class SubInfoCollectionCell: UICollectionViewCell {
     private lazy var separateLineView = SeparateLineView()
     private lazy var topLabel = UILabel().then {
         $0.textColor = .warmGray
-        $0.font = .subInfoFont()
+        $0.font = .subInfoFont
     }
     private lazy var  bottomLabel = UILabel().then {
         $0.textColor = .warmBlack
-        $0.font = .subInfoBoldFont()
+        $0.font = .subInfoBoldFont
     }
     
     //MARK: - Init

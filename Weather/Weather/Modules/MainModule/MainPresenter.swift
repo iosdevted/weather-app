@@ -33,7 +33,7 @@ extension MainPresenter: ViewToPresenterMainProtocol {
         router?.openWeatherWebsite()
     }
     
-    func locationListButtonClicked() {
+    func settingButtonClicked() {
         router?.pushToSettingViewController(view: view)
     }
 }

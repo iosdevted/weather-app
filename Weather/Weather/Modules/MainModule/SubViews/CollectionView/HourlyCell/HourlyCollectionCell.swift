@@ -21,14 +21,14 @@ class HourlyCollectionCell: UICollectionViewCell {
     //MARK: - Properties
     
     private lazy var hourLabel = UILabel().then {
-        $0.font = .hourlyBoldFont()
+        $0.font = .hourlyBoldFont
         $0.textColor = .warmBlack
     }
     private lazy var weatherIconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
     private lazy var tempLabel = UILabel().then {
-        $0.font = .hourlyBoldFont()
+        $0.font = .hourlyBoldFont
         $0.textColor = .warmBlack
     }
     

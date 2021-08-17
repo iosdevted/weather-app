@@ -21,18 +21,18 @@ class DailyCollectionCell: UICollectionViewCell {
     
     private lazy var dayLabel = UILabel().then {
         $0.textColor = .warmBlack
-        $0.font = .dailyBoldFont()
+        $0.font = .dailyBoldFont
     }
     private lazy var weatherIconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
     private lazy var maxTempLabel = UILabel().then {
         $0.textColor = .warmBlack
-        $0.font = .dailyBoldFont()
+        $0.font = .dailyBoldFont
     }
     private lazy var minTempLabel = UILabel().then {
         $0.textColor = .warmGray
-        $0.font = .dailyBoldFont()
+        $0.font = .dailyBoldFont
     }
     private var stackView = UIStackView()
     

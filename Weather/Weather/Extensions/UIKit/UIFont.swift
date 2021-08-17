@@ -9,47 +9,43 @@ import UIKit.UIFont
 
 extension UIFont {
     
-    static func mainFont(size: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: size)
-    }
-    
-    static func mainDescriptionFont() -> UIFont {
+    static var mainDescriptionFont: UIFont {
         return UIFont.systemFont(ofSize: 20)
     }
     
-    static func mainCityNameBoldFont() -> UIFont {
+    static var mainCityNameBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 30)
     }
     
-    static func mainTemperatureBoldFont() -> UIFont {
+    static var mainTemperatureBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 70)
     }
     
-    static func hourlyBoldFont() -> UIFont {
+    static var hourlyBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 13)
     }
     
-    static func dailyFont() -> UIFont {
+    static var dailyFont: UIFont {
         return UIFont.systemFont(ofSize: 17)
     }
     
-    static func dailyBoldFont() -> UIFont {
+    static var dailyBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 17)
     }
     
-    static func summaryBoldFont() -> UIFont {
+    static var summaryBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 16)
     }
     
-    static func subInfoFont() -> UIFont {
+    static var subInfoFont: UIFont {
         return UIFont.systemFont(ofSize: 15)
     }
     
-    static func subInfoBoldFont() -> UIFont {
+    static var subInfoBoldFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 23)
     }
     
-    static func searchFont() -> UIFont {
+    static var searchFont: UIFont {
         return UIFont.systemFont(ofSize: 15)
     }
 }

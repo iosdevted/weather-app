@@ -40,7 +40,7 @@ extension HourlyCollectionView {
         showsHorizontalScrollIndicator = false
         dataSource = self
         delegate = self
-        register(cell: HourlyCollectionCell.self)
+        register(cellType: HourlyCollectionCell.self)
     }
 }
 
@@ -53,7 +53,7 @@ extension HourlyCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeue(HourlyCollectionCell.self, indexPath)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: HourlyCollectionCell.self)
         
         if let hourlyCellDidLoad = self.hourlyCellDidLoad {
             hourlyCellDidLoad(cell, indexPath)

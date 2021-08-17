@@ -29,6 +29,8 @@ class WeatherService: WeatherServiceType {
     
     
     func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void) {
+        //Returns the character set for characters allowed in a query URL component.
+        //(Korean) -> (url component)
         let cityName = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? city
         
         var urlComponent = URLComponents(string: baseURL)
@@ -46,7 +48,6 @@ class WeatherService: WeatherServiceType {
     func handleRequest(url: URL, completion: @escaping (Result<WeatherResponse, WeatherServiceError>) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            
             guard error == nil else {
                 return completion(.failure(.clientError))
             }
@@ -54,6 +55,7 @@ class WeatherService: WeatherServiceType {
             guard let header = response as? HTTPURLResponse, (200..<300) ~= header.statusCode else {
                 return completion(.failure(.invalidStatusCode))
             }
+            
             guard let data = data else {
                 return completion(.failure(.noData))
             }

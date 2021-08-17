@@ -35,7 +35,7 @@ extension SubInfoCollectionView {
         isScrollEnabled = false
         dataSource = self
         delegate = self
-        register(cell: SubInfoCollectionCell.self)
+        register(cellType: SubInfoCollectionCell.self)
     }
 }
 
@@ -48,7 +48,7 @@ extension SubInfoCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeue(SubInfoCollectionCell.self, indexPath)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SubInfoCollectionCell.self)
         
         if let collectionCellDidLoad = collectionCellDidLoad {
             collectionCellDidLoad(cell, indexPath)

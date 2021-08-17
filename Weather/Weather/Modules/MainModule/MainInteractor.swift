@@ -22,16 +22,12 @@ extension MainInteractor {
     
     //MARK: - Helpers
     
-    private func retrieveLocalData() -> LocalWeather? {
-        return RealmManager.shared.retrieveAllData()
-    }
-    
     private func fetchWeatherData(by city: String) {
         weatherService.fetchWeather(byCity: city) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .success(let response):
-                RealmManager.shared.saveOnlyWeatherData(response)
+                RealmManager.shared.saveWeatherResponse(response)
                 self.presenter?.handleResult(response, cityName: city)
             case .failure(let error):
                 self.presenter?.handleError(error)
@@ -40,10 +36,11 @@ extension MainInteractor {
     }
     
     private func fetchWeatherData(by location: Location) {
-        self.weatherService.fetchWeather(lat: location.latitude, lon: location.longitude) { result in
+        self.weatherService.fetchWeather(lat: location.latitude, lon: location.longitude) { [weak self] result in
+            guard let `self` = self else { return }
             switch result {
             case .success(let response):
-                RealmManager.shared.saveAllData(weather: response, location: location)
+                RealmManager.shared.saveLocalWeatherData(weather: response, location: location)
                 self.presenter?.handleResult(response, cityName: location.name)
             case .failure(let error):
                 self.presenter?.handleError(error)
@@ -68,7 +65,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
     //MARK: -> Interactor
     
     func fetchWeatherData() {
-        localData = retrieveLocalData()
+        localData = RealmManager.shared.retrieveLocalWeatherData()
         
         // #Case 1: When the location information is not saved
         // Because the location has never been changed
@@ -85,7 +82,7 @@ extension MainInteractor: PresenterToInteractorMainProtocol {
         // #Case 2: When location information is changed in settingModule,
         // In this case, location information exists but no weather information.
         guard let _ = localData?.weatherData,
-              let weatherResponse = RealmManager.shared.retrieveDecodedWeatherData()
+              let weatherResponse = RealmManager.shared.retrieveWeatherResponse()
         else {
             fetchWeatherData(by: location)
             return

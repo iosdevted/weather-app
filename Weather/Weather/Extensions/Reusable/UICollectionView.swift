@@ -7,33 +7,27 @@
 
 import UIKit
 
-protocol Identifiable {
-    static var identifier: String { get }
-    
-}
-// id 값을 자신의 타입 이름으로 설정되도록 하기 (class SomeCell: UITableViewCell 의 id 는 SomeCell)
-extension Identifiable {
-    static var identifier: String { return String(describing: self) }
-}
+extension UICollectionReusableView: Reusable {}
+// We need to adopt Reusable for "forCellWithReuseIdentifier".
 
-//extension UICollectionViewCell: Identifiable { }
-extension UICollectionReusableView: Identifiable { }
-
-// register : 타입만 받아서 cell 간편하게 등록해줌
-// dequeue : as? 쓰지 않아도 자기 자신의 타입과 cell id 로 자동으로 반환하게 해주는 아이
 extension UICollectionView {
-    func register<Cell> (
-        // regiser 가 제네릭 타입 이라 Identifiable 프로토콜 을 채택하지 않은 Cell 이 들어올 수 있는 변수 때문에 where 로 제한할 것.
-        cell: Cell.Type,
-        forCellReuseIdentifier reuseIdentifier: String = Cell.identifier
-    ) where Cell: UICollectionViewCell {
-        register(cell, forCellWithReuseIdentifier: reuseIdentifier)
+    
+    // register : Don't have to write "forCellWithReuseIdentifier" every time
+    // dequeue : Don't have to wrtie "as?" every time.
+    
+    final func register<T: UICollectionViewCell>(cellType: T.Type) {
+        register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
     }
     
-    func dequeue<Cell>(
-        _ reusableCell: Cell.Type,
-        _ indexpath: IndexPath) -> Cell where Cell: UICollectionViewCell {
-        guard let cell = dequeueReusableCell(withReuseIdentifier: reusableCell.identifier, for: indexpath) as? Cell else { fatalError("Could not find cell with identifier") }
+    final func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath, cellType: T.Type = T.self) -> T {
+        let bareCell = self.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath)
+        guard let cell = bareCell as? T else {
+            fatalError(
+                "Failed to dequeue a cell with identifier \(cellType.reuseIdentifier) matching type \(cellType.self). "
+                    + "Check that the reuseIdentifier is set properly in your XIB/Storyboard "
+                    + "and that you registered the cell beforehand"
+            )
+        }
         return cell
     }
 }

@@ -21,7 +21,7 @@ class SummaryCell: UICollectionViewCell {
     private lazy var separateLineView = SeparateLineView()
     private lazy var descriptionLabel = UILabel().then {
         $0.textColor = .warmBlack
-        $0.font = .summaryBoldFont()
+        $0.font = .summaryBoldFont
         $0.numberOfLines = 0
     }
     

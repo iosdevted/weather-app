@@ -40,7 +40,7 @@ extension DailyCollectionView {
         allowsSelection = false
         dataSource = self
         delegate = self
-        register(cell: DailyCollectionCell.self)
+        register(cellType: DailyCollectionCell.self)
     }
 }
 
@@ -53,7 +53,7 @@ extension DailyCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeue(DailyCollectionCell.self, indexPath)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DailyCollectionCell.self)
         
         if let dailyCellDidLoad = dailyCellDidLoad {
             dailyCellDidLoad(cell, indexPath)

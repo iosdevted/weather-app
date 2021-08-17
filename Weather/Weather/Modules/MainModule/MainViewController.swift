@@ -21,7 +21,6 @@ class MainViewController: BaseViewController {
     
     var presenter: ViewToPresenterMainProtocol?
     
-    private var alertView: UIAlertController?
     private lazy var headerView = HeaderView()
     private lazy var toolBar = ToolBar()
     private lazy var collectionView: CollectionView = {
@@ -33,6 +32,7 @@ class MainViewController: BaseViewController {
         let view = CollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
+    private var alertView: UIAlertController?
     
     //MARK: - Life Cycle
     
@@ -93,8 +93,8 @@ extension MainViewController {
             self.presenter?.weatherButtonClicked()
         }
         
-        toolBar.locationListButtonDidTap = {
-            self.presenter?.locationListButtonClicked()
+        toolBar.settingButtonDidTap = {
+            self.presenter?.settingButtonClicked()
         }
     }
 }

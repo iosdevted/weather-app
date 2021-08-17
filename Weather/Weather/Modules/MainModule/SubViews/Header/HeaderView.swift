@@ -19,17 +19,17 @@ class HeaderView: UIView {
     //MARK: - Properties
     
     private lazy var cityNameLabel = UILabel().then {
-        $0.font = .mainCityNameBoldFont()
+        $0.font = .mainCityNameBoldFont
         $0.textColor = .warmBlack
         $0.textAlignment = .center
     }
     private lazy var temperatureLabel = UILabel().then {
-        $0.font = .mainTemperatureBoldFont()
+        $0.font = .mainTemperatureBoldFont
         $0.textColor = .warmBlack
         $0.textAlignment = .center
     }
     private lazy var weatherDescriptionLabel = UILabel().then {
-        $0.font = .mainDescriptionFont()
+        $0.font = .mainDescriptionFont
         $0.textColor = .warmBlack
         $0.textAlignment = .center
     }

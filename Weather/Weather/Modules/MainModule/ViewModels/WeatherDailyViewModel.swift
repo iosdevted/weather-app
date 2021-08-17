@@ -7,10 +7,9 @@
 
 import Foundation
 
-// Normally don't need this view model because API is well refined
-// But Open Weather API don't afford daily weather forecast at no costs
-// I needed to use 3 hours weather forecast, which is free.
-// So I made this view model for daily weather forecast.
+// This API doesn't offer a daily weather forecast. 😫
+// So I made this view model to calculate the highest and lowest temperature.
+// but this is very temporary way. Better to find another API to offer a daily weather forecast.
 
 struct WeatherDailyViewModel {
     
@@ -28,14 +27,20 @@ struct WeatherDailyViewModel {
     
     static func getViewModel(with weatherViewModel: [WeatherViewModel]) -> WeatherDailyViewModel {
         
-        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.dateWithMonth })
-        let keysArray = Array(temporaryDailyDictionary.keys).sorted(by: { $0 < $1 })
         var minTempArray = [String]()
         var maxTempArray = [String]()
         var conditionIDArray = [String]()
+        // weatherViewModel -> [WeatherViewModel]
+        let temporaryDailyDictionary = Dictionary(grouping: weatherViewModel, by: { $0.dateWithMonth })
+        // temporaryDailyDictionary -> ["17/08": [WeatherViewModel], 18/08: [WeatherViewModel] ..]
+        let keysArray = Array(temporaryDailyDictionary.keys).sorted(by: { $0 < $1 })
+        // keysArray -> ["17/08, 18/08, .."]
         
         temporaryDailyDictionary.forEach { key, value in
+            // value => [WeatherViewModel]
+            // find highest temperature using max.
             let tempMax = value.max { $0.tempMaxInt < $1.tempMaxInt }
+            // find lowest temperature using min.
             let tempMin = value.min { $0.tempMinInt < $1.tempMinInt }
             guard let tempMax = tempMax, let tempMin = tempMin else { return }
             
