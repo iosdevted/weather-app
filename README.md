@@ -51,6 +51,96 @@ Using this architecture one can easily test at the boundaries between each layer
 
 [API Example](https://api.openweathermap.org/data/2.5/forecast?q=paris&APPID=da69ade359c47e35161bf2e2dad374e8&units=metric)
 
+### Consideration
+
+For the SOLID Principle(Dependency Inversion Principle), Should I write the code like below?
+
+```swift
+protocol NetworkRequest: AnyObject {
+    associatedtype ModelType
+    func decode(_ data: Data) -> ModelType?
+    func load(withCompletion completion: @escaping (ModelType?) -> Void)
+}
+
+extension NetworkRequest {
+    fileprivate func load(_ url: URL, withCompletion completion: @escaping (ModelType?) -> Void) {
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+        let task = session.dataTask(with: url, completionHandler: { [weak self] (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            guard error == nil else {
+                return completion(nil)
+            }
+            
+            guard let header = response as? HTTPURLResponse, (200..<300) ~= header.statusCode else {
+                return completion(nil)
+            }
+            
+            guard let data = data else {
+                return completion(nil)
+            }
+            
+            completion(self?.decode(data))
+        })
+        task.resume()
+    }
+}
+
+protocol APIResource {
+    associatedtype ModelType: Decodable
+    var latitude: String { get }
+    var longitude: String { get }
+}
+
+extension APIResource {
+    var url: URL {
+        
+        let baseURL = "https://api.openweathermap.org/data/2.5/forecast"
+        let API_KEY = ""
+        
+        var urlComponent = URLComponents(string: baseURL)
+        
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "APPID", value: "\(API_KEY)"),
+            URLQueryItem(name: "lat", value: "\(latitude)"),
+            URLQueryItem(name: "lon", value: "\(longitude)"),
+            URLQueryItem(name: "units", value: "metric")
+        ]
+        
+        return (urlComponent?.url)!
+    }
+}
+
+struct WeatherResource: APIResource {
+    typealias ModelType = WeatherResponse
+    
+    let longitude: String
+    let latitude: String
+}
+
+
+class APIRequest<Resource: APIResource> {
+    let resource: Resource
+    
+    init(resource: Resource) {
+        self.resource = resource
+    }
+}
+
+extension APIRequest: NetworkRequest {
+    func decode(_ data: Data) -> (Resource.ModelType)? {
+        do {
+            let result = try JSONDecoder().decode(WeatherResponse.self, from: data)
+            return result as? Resource.ModelType
+        } catch {
+            return nil
+        }
+    }
+    
+    func load(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
+        load(resource.url, withCompletion: completion)
+    }
+}
+```
+
 ### Git Commit Message Guide
 
 - `feat`: A new feature
