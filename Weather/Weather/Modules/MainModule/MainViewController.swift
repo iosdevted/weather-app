@@ -44,6 +44,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // better with observer
         presenter?.viewWillAppear()
     }
     

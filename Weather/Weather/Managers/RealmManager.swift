@@ -10,8 +10,6 @@ import RealmSwift
 
 class RealmManager: NSObject {
     
-    static let shared = RealmManager()
-    
     //MARK: - Weather
     
     // Retrieve ALL Data

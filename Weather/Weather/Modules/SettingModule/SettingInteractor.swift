@@ -16,6 +16,7 @@ class SettingInteractor: NSObject {
     
     private var searchResults = [MKLocalSearchCompletion]()
     private var searchCompleter = MKLocalSearchCompleter()
+    private let realmManager = RealmManager()
 }
 
 //MARK: -> Interactor
@@ -50,7 +51,7 @@ extension SettingInteractor: PresenterToInteractorSettingProtocol {
              
             let location = Location(name: locationName, latitude: placeMark.coordinate.latitude, longitude: placeMark.coordinate.longitude)
             // Delete All local data and Save Only Location Data (No Weather Data)
-            RealmManager.shared.saveLocationData(location)
+            self.realmManager.saveLocationData(location)
             // go back to RootViewController
             self.presenter?.popToRootViewController()
         }

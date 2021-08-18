@@ -155,3 +155,12 @@ extension APIRequest: NetworkRequest {
 
 * Database: [Realm](https://github.com/realm/realm-cocoa)
 * Tool: [Then](https://github.com/devxoul/Then)
+
+### After `Code Review`
+
+1. Indiscriminate use of Singleton is not good.
+2. If I use local data, it is better to use it actively than to try to reduce its use.
+3. I should also consider the possibility that data may be different in the process of saving it to local data. Therefore, if there is information to be brought from local data, it is better to bring all the information that way.
+4. It is more effective to use observer than to use viewWillAppear.
+5. If I think I don't need to use lazy var, I don't need to use it.
+6. I need to think more about the effective method to implement something.

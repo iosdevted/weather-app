@@ -22,7 +22,7 @@ class WeatherService: WeatherServiceType {
             URLQueryItem(name: "lon", value: "\(lon)"),
             URLQueryItem(name: "units", value: "metric")
         ]
-        
+        //NEED
         guard let url = urlComponent?.url else { return }
         handleRequest(url: url, completion: completion)
     }
